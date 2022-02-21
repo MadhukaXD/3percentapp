@@ -10,7 +10,7 @@ function FoodList() {
 
     useEffect(() => {
         axios
-            .get('174.138.18.13/api/food')
+            .get('https://the3percentapp.com/api/food')
             .then(res => setFood(res.data))
             .catch(error => console.log(error));
 
