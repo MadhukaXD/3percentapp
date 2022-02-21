@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import { NavLink, Link, useLocation } from "react-router-dom";
 
 function LoginMain() {
     return (
@@ -137,7 +138,8 @@ function LoginMain() {
                                                                             id="object-300916" label="Username*"
                                                                             name="object-300916"
                                                                             prependcb="function(){}" required="required"
-                                                                            role="email" rows="5" data-mask="null" />
+                                                                            role="email" rows="5" data-mask="null"
+                                                                            value="madhukaperera1996@gmail.com" />
                                                                         <div data-lastpass="true" className="css-6lfyyy">
                                                                             <div data-lastpass-icon="true"
                                                                                 className="css-1fnz74y">
@@ -180,7 +182,8 @@ function LoginMain() {
                                                                         id="object-506487" form="login"
                                                                         label="Password*" name="object-506487"
                                                                         prependcb="function(){}" required="required"
-                                                                        role="password" rows="5" data-mask="null" />
+                                                                        role="password" rows="5" data-mask="null"
+                                                                        value="12345678" />
                                                                     <div data-lastpass="true" className="css-6lfyyy">
                                                                         <div data-lastpass-icon="true"
                                                                             className="css-cajv7m">
@@ -227,25 +230,34 @@ function LoginMain() {
                                                 </input>
                                             </div>
                                       
-                                        <a href="index.html"
+                                            <NavLink
+                                                strict
+                                                exact
+                                                to={`${process.env.PUBLIC_URL}/dash`}
+                                                key={`${process.env.PUBLIC_URL}/dash`}
                                             className="k-button no-shadow medium noColor block"
                                             style={{
                                                 "background-color": "rgb(255 102 0)",
                                                 "color": "rgb(255 255 255)"
                                             }}>
-                                            <div className="k-button__content" style={{ "opacity": "1" }}>
+                                                <div className="k-button__content"
+                                                    style={{ "opacity": "1" }}>
                                                 Login
                                                 {/* <!----> */}
                                             </div>
                                             {/* <!----> */}
-                                        </a><button
+                                            </NavLink>
+
+                                            <button
                                             className="mt-moon k-button block flat medium colorOne--text">
-                                            <div className="k-button__content" style={{ "opacity": "1" }}>
+                                                <div className="k-button__content"
+                                                    style={{ "opacity": "1" }}>
                                                 I Forgot!
                                                 {/* <!----> */}
                                             </div>
                                             {/* <!----> */}
                                         </button>
+
                                     </div>
                                     </div>
                                 </div>
