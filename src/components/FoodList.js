@@ -10,7 +10,7 @@ function FoodList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:5002/api/food')
+            .get('174.138.18.13/api/food')
             .then(res => setFood(res.data))
             .catch(error => console.log(error));
 
