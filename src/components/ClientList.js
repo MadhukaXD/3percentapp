@@ -9,7 +9,7 @@ function ClientList() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:5001/api/users')
+            .get('https://immense-brushlands-85194.herokuapp.com/api/users')
             .then(res => setClientList(res.data))
             .catch(error => console.log(error));
     });
