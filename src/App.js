@@ -22,9 +22,8 @@ import EditFoods from './components/EditFoods';
 import EditExercise from './components/EditExercise';
 import Dash from './components/Dash';
 import LoginMain from './components/LoginMain';
-
-
 import ClientConfirmation from './components/ClientConfirmation';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -104,14 +103,13 @@ function App() {
           <Route path="/dash">
             <Dash />
           </Route>
+          <Route path="/clientconfirmation">
+            <ClientConfirmation />
+          </Route>
           <Route path="/">
             <LoginMain />
           </Route>
 
-
-          <Route path="/clientconfirmation">
-            <ClientConfirmation />
-          </Route>
         </Switch>
       </Router>
     </div>

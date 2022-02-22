@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import { NavLink, Link, useLocation } from "react-router-dom";
 
 function ClientConfirmation() {
     return (
@@ -299,20 +300,29 @@ function ClientConfirmation() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                    <button
-                                                        data-v-70fe1976="" to="[object Object]"
-                                                        className="k-button medium colorOne">
-                                                        <div className="k-button__content text-uppercase" style={{ "opacity": "1" }}>
-                                                            take the questionnaires
-                                                        </div>
-                                                    </button>
-                                                </div>
                                             </div>
                                         </div>
                                         {/* <!----> */}
                                     </div>
                                 </div>
+
+                                <NavLink
+                                    strict
+                                    exact
+                                    to={`${process.env.PUBLIC_URL}/questions`}
+                                    key={`${process.env.PUBLIC_URL}/questions`}>
+                                    <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
+                                        <button
+                                            data-v-70fe1976="" to="[object Object]"
+                                            className="k-button medium colorOne">
+                                            <div className="k-button__content text-uppercase"
+                                                style={{ "opacity": "1" }}>
+                                                take the questionnaires
+                                            </div>
+                                        </button>
+                                    </div>
+                                </NavLink>
+
                             </div>
                         </div>
                     </div>

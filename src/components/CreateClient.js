@@ -17,7 +17,7 @@ function CreateClient() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    fetch("https://immense-brushlands-85194.herokuapp.com/api/users", {
+    fetch("http://localhost:5001/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
