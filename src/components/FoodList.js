@@ -10,7 +10,7 @@ function FoodList() {
 
     useEffect(() => {
         axios
-            .get('https://evening-spire-37017.herokuapp.com/api/food')
+            .get('https://the3percent-food.herokuapp.com/api/food')
             .then(res => setFood(res.data))
             .catch(error => console.log(error));
 

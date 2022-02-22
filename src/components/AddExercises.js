@@ -19,7 +19,7 @@ function AddExercises() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        fetch("https://secret-bastion-57421.herokuapp.com/api/exercise", {
+        fetch("https://the3percent-exercises.herokuapp.com/api/exercise", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, }),

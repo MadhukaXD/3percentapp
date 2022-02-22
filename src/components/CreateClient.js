@@ -17,7 +17,7 @@ function CreateClient() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5001/api/users", {
+    fetch("https://the3percent-client.herokuapp.com/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

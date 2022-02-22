@@ -9,7 +9,7 @@ function ClientList() {
 
     useEffect(() => {
         axios
-            .get('https://immense-brushlands-85194.herokuapp.com/api/users')
+            .get('https://the3percent-client.herokuapp.com/api/users')
             .then(res => setClientList(res.data))
             .catch(error => console.log(error));
     });

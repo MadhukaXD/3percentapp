@@ -10,7 +10,7 @@ function ExerciseList() {
 
     useEffect(() => {
         axios
-            .get('https://secret-bastion-57421.herokuapp.com/api/exercise')
+            .get('https://the3percent-exercises.herokuapp.com/api/exercise')
             .then(res => setExerciseList(res.data))
             .catch(error => console.log(error));
     });
