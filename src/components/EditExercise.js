@@ -19,7 +19,7 @@ function EditExercise() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:5003/api/exercise", {
+        fetch("https://secret-bastion-57421.herokuapp.com/api/exercise", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, }),
@@ -40,7 +40,7 @@ function EditExercise() {
     const queryParams = new URLSearchParams(window.location.search);
     const ExerciseList_id = queryParams.get('ExerciseList_id');
 
-    const apiurl = "http://localhost:5003/api/exercise/" + ExerciseList_id;
+    const apiurl = "https://secret-bastion-57421.herokuapp.com/api/exercise/" + ExerciseList_id;
 
     useState((id) => {
         axios

@@ -29,7 +29,7 @@ function EditFoods() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:5002/api/food", {
+        fetch("https://evening-spire-37017.herokuapp.com/api/food", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ FoodName, Recipe, ServingSize, UnitMeasurement, Image, Protein, Carbs, Fat, Fibre, Sodium, Sugar, Calories, TotalCarbohydrates, SaturatedFat, Cholesterol, VitaminA, VitaminC, Calcium, Iron, MonosaturatedFat }),
@@ -50,7 +50,7 @@ function EditFoods() {
     const queryParams = new URLSearchParams(window.location.search);
     const Food_id = queryParams.get('Food_id');
 
-    const apiurl = "http://localhost:5002/api/food/" + Food_id;
+    const apiurl = "https://evening-spire-37017.herokuapp.com/api/food/" + Food_id;
 
     useState((id) => {
         axios
