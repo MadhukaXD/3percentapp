@@ -20,6 +20,8 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.20.5",
     "react-hooks": "^1.0.1",
+    "react-notifications": "^1.7.3",
+    "react-notifications-component": "^3.4.1",
     "react-range": "^1.8.12",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -58,7 +60,6 @@
     "node": "16.13.0",
     "npm": "8.1.0"
   },
-
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "server.js",
   "author": "",

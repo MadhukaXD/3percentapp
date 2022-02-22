@@ -16,6 +16,28 @@ function FoodList() {
 
     });
 
+    const [query, setquery] = useState("");
+    const [recipes, setrecipes] = useState([]);
+
+    const YOUR_APP_ID = "01d8742f";
+    const YOUR_APP_KEY = "9e53540443514fc483049039c942aba6";
+
+    var url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=10`;
+
+
+    async function getRecipe() {
+        var result = await axios.get(url);
+        setrecipes(result.data.hits);
+        console.log(result);
+
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log("test")
+        getRecipe();
+    };
+
     return (
         <div id="app" className="grey-background" >
             <div data-app="true" className="k-app light" >
@@ -59,9 +81,29 @@ function FoodList() {
                                                         <div data-v-1b4e9c52="" className="flex xs12 md9">
                                                             <div data-v-1b4e9c52="" className="action-toolbar__input k-input mb-none"
                                                                 style={{ "--componentThemeColor": "var(--colorOne)" }}>
-                                                                <div
+                                                                <div 
                                                                     className="k-input-container d-flex align-center k-input__field">
+
                                                                     <div
+                                                                        className="pica"
+                                                                        style={{
+                                                                            "flex-grow": "1",
+                                                                            "position": "relative"
+                                                                        }}>
+                                                                        <form onSubmit={onSubmit}>
+                                                                            <input
+                                                                                type="text" data-vv-name="object-898551"
+                                                                                appendcb="function(){}" aria-checked=""
+                                                                                autocomplete="on" id="object-898551"
+                                                                                name="object-898551" placeholder="Search"
+                                                                                prependcb="function(){}" role="text" rows="5"
+                                                                                data-mask="null"
+                                                                                value={query}
+                                                                                onChange={(e) => setquery(e.target.value)}
+                                                                            />
+                                                                        </form>
+                                                                    </div>
+                                                                    <div 
                                                                         className="k-input__field-icon pica left colorOne--text">
                                                                         <svg data-v-7f8bad2e="" data-v-1b4e9c52=""
                                                                             aria-hidden="true" focusable="false"
@@ -75,19 +117,7 @@ function FoodList() {
                                                                             </path>
                                                                         </svg>
                                                                     </div>
-                                                                    <div className="pica"
-                                                                        style={{
-                                                                            "flex-grow": "1",
-                                                                            "position": "relative"
-                                                                        }}>
-                                                                        <input
-                                                                            type="text" data-vv-name="object-898551"
-                                                                            appendcb="function(){}" aria-checked=""
-                                                                            autocomplete="on" id="object-898551"
-                                                                            name="object-898551" placeholder="Search"
-                                                                            prependcb="function(){}" role="text" rows="5"
-                                                                            data-mask="null" />
-                                                                    </div>
+
                                                                 </div>
                                                                 <div data-v-6b0e4150="">
                                                                 </div>
@@ -445,6 +475,149 @@ function FoodList() {
                                                                     </div>
                                                                 </div>
                                                             </NavLink>
+                                                            <div className="k-row__slot--right">
+                                                                <div data-v-12e8f0c3="" className="k-flyout">
+                                                                    <div className="k-flyout__activator">
+                                                                        <button
+                                                                            to="[object Object]"
+                                                                            className="k-button flat icon medium disabled--text">
+                                                                            <div className="k-button__content" style={{ "opacity": "1" }}>
+                                                                                <svg data-v-7f8bad2e="" aria-hidden="true"
+                                                                                    focusable="false" data-prefix="far"
+                                                                                    data-icon="ellipsis-h" role="img"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    viewBox="0 0 512 512"
+                                                                                    className="svg-inline--fa fa-ellipsis-h fa-w-16 k-icon mars disabled--text">
+                                                                                    <path data-v-7f8bad2e="" fill="currentColor"
+                                                                                        d="M304 256c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48 48 21.5 48 48zm120-48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm-336 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48z"
+                                                                                        className="">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </button></div>
+                                                                    <div id="k-flyout-block-eb9d96d1-b06e-49c5-b6fe-e63d36be5637"
+                                                                        className="k-flyout__block pica">
+                                                                        <div className="k-flyout__block-row">
+                                                                            <div className="k-flyout__block-row--text">Preview</div>
+                                                                        </div>
+                                                                        <div className="k-flyout__block-row">
+                                                                            <div className="k-flyout__block-row--text">Edit</div>
+                                                                        </div>
+                                                                        <div className="k-flyout__block-row">
+                                                                            <div className="k-flyout__block-row--text">Rename</div>
+                                                                        </div>
+                                                                        <div className="k-flyout__block-row">
+                                                                            <div className="k-flyout__block-row--text">Duplicate
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="k-flyout__block-row">
+                                                                            <div className="k-flyout__block-row--text">Assign To
+                                                                                Clients</div>
+                                                                        </div>
+                                                                        <div className="k-flyout__block-row">
+                                                                            <div className="k-flyout__block-row--text">Add / Remove
+                                                                                Group</div>
+                                                                        </div>
+                                                                        <div className="k-flyout__block-row error--text">
+                                                                            <div className="k-flyout__block-row--text">Delete</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                    {recipes.map((recipe, key) => (
+                                                        <div data-v-12e8f0c3="" data-v-19d24620=""
+                                                            id="k-row-e02c9d68-bf46-4c60-aacb-9f41ee3fec08"
+                                                            className="k-row clickable standalone image-middle">
+                                                            <div className="k-row__slot--left">
+                                                                <div data-v-12e8f0c3="" className="d-flex align-center pl-moon">
+                                                                    <div data-v-12e8f0c3="">
+                                                                        <div id="checkbox-undefined" className="k-checkbox">
+                                                                            <input
+                                                                                id="object-456304" type="checkbox"
+                                                                                data-vv-name="object-456304" data-vv-as=""
+                                                                                role="checkbox" className="k-checkbox__input"
+                                                                                value="false" />
+                                                                            <div className="k-checkbox__wrapper"><svg
+                                                                                data-v-7f8bad2e="" aria-hidden="true"
+                                                                                focusable="false" data-prefix="far"
+                                                                                data-icon="check" role="img"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 512 512"
+                                                                                className="k-checkbox__check svg-inline--fa fa-check fa-w-16 k-icon mars white--text">
+                                                                                <path data-v-7f8bad2e="" fill="currentColor"
+                                                                                    d="M435.848 83.466L172.804 346.51l-96.652-96.652c-4.686-4.686-12.284-4.686-16.971 0l-28.284 28.284c-4.686 4.686-4.686 12.284 0 16.971l133.421 133.421c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-28.284-28.284c-4.686-4.686-12.284-4.686-16.97 0z"
+                                                                                    className="">
+                                                                                </path>
+                                                                            </svg>
+                                                                            </div>
+                                                                            <label for="object-456304"
+                                                                                className="k-checkbox__label">
+                                                                                <span>
+                                                                                </span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="k-row__slot--middle">
+                                                                <div data-v-12e8f0c3="" className="layout row wrap">
+                                                                    <div data-v-12e8f0c3=""
+                                                                        className="flex xs12 sm8 md6 lg4 xs4 d-flex align-center pica">
+                                                                        <div data-v-c9edefc2="" data-v-12e8f0c3=""
+                                                                            className="k-image colorTwo">
+                                                                            <div data-v-c9edefc2="" className="k-image__sizer"
+                                                                                style={{ "padding-bottom": "100%" }}>
+                                                                            </div>
+                                                                            <div data-v-c9edefc2="" className="k-image__image"
+                                                                                style={{ "background-image": "url(&quot;/3/img/14.1ac5241b.png&quot;)" }}>
+                                                                            </div>
+                                                                            <div data-v-c9edefc2="" className="k-image__content"
+                                                                                style={{ "display": "none" }}>
+                                                                            </div>
+                                                                        </div>
+                                                                        {recipe["recipe"]["label"]}
+                                                                    </div>
+                                                                    <div data-v-12e8f0c3=""
+                                                                        className="flex sm2 hidden-xs-only d-flex align-center">
+                                                                        <div data-v-f1ed5950="" data-v-12e8f0c3=""
+                                                                            className="k-avatar__row"
+                                                                            style={{ "height": "32px" }}>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div data-v-12e8f0c3=""
+                                                                        className="flex sm2 hidden-xs-only d-flex align-center">
+                                                                        <div data-v-62035167="" data-v-12e8f0c3=""
+                                                                            className="k-counter brevier show">
+                                                                            <div data-v-62035167=""
+                                                                                className="k-counter__value colorOne">0</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div data-v-12e8f0c3=""
+                                                                        className="flex xs2 hidden-md-and-down d-flex align-center">
+                                                                        <div data-v-23bc496c="" data-v-12e8f0c3="" size="40px"
+                                                                            className="mr-mars k-avatar colorOne"
+                                                                            style={{
+                                                                                "height": "40px !important",
+                                                                                "width": "40px !important"
+                                                                            }}>
+                                                                            <span data-v-23bc496c="" className="k-avatar__initials"
+                                                                                style={{
+                                                                                    "font-size": "20px",
+                                                                                    "width": "40px"
+                                                                                }}>kd</span>
+                                                                        </div>
+                                                                        kasun dias
+                                                                    </div>
+                                                                    <div data-v-12e8f0c3=""
+                                                                        className="flex hidden-sm-and-down md2 d-flex align-center">
+                                                                        {Food.Date}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                             <div className="k-row__slot--right">
                                                                 <div data-v-12e8f0c3="" className="k-flyout">
                                                                     <div className="k-flyout__activator">

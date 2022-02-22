@@ -1,8 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { ReactNotifications, Store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 function LoginMain() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [authenticated, setAuthenticated] = useState(false);
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        fetch("http://localhost:5005/api/adminauth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email, password: password }),
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then((response) => {
+                console.log(response['token']);
+                if (response['token']) {
+                    setAuthenticated(true);
+                    window.location = "/dash";
+                }
+                else {
+
+                    Store.addNotification({
+                        title: "Failure!",
+                        message: "Invalid Credentials",
+                        type: "danger",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                            duration: 5000,
+                            onScreen: true
+                        }
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const createNotification = () => {
+        Store.addNotification({
+            title: "Failure!",
+            message: "Invalid Credentials",
+            type: "danger",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        });
+    }
+
     return (
         <div id="app" className="grey-background">
             <div data-app="true" className="k-app light">
@@ -15,7 +75,6 @@ function LoginMain() {
                         <div className="menu-bar">
                             <div data-v-75a3e7a8="" className="tw-container mx-auto k-top-bar is-primary has-right">
                                 <div data-v-75a3e7a8="" className="k-top-bar__container">
-                                    {/* <!----> */}
                                     <div data-v-75a3e7a8="" className="k-top-bar__slot--middle">
                                         <a data-v-75a3e7a8=""
                                             className="router-link-active canon">
@@ -41,30 +100,22 @@ function LoginMain() {
                                             className="k-button flat medium white--text" data-v-75a3e7a8="">
                                             <div className="k-button__content" style={{ "opacity": 1 }}>
                                                 Store
-                                                {/* <!----> */}
                                             </div>
-                                            {/* <!----> */}
                                         </button><button to="[object Object]" className="k-button flat medium white--text"
                                             data-v-75a3e7a8="">
                                                 <div className="k-button__content" style={{ "opacity": 1 }}>
                                                     Events
-                                                    {/* <!----> */}
                                                 </div>
-                                                {/* <!----> */}
                                             </button><button to="[object Object]" className="k-button flat medium white--text"
                                                 data-v-75a3e7a8="">
                                                 <div className="k-button__content" style={{ "opacity": 1 }}>
                                                     Contact
-                                                    {/* <!----> */}
                                                 </div>
-                                                {/* <!----> */}
                                             </button><button to="[object Object]"
                                                 className="k-button outline medium white--text" data-v-75a3e7a8="">
                                                 <div className="k-button__content" style={{ "opacity": 1 }}>
                                                     Log In
-                                                    {/* <!----> */}
                                                 </div>
-                                                {/* <!----> */}
                                             </button></div>
                                     </div>
                                 </div>
@@ -107,7 +158,6 @@ function LoginMain() {
                                             className="flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4 pa-earth k-card raised">
                                             <div data-v-f3fcb000="" className="form-generator">
                                                 <div raised="" className="mb-earth">
-                                                    {/* <!----> */}
                                                     <form data-v-66e8aa00="" id="login" data-vv-scope="login" name="login"
                                                         novalidate="novalidate" />
                                                     <div data-v-66e8aa00="" className="layout row wrap">
@@ -117,13 +167,10 @@ function LoginMain() {
                                                                 style={{ "--componentThemeColor": "var(--null)" }}><label
                                                                     for="object-300916"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Username*
-                                                                    {/* <!----> */}
+                                                                    Email*
                                                                 </label>
-                                                                {/* <!----> */}
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field">
-                                                                    {/* <!----> */}
                                                                     <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "1",
@@ -139,7 +186,9 @@ function LoginMain() {
                                                                             name="object-300916"
                                                                             prependcb="function(){}" required="required"
                                                                             role="email" rows="5" data-mask="null"
-                                                                            value="madhukaperera1996@gmail.com" />
+                                                                            placeholder="Email"
+                                                                            value={email}
+                                                                            onChange={(e) => setEmail(e.target.value)} />
                                                                         <div data-lastpass="true" className="css-6lfyyy">
                                                                             <div data-lastpass-icon="true"
                                                                                 className="css-1fnz74y">
@@ -147,8 +196,6 @@ function LoginMain() {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {/* <!----> */}
-                                                                {/* <!----> */}
                                                             </div>
                                                             <div data-v-6b0e4150=""></div>
                                                         </div>
@@ -161,12 +208,9 @@ function LoginMain() {
                                                                 for="object-506487"
                                                                 className="minion k-input__label colorOne--text">
                                                                 Password*
-                                                                {/* <!----> */}
                                                             </label>
-                                                            {/* <!----> */}
                                                             <div
                                                                 className="k-input-container d-flex align-center k-input__field">
-                                                                {/* <!----> */}
                                                                 <div className="pica"
                                                                     style={{
                                                                         "flex-grow": "1",
@@ -183,7 +227,9 @@ function LoginMain() {
                                                                         label="Password*" name="object-506487"
                                                                         prependcb="function(){}" required="required"
                                                                         role="password" rows="5" data-mask="null"
-                                                                        value="12345678" />
+                                                                        placeholder="Password"
+                                                                        value={password}
+                                                                        onChange={(e) => setPassword(e.target.value)} />
                                                                     <div data-lastpass="true" className="css-6lfyyy">
                                                                         <div data-lastpass-icon="true"
                                                                             className="css-cajv7m">
@@ -201,9 +247,7 @@ function LoginMain() {
                                                                         d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"
                                                                         className=""></path>
                                                                 </svg>
-                                                                    {/* <!----> */}
                                                                 </div>
-                                                                {/* <!----> */}
                                                             </div>
                                                             <div data-v-6b0e4150=""></div>
                                                         </div>
@@ -217,7 +261,6 @@ function LoginMain() {
                                                             <label
                                                                 for="object-113153">
                                                                 Remember Me?
-                                                                {/* <!----> */}
                                                             </label>
                                                             <div className="k-toggle__track colorOne--text"></div>
                                                             <div className="k-toggle__dot"
@@ -229,33 +272,25 @@ function LoginMain() {
                                                     className="hidden">
                                                 </input>
                                             </div>
-                                      
-                                            <NavLink
-                                                strict
-                                                exact
-                                                to={`${process.env.PUBLIC_URL}/dash`}
-                                                key={`${process.env.PUBLIC_URL}/dash`}
-                                            className="k-button no-shadow medium noColor block"
-                                            style={{
-                                                "background-color": "rgb(255 102 0)",
-                                                "color": "rgb(255 255 255)"
-                                            }}>
-                                                <div className="k-button__content"
-                                                    style={{ "opacity": "1" }}>
-                                                Login
-                                                {/* <!----> */}
-                                            </div>
-                                            {/* <!----> */}
-                                            </NavLink>
-
+                                            <form onClick={onSubmit}>
+                                                <div
+                                                    className="k-button no-shadow medium noColor block"
+                                                    style={{
+                                                        "background-color": "rgb(255 102 0)",
+                                                        "color": "rgb(255 255 255)"
+                                                    }}>
+                                                    <div className="k-button__content"
+                                                        style={{ "opacity": "1" }}>
+                                                        Login
+                                                    </div>
+                                                </div>
+                                            </form>
                                             <button
                                             className="mt-moon k-button block flat medium colorOne--text">
                                                 <div className="k-button__content"
                                                     style={{ "opacity": "1" }}>
-                                                I Forgot!
-                                                {/* <!----> */}
-                                            </div>
-                                            {/* <!----> */}
+                                                    I Forgot!
+                                                </div>
                                         </button>
 
                                     </div>
@@ -268,7 +303,6 @@ function LoginMain() {
                         </div>
                     </div>
                 </div>
-                {/* <!----> */}
             </div>
             <div tabindex="0" className="vuedals" style={{ "display": "none" }}></div>
             <div data-v-2211593a="" className="__cov-progress"

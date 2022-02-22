@@ -131451,3 +131451,21 @@ svg:not(:root).svg-inline--fa {
   max-height: 130px;
   color: var(--colorTwo-contrast);
 }
+.dropdownsec{
+  position: absolute;
+  width: 150px;
+  height: 170px;
+  top: 50px;
+  background: white;
+  padding:10px;
+  display:none;
+}
+.dropdownsec.active{
+  display:block;
+}
+
+.dropdownsec a{
+  display:block;
+  padding:10px;
+
+}
