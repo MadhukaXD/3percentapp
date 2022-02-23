@@ -429,10 +429,3 @@ const Button2 = styled.div`
     border-radius: 8px;
     cursor: pointer;
 `
-
-
-<<<<<<< HEAD
-export default AddFoods2
-=======
-export default AddFoods2
->>>>>>> f818816dba9a56d297b75ef9145b610b6dae420c
