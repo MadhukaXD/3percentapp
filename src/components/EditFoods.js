@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import styled from "styled-components"
+import React, { useState, useEffect, useRef } from 'react'
 import axios from "axios"
 import Header from './Header';
 import { ReactNotifications, Store } from 'react-notifications-component'
@@ -87,47 +86,34 @@ function EditFoods() {
 
     const apiurl = "https://the3percent-food.herokuapp.com/api/food/" + Food_id;
     // console.log(apiurl);
-    useState((id) => {
+    useState(() => {
         axios
             .get(apiurl, { id: Food_id })
             .then(res => setFood(res.data))
             .catch(error => console.log(error));
+    }, []);
 
 
-    });
-    // console.log(Food)
+    React.useEffect(() => {
+        fetch('https://the3percent-food.herokuapp.com/api/food/' + Food_id)
+            .then(results => results.json())
+            .then(data => {
+                // console.log(data.Recipe);
+                setFoodName(data.FoodName);
+                setRecipe(data.Recipe);
+                setServingSize(data.ServingSize);
+                setUnitMeasurement(data.UnitMeasurement);
+            });
+    }, []); // Pass empty array to only run once on mount.
 
-    FoodName = Food.FoodName;
-    // Recipe = Food.Recipe;
-    // ServingSize = Food.ServingSize;
-    // UnitMeasurement = Food.UnitMeasurement;
-    // Protein = Food.Protein;
-    // Carbs = Food.Carbs;
-    // Fat = Food.Fat;
-    // Fibre = Food.Fibre;
-    // Sodium = Food.Sodium;
-    // Sugar = Food.Sugar;
-    // Calories = Food.Calories;
-    // TotalCarbohydrates = Food.TotalCarbContainer;
-    // SaturatedFat = Food.SaturatedFat;
-    // Cholesterol = Food.Cholesterol;
-    // VitaminA = Food.VitaminA;
-    // VitaminC = Food.VitaminC;
-    // Calcium = Food.Calcium;
-    // Iron = Food.Iron;
-    // MonosaturatedFat = Food.MonosaturatedFat;
-    // Image = Food.Image;
+    // const [DeleteFood, setDeleteFood] = useState([]);
 
-
-
-    const [DeleteFood, setDeleteFood] = useState([]);
-
-    function Delete() {
-        axios
-            .delete(apiurl, { id: Food_id })
-            .then(res => setDeleteFood(res.data))
-            .catch(error => console.log(error));
-    }
+    // function Delete() {
+    //     axios
+    //         .delete(apiurl, { id: Food_id })
+    //         .then(res => setDeleteFood(res.data))
+    //         .catch(error => console.log(error));
+    // }
 
     return (
         <div id="app name" className="grey-background">
@@ -189,7 +175,7 @@ function EditFoods() {
                                                                                     placeholder="Food Name"
                                                                                     rows="5" data-mask="null"
                                                                                     aria-checked="Grams"
-                                                                                    readonly="true"
+                                                                                    readOnly={true}
                                                                                     key={Food.FoodName}
                                                                                     defaultValue={Food.FoodName}
                                                                                     onChange={(e) => setFoodName(e.target.value)}
@@ -250,7 +236,7 @@ function EditFoods() {
                                                                                         key={Food.Recipe}
                                                                                         defaultValue={Food.Recipe}
                                                                                         onChange={(e) => setRecipe(e.target.value)}
-
+                                                                                        // onInputChange={(e) => setRecipe(e.target.defaultValue)}
                                                                                     >
                                                                                     </textarea>
                                                                                 </div>
@@ -337,6 +323,7 @@ function EditFoods() {
                                                                             key={Food.ServingSize}
                                                                             defaultValue={Food.ServingSize}
                                                                             onChange={(e) => setServingSize(e.target.value)}
+                                                                            onInputChange={(e) => setServingSize(e.target.defaultValue)}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -374,6 +361,7 @@ function EditFoods() {
                                                                                     key={Food.UnitMeasurement}
                                                                                     defaultValue={Food.UnitMeasurement}
                                                                                     onChange={(e) => setUnitMeasurement(e.target.value)}
+                                                                                    onInputChange={(e) => setUnitMeasurement(e.target.defaultValue)}
                                                                                 />
                                                                             </div>
                                                                             <div
@@ -970,429 +958,8 @@ function EditFoods() {
                 </div>
             </div>
         </div >
-        // <Container>
 
-        //     <Container1>
-        //         <textarea className="textarea1"
-        //             value={Food.FoodName}
-        //             onChange={(e) => setFoodName(e.target.value)}
-        //             readOnly={true}
-        //         ></textarea>
-        //     </Container1>
-        //     <Container2>
-        //         <p>Recipe</p>
-        //         <textarea
-        //             className="textarea2"
-        //             value={Food.Recipe}
-        //             onChange={(e) => setRecipe(e.target.value)}
-        //             readOnly={true}
-        //         ></textarea>
-
-        //     </Container2>
-
-        //     <Container3>
-        //         <p>Macronutrients</p>
-        //         <HorizontalRule />
-        //         <FormDetails>
-        //             <Form.Group className="mb-3" controlId="formBasicEmail"
-        //                 onChange={(e) => setServingSize(e.target.value)}
-        //             >
-        //                 <Form.Label>Serving Size</Form.Label>
-        //                 <Form.Control type="text" placeholder=""
-        //                     value={Food.ServingSize}
-        //                     readOnly={true} />
-        //             </Form.Group>
-        //             <Form.Group className="mb-3" controlId="formBasicEmail"
-        //                 onChange={(e) => setUnitMeasurement(e.target.value)}
-        //             >
-        //                 <Form.Label>Unit Measurement </Form.Label>
-        //                 <Form.Select class="form-control" aria-label="Default select example"
-        //                     value={Food.UnitMeasurement}
-        //                     readOnly={true}>
-        //                     <option selected>Choose...</option>
-        //                     <option value="Cup">Cup</option>
-        //                     <option value="Centilitre">Centilitre</option>
-        //                     <option value="Gram">Gram</option>
-        //                     <option value="Gallon">Gallon</option>
-        //                 </Form.Select>
-        //             </Form.Group>
-        //         </FormDetails>
-        //         <FormDetails2>
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setProtein(e.target.value)}
-        //             >
-        //                 <Form.Label>Protein (g)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Protein}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-
-        //                 onChange={(e) => setCarbs(e.target.value)}
-        //             >
-        //                 <Form.Label>Carbs (g)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Carbs}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setFat(e.target.value)}
-        //             >
-        //                 <Form.Label>Fat (g)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Fat}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setFibre(e.target.value)}
-        //             >
-        //                 <Form.Label>Fibre (g)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Fibre}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setSodium(e.target.value)}
-        //             >
-        //                 <Form.Label>Sodium (mg)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Sodium}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setSugar(e.target.value)}
-        //             >
-        //                 <Form.Label>Sugar (mg)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Sugar}
-        //                     readOnly={true} s />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setCalories(e.target.value)}
-        //             >
-        //                 <Form.Label>Calories</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Calories}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setTotalCarbohydrates(e.target.value)}
-        //             >
-        //                 <Form.Label>Total Carbohydrates (g)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.TotalCarbohydrates}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setSaturatedFat(e.target.value)}
-        //             >
-        //                 <Form.Label>Saturated Fat (g)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.SaturatedFat}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setCholesterol(e.target.value)}
-        //             >
-        //                 <Form.Label>Cholesterol (g)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Cholesterol}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setVitaminA(e.target.value)}
-        //             >
-        //                 <Form.Label>Vitamin A (%)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.VitaminA}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setVitaminC(e.target.value)}
-        //             >
-        //                 <Form.Label>Vitamin C (%)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.VitaminC}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setCalcium(e.target.value)}
-        //             >
-        //                 <Form.Label>Calcium (%)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Calcium}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setIron(e.target.value)}
-        //             >
-        //                 <Form.Label>Iron (%)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.Iron}
-        //                     readOnly={true} />
-        //             </Form.Group>
-
-        //             <Form.Group className='mb-3' controlId='formBasicEmail'
-        //                 onChange={(e) => setMonosaturatedFat(e.target.value)}
-        //             >
-        //                 <Form.Label>Monosaturated Fat (g)</Form.Label>
-        //                 <Form.Control type='text' placeholder=''
-        //                     value={Food.MonosaturatedFat}
-        //                     readOnly={true} />
-        //             </Form.Group>
-        //         </FormDetails2>
-        //     </Container3>
-        //     <Container4>
-        //         <p>Media</p>
-        //         <HorizontalRule />
-        //         <InlineBox>
-        //             <div class="custom-file">
-        //                 <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
-        //                 <label class="custom-file-label" for="validatedCustomFile"></label>
-        //                 <div class="invalid-feedback"></div>
-        //             </div>
-        //         </InlineBox>
-        //         <Button1
-        //             value={Image}
-        //             onChange={(e) => setImage(e.target.value)}
-        //         >
-        //             UPLOAD HERE
-        //         </Button1>
-        //         <a href="foodlist">
-        //             <button type="button"
-        //                 className="btn btn-primary"
-        //                 onClick={Delete}
-        //             >Delete Food</button>
-        //         </a>
-        //         <a>
-        //             <button type="button"
-        //                 className="btn btn-primary"
-        //             >Edit Food</button>
-        //         </a>
-        //     </Container4>
-        //     <Button2
-        //         type="text" placeholder=""
-        //         onClick={onSubmit}
-        //     >SAVE FOOD</Button2>
-        // </Container >
     )
 }
-
-const Container = styled.div`
-`
-
-const Container1 = styled.div`
-    margin-left: 75px;
-    margin-top: -50px;
-    width: 1271px;
-    height: 100px;
-    background-color: #FFFFFF;
-    border-radius: 5px; 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-
-    p{
-        padding-left: 15px;
-        padding-top: 3px
-    }
-
-  
-    .textarea1 {
-        height: 100px;
-        width: 1271px;
-        background: #FFFFFF;
-        border: 2px solid ;
-        box-sizing: border-box;
-        border-radius: 4px;
-        border-color: #FFFFFF;
-        font-size: 35px;
-    }
-
-`
-
-const Container2 = styled.div`
-    margin-left: 75px;
-    margin-top: 30px;
-    width: 1271px;
-    height: 207px;
-    background: #FFFFFF;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-
-    p{
-        padding-left: 36px;
-        padding-top: 20px;
-    }
-
-    .textarea2 {
-        height: 109px;
-        width: 1198px;
-        background: #FFFFFF;
-        border: 2px solid ;
-        box-sizing: border-box;
-        border-radius: 4px;
-        border-color: #FFFFFF;
-        font-size: 35px;
-        border: 2px solid #FFE4D1;
-        margin-left: 38px;
-    }
-`
-const Container3 = styled.div`
-    margin-left: 75px;
-    margin-top: 30px;
-    width: 1271px;
-    height: 763px;
-    background: #FFFFFF;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-
-    p{
-        padding-left: 28px;
-        padding-top: 13px;
-        font-size: 14px;
-    }
-
-`
-const FormDetails = styled.div`
-    display: grid;
-    grid-template-columns: minmax(0, 8fr) minmax(0, 8fr) minmax(300px, 8fr);
-    column-gap: 11px;
-    row-gap: 30px;
-    margin-top: 49px;
-    margin-right: 50px;
-    margin-left: 50px;
-
-    .mb-3 {
-        display : grid;
-        column-gap: 90px;
-        row-gap: px;
-    }
-
-    .form-control {
-        width: 381px;
-        height: 48px;
-        border-radius: 4px;
-        border: 2px solid #FFE4D1;
-        box-sizing: border-box
-    }
-
-    .form-label {
-        padding-bottom: 10px
-    }
-
-`
-
-const FormDetails2 = styled.div`
-    display: grid;
-    grid-template-columns: minmax(0, 8fr) minmax(0, 8fr) minmax(300px, 8fr);
-    column-gap: 9px;
-    row-gap: 5px;
-    margin-top: 0px;
-    margin-right: 50px;
-    margin-left: 50px;
-
-    .mb-3 {
-        display : grid;
-        column-gap: 90px;
-        row-gap: px;
-    }
-
-    .form-control {
-        width: 381px;
-        height: 48px;
-        border-radius: 4px;
-        border: 2px solid #FFE4D1;
-        box-sizing: border-box
-    }
-
-    .form-label {
-        padding-bottom: 15px
-    }
-`
-
-const HorizontalRule = styled.div`
-    position: absolute;
-    width: 1219px;
-    height: 0px;
-    border: 1px solid #FFE4D1;
-    left: 103px;
-    top: ;
-`
-const Container4 = styled.div`
-    margin-left: 75px;
-    margin-top: 30px;
-    width: 1271px;
-    height: 424px;
-    background: #FFFFFF;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-
-    p{
-        padding-left: 28px;
-        padding-top: 13px;
-        font-size: 14px;
-    }
-
-    .btn-primary{
-        margin-top: 390px;
-        margin-right: 10px;
-    }
-`
-
-
-const InlineBox = styled.div`
-    position: absolute;
-    width: 1171px;
-    height: 212px;
-    margin-top: 39px;
-    margin-left: 49px;
-    border: 1px dashed #7A7A7A;
-    box-sizing: border-box;
-
-`
-const Button1 = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 16px;
-    position: absolute;
-    width: 179px;
-    height: 39px;
-    margin-left: 525px;
-    margin-top: 280px;
-    background: #FF6600;
-    border-radius: 8px;
-    cursor: pointer;
-`
-
-const Button2 = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 16px;
-    position: absolute;
-    width: 179px;
-    height: 39px;
-    margin-left: 600px;
-    margin-top: 20px;
-    background: #FF6600;
-    border-radius: 8px;
-    cursor: pointer;
-`
-
 
 export default EditFoods;

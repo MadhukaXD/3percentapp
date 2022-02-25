@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import Header from './Header';
 import { ReactNotifications, Store } from 'react-notifications-component'
@@ -20,6 +20,7 @@ function EditExercise() {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        // alert(ExerciseDescription);
         fetch("https://the3percent-exercises.herokuapp.com/api/exercise", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -74,25 +75,42 @@ function EditExercise() {
 
     const apiurl = "https://the3percent-exercises.herokuapp.com/api/exercise/" + ExerciseList_id;
 
-    useState((id) => {
+    useState(() => {
         axios
             .get(apiurl, { id: ExerciseList_id })
             .then(res => setExerciseList(res.data))
             .catch(error => console.log(error));
-        console.log(id);
+        console.log();
     });
 
-    ExerciseTitle = ExerciseList.ExerciseTitle;
+    React.useEffect(() => {
+        fetch('https://the3percent-exercises.herokuapp.com/api/exercise/' + ExerciseList_id)
+            .then(results => results.json())
+            .then(data => {
+                // console.log(data.Recipe);
+                setExerciseTitle(data.ExerciseTitle);
+                setExerciseDescription(data.ExerciseDescription);
+                setExerciseCategory(data.ExerciseCategory);
+                setType(data.Type);
+                setMainMuscleWorked(data.MainMuscleWorked);
+                setOtherMuscleWorked(data.OtherMuscleWorked);
+                setEquipment(data.Equipment);
+                setMechanicsType(data.MechanicsType);
+                setLevel(data.Level);
+                setSport(data.Sport);
+                setForce(data.Force);
+            });
+    }, []); // Pass empty array to only run once on mount.
 
 
-    const [DeleteExercise, setDeleteExercise] = useState([]);
+    // const [DeleteExercise, setDeleteExercise] = useState([]);
 
-    function Delete() {
-        axios
-            .delete(apiurl, { id: ExerciseList_id })
-            .then(res => setDeleteExercise(res.data))
-            .catch(error => console.log(error));
-    }
+    // function Delete() {
+    //     axios
+    //         .delete(apiurl, { id: ExerciseList_id })
+    //         .then(res => setDeleteExercise(res.data))
+    //         .catch(error => console.log(error));
+    // }
 
     return (
         <div id="app name" className="grey-background">
