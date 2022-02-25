@@ -94,25 +94,7 @@ function ExerciseList() {
                                                         </div>
                                                         <div data-v-1b4e9c52=""
                                                             className="flex d-flex justify-end align-center xs12 md3">
-                                                            <button
-                                                                data-v-1b4e9c52="" to="[object Object]"
-                                                                className="action-toolbar__icon k-button  flat icon medium ">
-                                                                <div className="k-button__content"
-                                                                    style={{ "opacity": "1" }}>
-                                                                    <svg
-                                                                        data-v-7f8bad2e="" aria-hidden="true"
-                                                                        focusable="false" data-prefix="fas"
-                                                                        data-icon="trash-alt" role="img"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        viewBox="0 0 448 512"
-                                                                        className="svg-inline--fa fa-trash-alt fa-w-14 k-icon earth colortwotranslucent">
-                                                                        <path data-v-7f8bad2e="" fill="currentColor"
-                                                                            d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
-                                                                            className="">
-                                                                        </path>
-                                                                    </svg>
-                                                                </div>
-                                                            </button>
+
                                                             <hr data-v-2c4f5d45="" data-v-1b4e9c52=""
                                                                 className="action-toolbar__divider mx-earth k-divider--vertical grey-two--text none"
                                                                 style={{
@@ -449,56 +431,25 @@ function ExerciseList() {
                                                                     </div>
                                                                 </NavLink>
                                                             </div>
-                                                            <div className="k-row__slot--right">
-                                                                <div data-v-12e8f0c3="" className="k-flyout">
-                                                                    <div className="k-flyout__activator">
-                                                                        <button
-                                                                            to="[object Object]"
-                                                                            className="k-button flat icon medium disabled--text">
-                                                                            <div className="k-button__content" style={{ "opacity": "1" }}>
-                                                                                <svg data-v-7f8bad2e="" aria-hidden="true"
-                                                                                    focusable="false" data-prefix="far"
-                                                                                    data-icon="ellipsis-h" role="img"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 512 512"
-                                                                                    className="svg-inline--fa fa-ellipsis-h fa-w-16 k-icon mars disabled--text">
-                                                                                    <path data-v-7f8bad2e="" fill="currentColor"
-                                                                                        d="M304 256c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48 48 21.5 48 48zm120-48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm-336 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48z"
-                                                                                        className="">
-                                                                                    </path>
-                                                                                </svg>
-                                                                            </div>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div id="k-flyout-block-eb9d96d1-b06e-49c5-b6fe-e63d36be5637"
-                                                                        className="k-flyout__block pica">
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Preview</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Edit</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Rename</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Duplicate
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Assign To
-                                                                                Clients</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Add / Remove
-                                                                                Group</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row error--text">
-                                                                            <div className="k-flyout__block-row--text">Delete</div>
-                                                                        </div>
-                                                                    </div>
+                                                            {/* <button
+                                                                data-v-1b4e9c52="" to="[object Object]"
+                                                                className="action-toolbar__icon k-button  flat icon medium ">
+                                                                <div className="k-button__content"
+                                                                    style={{ "opacity": "1" }}>
+                                                                    <svg
+                                                                        data-v-7f8bad2e="" aria-hidden="true"
+                                                                        focusable="false" data-prefix="fas"
+                                                                        data-icon="trash-alt" role="img"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 448 512"
+                                                                        className="svg-inline--fa fa-trash-alt fa-w-14 k-icon earth colortwotranslucent">
+                                                                        <path data-v-7f8bad2e="" fill="currentColor"
+                                                                            d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
+                                                                            className="">
+                                                                        </path>
+                                                                    </svg>
                                                                 </div>
-                                                            </div>
+                                                            </button> */}
                                                         </div>
                                                     ))}
                                                     <div data-v-644ea9c9="" data-v-19d24620=""

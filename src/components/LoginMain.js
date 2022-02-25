@@ -11,7 +11,7 @@ function LoginMain() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        fetch("https://the3percent-admin.herokuapp.com/api/adminuser", {
+        fetch("https://the3percent-admin.herokuapp.com/api/adminauth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: email, password: password }),

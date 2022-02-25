@@ -2,39 +2,74 @@ import React, { useState, useEffect } from 'react'
 import styled from "styled-components"
 import axios from "axios"
 import Header from './Header';
+import { ReactNotifications, Store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 function EditFoods() {
 
-    const [FoodName, setFoodName] = useState("");
-    const [Recipe, setRecipe] = useState("");
-    const [ServingSize, setServingSize] = useState("");
-    const [UnitMeasurement, setUnitMeasurement] = useState("");
-    const [Protein, setProtein] = useState("");
-    const [Carbs, setCarbs] = useState("");
-    const [Fat, setFat] = useState("");
-    const [Fibre, setFibre] = useState("");
-    const [Sodium, setSodium] = useState("");
-    const [Sugar, setSugar] = useState("");
-    const [Calories, setCalories] = useState("");
-    const [TotalCarbohydrates, setTotalCarbohydrates] = useState("");
-    const [SaturatedFat, setSaturatedFat] = useState("");
-    const [Cholesterol, setCholesterol] = useState("");
-    const [VitaminA, setVitaminA] = useState("");
-    const [VitaminC, setVitaminC] = useState("");
-    const [Calcium, setCalcium] = useState("");
-    const [Iron, setIron] = useState("");
-    const [MonosaturatedFat, setMonosaturatedFat] = useState("");
-    const [Image, setImage] = useState("");
+    let [FoodName, setFoodName] = useState("");
+    let [Recipe, setRecipe] = useState("");
+    let [ServingSize, setServingSize] = useState("");
+    let [UnitMeasurement, setUnitMeasurement] = useState("");
+    let [Protein, setProtein] = useState("");
+    let [Carbs, setCarbs] = useState("");
+    let [Fat, setFat] = useState("");
+    let [Fibre, setFibre] = useState("");
+    let [Sodium, setSodium] = useState("");
+    let [Sugar, setSugar] = useState("");
+    let [Calories, setCalories] = useState("");
+    let [TotalCarbohydrates, setTotalCarbohydrates] = useState("");
+    let [SaturatedFat, setSaturatedFat] = useState("");
+    let [Cholesterol, setCholesterol] = useState("");
+    let [VitaminA, setVitaminA] = useState("");
+    let [VitaminC, setVitaminC] = useState("");
+    let [Calcium, setCalcium] = useState("");
+    let [Iron, setIron] = useState("");
+    let [MonosaturatedFat, setMonosaturatedFat] = useState("");
+    let [Image, setImage] = useState("");
 
 
     const onSubmit = (e) => {
         e.preventDefault();
+        // alert(Recipe);
         fetch("https://the3percent-food.herokuapp.com/api/food", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ FoodName, Recipe, ServingSize, UnitMeasurement, Image, Protein, Carbs, Fat, Fibre, Sodium, Sugar, Calories, TotalCarbohydrates, SaturatedFat, Cholesterol, VitaminA, VitaminC, Calcium, Iron, MonosaturatedFat }),
         })
             .then(function (response) {
+                console.log(response);
+                if (response.status === 200) {
+                    Store.addNotification({
+                        title: "Success!",
+                        message: "Food Updated successfully",
+                        type: "success",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                            duration: 5000,
+                            onScreen: true
+                        }
+                    });
+                    window.location = "/foodlist";
+                }
+                else {
+                    Store.addNotification({
+                        title: "Failure!",
+                        message: "Please fill required fields",
+                        type: "danger",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                            duration: 5000,
+                            onScreen: true
+                        }
+                    });
+                }
                 return response.text();
             })
             .then((response) => {
@@ -51,16 +86,37 @@ function EditFoods() {
     const Food_id = queryParams.get('Food_id');
 
     const apiurl = "https://the3percent-food.herokuapp.com/api/food/" + Food_id;
-
+    // console.log(apiurl);
     useState((id) => {
         axios
             .get(apiurl, { id: Food_id })
             .then(res => setFood(res.data))
             .catch(error => console.log(error));
-        console.log(id);
+
+
     });
+    // console.log(Food)
 
-
+    FoodName = Food.FoodName;
+    // Recipe = Food.Recipe;
+    // ServingSize = Food.ServingSize;
+    // UnitMeasurement = Food.UnitMeasurement;
+    // Protein = Food.Protein;
+    // Carbs = Food.Carbs;
+    // Fat = Food.Fat;
+    // Fibre = Food.Fibre;
+    // Sodium = Food.Sodium;
+    // Sugar = Food.Sugar;
+    // Calories = Food.Calories;
+    // TotalCarbohydrates = Food.TotalCarbContainer;
+    // SaturatedFat = Food.SaturatedFat;
+    // Cholesterol = Food.Cholesterol;
+    // VitaminA = Food.VitaminA;
+    // VitaminC = Food.VitaminC;
+    // Calcium = Food.Calcium;
+    // Iron = Food.Iron;
+    // MonosaturatedFat = Food.MonosaturatedFat;
+    // Image = Food.Image;
 
 
 
@@ -120,7 +176,8 @@ function EditFoods() {
                                                                                     "flex-grow": "1",
                                                                                     "position": "relative"
                                                                                 }}>
-                                                                                <input type="text"
+                                                                                <input
+                                                                                    type="text"
                                                                                     data-vv-name="object-110314"
                                                                                     data-vv-as="macro type"
                                                                                     appendcb="function(){}"
@@ -132,9 +189,11 @@ function EditFoods() {
                                                                                     placeholder="Food Name"
                                                                                     rows="5" data-mask="null"
                                                                                     aria-checked="Grams"
-                                                                                    readOnly={true}
-                                                                                    value={Food.FoodName}
-                                                                                    onChange={(e) => setFoodName(e.target.value)} />
+                                                                                    readonly="true"
+                                                                                    key={Food.FoodName}
+                                                                                    defaultValue={Food.FoodName}
+                                                                                    onChange={(e) => setFoodName(e.target.value)}
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                         <div data-v-6b0e4150="" ></div>
@@ -188,8 +247,10 @@ function EditFoods() {
                                                                                         role="text"
                                                                                         rows="5" data-mask="null"
                                                                                         aria-checked="Grams"
-                                                                                        value={Food.Recipe}
+                                                                                        key={Food.Recipe}
+                                                                                        defaultValue={Food.Recipe}
                                                                                         onChange={(e) => setRecipe(e.target.value)}
+
                                                                                     >
                                                                                     </textarea>
                                                                                 </div>
@@ -273,8 +334,10 @@ function EditFoods() {
                                                                             className="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.ServingSize}
-                                                                            onChange={(e) => setServingSize(e.target.value)} />
+                                                                            key={Food.ServingSize}
+                                                                            defaultValue={Food.ServingSize}
+                                                                            onChange={(e) => setServingSize(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150="" ></div>
@@ -308,8 +371,10 @@ function EditFoods() {
                                                                                     prependcb="function(){}" role="text"
                                                                                     rows="5" data-mask="null"
                                                                                     aria-checked="Grams"
-                                                                                    value={Food.UnitMeasurement}
-                                                                                    onChange={(e) => setUnitMeasurement(e.target.value)} />
+                                                                                    key={Food.UnitMeasurement}
+                                                                                    defaultValue={Food.UnitMeasurement}
+                                                                                    onChange={(e) => setUnitMeasurement(e.target.value)}
+                                                                                />
                                                                             </div>
                                                                             <div
                                                                                 className="k-input__field-icon pica right colorOne--text">
@@ -356,7 +421,8 @@ function EditFoods() {
                                                                             label="Protein (g)" name="object-640858"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Protein}
+                                                                            key={Food.Protein}
+                                                                            defaultValue={Food.Protein}
                                                                             onChange={(e) => setProtein(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -387,7 +453,8 @@ function EditFoods() {
                                                                             label="Carbs (g)" name="object-584956"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Carbs}
+                                                                            key={Food.Carbs}
+                                                                            defaultValue={Food.Carbs}
                                                                             onChange={(e) => setCarbs(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -416,7 +483,8 @@ function EditFoods() {
                                                                             name="object-582949"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Fat}
+                                                                            key={Food.Fat}
+                                                                            defaultValue={Food.Fat}
                                                                             onChange={(e) => setFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -445,7 +513,8 @@ function EditFoods() {
                                                                             label="Fibre (g)" name="object-497406"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Fibre}
+                                                                            key={Food.Fibre}
+                                                                            defaultValue={Food.Fibre}
                                                                             onChange={(e) => setFibre(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -474,7 +543,8 @@ function EditFoods() {
                                                                             label="Sodium (mg)" name="object-537921"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Sodium}
+                                                                            key={Food.Sodium}
+                                                                            defaultValue={Food.Sodium}
                                                                             onChange={(e) => setSodium(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -503,7 +573,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Sugar}
+                                                                            key={Food.Sugar}
+                                                                            defaultValue={Food.Sugar}
                                                                             onChange={(e) => setSugar(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -532,7 +603,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Calories}
+                                                                            key={Food.Calories}
+                                                                            defaultValue={Food.Calories}
                                                                             onChange={(e) => setCalories(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -561,7 +633,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.TotalCarbohydrates}
+                                                                            key={Food.TotalCarbohydrates}
+                                                                            defaultValue={Food.TotalCarbohydrates}
                                                                             onChange={(e) => setTotalCarbohydrates(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -590,7 +663,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.SaturatedFat}
+                                                                            key={Food.SaturatedFat}
+                                                                            defaultValue={Food.SaturatedFat}
                                                                             onChange={(e) => setSaturatedFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -619,7 +693,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Cholesterol}
+                                                                            key={Food.Cholesterol}
+                                                                            defaultValue={Food.Cholesterol}
                                                                             onChange={(e) => setCholesterol(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -648,7 +723,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.VitaminA}
+                                                                            key={Food.VitaminA}
+                                                                            defaultValue={Food.VitaminA}
                                                                             onChange={(e) => setVitaminA(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -677,7 +753,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.VitaminC}
+                                                                            key={Food.VitaminC}
+                                                                            defaultValue={Food.VitaminC}
                                                                             onChange={(e) => setVitaminC(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -706,7 +783,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Calcium}
+                                                                            key={Food.Calcium}
+                                                                            defaultValue={Food.Calcium}
                                                                             onChange={(e) => setCalcium(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -735,7 +813,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.Iron}
+                                                                            key={Food.Iron}
+                                                                            defaultValue={Food.Iron}
                                                                             onChange={(e) => setIron(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -764,7 +843,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            value={Food.MonosaturatedFat}
+                                                                            key={Food.MonosaturatedFat}
+                                                                            defaultValue={Food.MonosaturatedFat}
                                                                             onChange={(e) => setMonosaturatedFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -831,14 +911,13 @@ function EditFoods() {
                                                     </div>
 
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                        <button
-                                                            data-v-70fe1976="" to="[object Object]"
-                                                            className="k-button medium colorOne">
-                                                            <div className="k-button__content"
-                                                                style={{ "opacity": 1 }}>
-                                                                Upload here
+                                                        <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
+                                                                <label class="custom-file-label" for="validatedCustomFile"></label>
+                                                                <div class="invalid-feedback"></div>
                                                             </div>
-                                                        </button>
+                                                        </div>
                                                     </div>
 
                                                     <div class="k-card__content">
@@ -853,12 +932,12 @@ function EditFoods() {
                                             </div>
 
                                             <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                <button
+                                                <button onClick={onSubmit}
                                                     data-v-70fe1976="" to="[object Object]"
                                                     className="k-button medium colorOne">
                                                     <div className="k-button__content"
                                                         style={{ "opacity": 1 }}>
-                                                        Add Meal
+                                                        Update Food
                                                     </div>
                                                 </button>
                                             </div>

@@ -1,9 +1,82 @@
 import React, { useState, useEffect } from 'react'
-import styled from "styled-components";
-import axios from "axios";
 import Header from './Header';
+import { ReactNotifications, Store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 function AddFoods() {
+
+    const [FoodName, setFoodName] = useState("");
+    const [Recipe, setRecipe] = useState("");
+    const [ServingSize, setServingSize] = useState("");
+    const [UnitMeasurement, setUnitMeasurement] = useState("");
+    const [Protein, setProtein] = useState("");
+    const [Carbs, setCarbs] = useState("");
+    const [Fat, setFat] = useState("");
+    const [Fibre, setFibre] = useState("");
+    const [Sodium, setSodium] = useState("");
+    const [Sugar, setSugar] = useState("");
+    const [Calories, setCalories] = useState("");
+    const [TotalCarbohydrates, setTotalCarbohydrates] = useState("");
+    const [SaturatedFat, setSaturatedFat] = useState("");
+    const [Cholesterol, setCholesterol] = useState("");
+    const [VitaminA, setVitaminA] = useState("");
+    const [VitaminC, setVitaminC] = useState("");
+    const [Calcium, setCalcium] = useState("");
+    const [Iron, setIron] = useState("");
+    const [MonosaturatedFat, setMonosaturatedFat] = useState("");
+    const [Image, setImage] = useState("");
+
+    const onSubmit = (e) => {
+
+        e.preventDefault();
+        fetch("https://the3percent-food.herokuapp.com/api/food", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ FoodName, Recipe, ServingSize, UnitMeasurement, Image, Protein, Carbs, Fat, Fibre, Sodium, Sugar, Calories, TotalCarbohydrates, SaturatedFat, Cholesterol, VitaminA, VitaminC, Calcium, Iron, }),
+        })
+            .then(function (response) {
+                console.log(response.status);
+                if (response.status === 200) {
+                    Store.addNotification({
+                        title: "Success!",
+                        message: "New Food added successfully",
+                        type: "success",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                            duration: 5000,
+                            onScreen: true
+                        }
+                    });
+                    window.location = "/foodlist";
+                }
+                else {
+                    Store.addNotification({
+                        title: "Failure!",
+                        message: "Please fill required fields",
+                        type: "danger",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                            duration: 5000,
+                            onScreen: true
+                        }
+                    });
+                }
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+    };
+
     return (
         <div id="app name" className="grey-background">
             <div data-app="true" className="k-app light">
@@ -62,7 +135,9 @@ function AddFoods() {
                                                                                     prependcb="function(){}" role="text"
                                                                                     placeholder="Food Name"
                                                                                     rows="5" data-mask="null"
-                                                                                    aria-checked="Grams" />
+                                                                                    aria-checked="Grams"
+                                                                                    value={FoodName}
+                                                                                    onChange={(e) => setFoodName(e.target.value)} />
                                                                             </div>
                                                                         </div>
                                                                         <div data-v-6b0e4150="" ></div>
@@ -115,7 +190,9 @@ function AddFoods() {
                                                                                         prependcb="function(){}"
                                                                                         role="text"
                                                                                         rows="5" data-mask="null"
-                                                                                        aria-checked="Grams">
+                                                                                        aria-checked="Grams"
+                                                                                        value={Recipe}
+                                                                                        onChange={(e) => setRecipe(e.target.value)}>
                                                                                     </textarea>
                                                                                 </div>
                                                                             </div>
@@ -178,7 +255,7 @@ function AddFoods() {
                                                                 <label
                                                                     for="object-344170"
                                                                     className="minion k-input__label grey-one--text">
-                                                                    Serving Size
+                                                                    Serving Size (g)
                                                                 </label>
                                                                 <div
                                                                     className="">
@@ -197,7 +274,9 @@ function AddFoods() {
                                                                             name="object-344170"
                                                                             className="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={ServingSize}
+                                                                            onChange={(e) => setServingSize(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150="" ></div>
@@ -230,7 +309,9 @@ function AddFoods() {
                                                                                     name="object-110314"
                                                                                     prependcb="function(){}" role="text"
                                                                                     rows="5" data-mask="null"
-                                                                                    aria-checked="Grams" />
+                                                                                    aria-checked="Grams"
+                                                                                    value={UnitMeasurement}
+                                                                                    onChange={(e) => setUnitMeasurement(e.target.value)} />
                                                                             </div>
                                                                             <div
                                                                                 className="k-input__field-icon pica right colorOne--text">
@@ -276,7 +357,9 @@ function AddFoods() {
                                                                             aria-label="Protein (g)" id="object-640858"
                                                                             label="Protein (g)" name="object-640858"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Protein}
+                                                                            onChange={(e) => setProtein(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150="">
@@ -305,7 +388,9 @@ function AddFoods() {
                                                                             aria-label="Carbs (g)" id="object-584956"
                                                                             label="Carbs (g)" name="object-584956"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Carbs}
+                                                                            onChange={(e) => setCarbs(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -332,7 +417,9 @@ function AddFoods() {
                                                                             id="object-582949" label="Fat (g)"
                                                                             name="object-582949"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Fat}
+                                                                            onChange={(e) => setFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -359,7 +446,9 @@ function AddFoods() {
                                                                             aria-label="Fibre (g)" id="object-497406"
                                                                             label="Fibre (g)" name="object-497406"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Fibre}
+                                                                            onChange={(e) => setFibre(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -386,7 +475,9 @@ function AddFoods() {
                                                                             aria-label="Sodium (mg)" id="object-537921"
                                                                             label="Sodium (mg)" name="object-537921"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Sodium}
+                                                                            onChange={(e) => setSodium(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -413,7 +504,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Sugar}
+                                                                            onChange={(e) => setSugar(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -440,7 +533,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Calories}
+                                                                            onChange={(e) => setCalories(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -467,7 +562,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={TotalCarbohydrates}
+                                                                            onChange={(e) => setTotalCarbohydrates(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -494,7 +591,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={SaturatedFat}
+                                                                            onChange={(e) => setSaturatedFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -521,7 +620,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Cholesterol}
+                                                                            onChange={(e) => setCholesterol(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -548,7 +649,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={VitaminA}
+                                                                            onChange={(e) => setVitaminA(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -575,7 +678,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={VitaminC}
+                                                                            onChange={(e) => setVitaminC(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -602,7 +707,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Calcium}
+                                                                            onChange={(e) => setCalcium(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -629,7 +736,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={Iron}
+                                                                            onChange={(e) => setIron(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -656,7 +765,9 @@ function AddFoods() {
                                                                             aria-label="Sugar (g)" id="object-86824"
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null" />
+                                                                            min="0" rows="5" data-mask="null"
+                                                                            value={MonosaturatedFat}
+                                                                            onChange={(e) => setMonosaturatedFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -722,14 +833,11 @@ function AddFoods() {
                                                     </div>
 
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                        <button
-                                                            data-v-70fe1976="" to="[object Object]"
-                                                            className="k-button medium colorOne">
-                                                            <div className="k-button__content"
-                                                                style={{ "opacity": 1 }}>
-                                                                Upload here
-                                                            </div>
-                                                        </button>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
+                                                            <label class="custom-file-label" for="validatedCustomFile"></label>
+                                                            <div class="invalid-feedback"></div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="k-card__content">
@@ -744,7 +852,7 @@ function AddFoods() {
                                             </div>
 
                                             <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                <button
+                                                <button onClick={onSubmit}
                                                     data-v-70fe1976="" to="[object Object]"
                                                     className="k-button medium colorOne">
                                                     <div className="k-button__content"

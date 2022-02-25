@@ -29,14 +29,27 @@ function FoodList() {
         var result = await axios.get(url);
         setrecipes(result.data.hits);
         console.log(result);
-
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log("test")
         getRecipe();
     };
+
+    const [visible, setVisible] = React.useState(false);
+
+    // const toggleBtn = document.querySelector('#foodsearchbar');
+    // const divlist = document.querySelector('.k-row clickable standalone image-middle');
+
+
+    // toggleBtn.addEventListener('click', () => {
+    //     console.log('hellow')
+    //     if (divlist.style.display === 'none') {
+    //         divlist.style.display = 'block';
+    //     } else {
+    //         divlist.style.display = 'none';
+    //     }
+    // });
 
     return (
         <div id="app" className="grey-background" >
@@ -81,16 +94,16 @@ function FoodList() {
                                                         <div data-v-1b4e9c52="" className="flex xs12 md9">
                                                             <div data-v-1b4e9c52="" className="action-toolbar__input k-input mb-none"
                                                                 style={{ "--componentThemeColor": "var(--colorOne)" }}>
-                                                                <div 
-                                                                    className="k-input-container d-flex align-center k-input__field">
 
-                                                                    <div
-                                                                        className="pica"
-                                                                        style={{
-                                                                            "flex-grow": "1",
-                                                                            "position": "relative"
-                                                                        }}>
-                                                                        <form onSubmit={onSubmit}>
+                                                                <form className="searchBar" id="foodsearchbar" onSubmit={onSubmit}>
+                                                                    <div className="k-input-container d-flex align-center k-input__field" >
+                                                                        <div
+                                                                            className="pica"
+                                                                            style={{
+                                                                                "flex-grow": "1",
+                                                                                "position": "relative"
+                                                                            }}>
+
                                                                             <input
                                                                                 type="text" data-vv-name="object-898551"
                                                                                 appendcb="function(){}" aria-checked=""
@@ -99,51 +112,32 @@ function FoodList() {
                                                                                 prependcb="function(){}" role="text" rows="5"
                                                                                 data-mask="null"
                                                                                 value={query}
-                                                                                onChange={(e) => setquery(e.target.value)}
-                                                                            />
-                                                                        </form>
-                                                                    </div>
-                                                                    <div 
-                                                                        className="k-input__field-icon pica left colorOne--text">
-                                                                        <svg data-v-7f8bad2e="" data-v-1b4e9c52=""
-                                                                            aria-hidden="true" focusable="false"
-                                                                            data-prefix="far" data-icon="search" role="img"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            viewBox="0 0 512 512"
-                                                                            className="svg-inline--fa fa-search fa-w-16 k-icon mars colorOne">
-                                                                            <path data-v-7f8bad2e="" fill="currentColor"
-                                                                                d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"
-                                                                                className="">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </div>
+                                                                                onChange={(e) => setquery(e.target.value)} />
 
-                                                                </div>
+                                                                        </div>
+                                                                        <div
+                                                                            className="k-input__field-icon pica left colorOne--text">
+                                                                            <svg data-v-7f8bad2e="" data-v-1b4e9c52=""
+                                                                                aria-hidden="true" focusable="false"
+                                                                                data-prefix="far" data-icon="search" role="img"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 512 512"
+                                                                                className="svg-inline--fa fa-search fa-w-16 k-icon mars colorOne">
+                                                                                <path data-v-7f8bad2e="" fill="currentColor"
+                                                                                    d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"
+                                                                                    className="">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
                                                                 <div data-v-6b0e4150="">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div data-v-1b4e9c52=""
                                                             className="flex d-flex justify-end align-center xs12 md3">
-                                                            <button
-                                                                data-v-1b4e9c52="" to="[object Object]"
-                                                                className="action-toolbar__icon k-button  flat icon medium ">
-                                                                <div className="k-button__content"
-                                                                    style={{ "opacity": "1" }}>
-                                                                    <svg
-                                                                        data-v-7f8bad2e="" aria-hidden="true"
-                                                                        focusable="false" data-prefix="fas"
-                                                                        data-icon="trash-alt" role="img"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        viewBox="0 0 448 512"
-                                                                        className="svg-inline--fa fa-trash-alt fa-w-14 k-icon earth colortwotranslucent">
-                                                                        <path data-v-7f8bad2e="" fill="currentColor"
-                                                                            d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
-                                                                            className="">
-                                                                        </path>
-                                                                    </svg>
-                                                                </div>
-                                                            </button>
+
                                                             <hr data-v-2c4f5d45="" data-v-1b4e9c52=""
                                                                 className="action-toolbar__divider mx-earth k-divider--vertical grey-two--text none"
                                                                 style={{
@@ -380,6 +374,7 @@ function FoodList() {
                                                             <div style={{ "width": "60px" }}></div>
                                                         </div>
                                                     </div>
+
                                                     {Food.map((Food, key) => (
                                                         <div data-v-12e8f0c3="" data-v-19d24620=""
                                                             id="k-row-e02c9d68-bf46-4c60-aacb-9f41ee3fec08"
@@ -475,57 +470,28 @@ function FoodList() {
                                                                     </div>
                                                                 </div>
                                                             </NavLink>
-                                                            <div className="k-row__slot--right">
-                                                                <div data-v-12e8f0c3="" className="k-flyout">
-                                                                    <div className="k-flyout__activator">
-                                                                        <button
-                                                                            to="[object Object]"
-                                                                            className="k-button flat icon medium disabled--text">
-                                                                            <div className="k-button__content" style={{ "opacity": "1" }}>
-                                                                                <svg data-v-7f8bad2e="" aria-hidden="true"
-                                                                                    focusable="false" data-prefix="far"
-                                                                                    data-icon="ellipsis-h" role="img"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 512 512"
-                                                                                    className="svg-inline--fa fa-ellipsis-h fa-w-16 k-icon mars disabled--text">
-                                                                                    <path data-v-7f8bad2e="" fill="currentColor"
-                                                                                        d="M304 256c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48 48 21.5 48 48zm120-48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm-336 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48z"
-                                                                                        className="">
-                                                                                    </path>
-                                                                                </svg>
-                                                                            </div>
-                                                                        </button></div>
-                                                                    <div id="k-flyout-block-eb9d96d1-b06e-49c5-b6fe-e63d36be5637"
-                                                                        className="k-flyout__block pica">
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Preview</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Edit</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Rename</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Duplicate
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Assign To
-                                                                                Clients</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Add / Remove
-                                                                                Group</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row error--text">
-                                                                            <div className="k-flyout__block-row--text">Delete</div>
-                                                                        </div>
-                                                                    </div>
+                                                            {/* <button
+                                                                data-v-1b4e9c52="" to="[object Object]"
+                                                                className="action-toolbar__icon k-button  flat icon medium ">
+                                                                <div className="k-button__content"
+                                                                    style={{ "opacity": "1" }}>
+                                                                    <svg
+                                                                        data-v-7f8bad2e="" aria-hidden="true"
+                                                                        focusable="false" data-prefix="fas"
+                                                                        data-icon="trash-alt" role="img"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 448 512"
+                                                                        className="svg-inline--fa fa-trash-alt fa-w-14 k-icon earth colortwotranslucent">
+                                                                        <path data-v-7f8bad2e="" fill="currentColor"
+                                                                            d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
+                                                                            className="">
+                                                                        </path>
+                                                                    </svg>
                                                                 </div>
-                                                            </div>
+                                                            </button> */}
                                                         </div>
                                                     ))}
+
                                                     {recipes.map((recipe, key) => (
                                                         <div data-v-12e8f0c3="" data-v-19d24620=""
                                                             id="k-row-e02c9d68-bf46-4c60-aacb-9f41ee3fec08"
@@ -561,7 +527,7 @@ function FoodList() {
                                                                     </div>
                                                                 </div>
                                                             </div>
-
+                                                            <a href={"editfoods?url=" + recipe["recipe"]["url"]}>
                                                             <div className="k-row__slot--middle">
                                                                 <div data-v-12e8f0c3="" className="layout row wrap">
                                                                     <div data-v-12e8f0c3=""
@@ -570,15 +536,21 @@ function FoodList() {
                                                                             className="k-image colorTwo">
                                                                             <div data-v-c9edefc2="" className="k-image__sizer"
                                                                                 style={{ "padding-bottom": "100%" }}>
+                                                                                    {/* {recipe["recipe"]["image"]} */}
+                                                                                    <img src={recipe["recipe"]["image"]}
+                                                                                    />
+
                                                                             </div>
                                                                             <div data-v-c9edefc2="" className="k-image__image"
                                                                                 style={{ "background-image": "url(&quot;/3/img/14.1ac5241b.png&quot;)" }}>
+                                                                                    {/* <img src='https://www.edamam.com/web-img/4d9/4d9084cbc170789caa9e997108b595de.jpg' /> */}
                                                                             </div>
                                                                             <div data-v-c9edefc2="" className="k-image__content"
                                                                                 style={{ "display": "none" }}>
                                                                             </div>
                                                                         </div>
                                                                         {recipe["recipe"]["label"]}
+
                                                                     </div>
                                                                     <div data-v-12e8f0c3=""
                                                                         className="flex sm2 hidden-xs-only d-flex align-center">
@@ -592,7 +564,7 @@ function FoodList() {
                                                                         <div data-v-62035167="" data-v-12e8f0c3=""
                                                                             className="k-counter brevier show">
                                                                             <div data-v-62035167=""
-                                                                                className="k-counter__value colorOne">0</div>
+                                                                                    className="k-counter__value colorOne"></div>
                                                                         </div>
                                                                     </div>
                                                                     <div data-v-12e8f0c3=""
@@ -609,120 +581,20 @@ function FoodList() {
                                                                                     "width": "40px"
                                                                                 }}>kd</span>
                                                                         </div>
-                                                                        kasun dias
+
                                                                     </div>
                                                                     <div data-v-12e8f0c3=""
-                                                                        className="flex hidden-sm-and-down md2 d-flex align-center">
-                                                                        {Food.Date}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                                            className="flex hidden-sm-and-down md2 d-flex align-center">
 
-                                                            <div className="k-row__slot--right">
-                                                                <div data-v-12e8f0c3="" className="k-flyout">
-                                                                    <div className="k-flyout__activator">
-                                                                        <button
-                                                                            to="[object Object]"
-                                                                            className="k-button flat icon medium disabled--text">
-                                                                            <div className="k-button__content" style={{ "opacity": "1" }}>
-                                                                                <svg data-v-7f8bad2e="" aria-hidden="true"
-                                                                                    focusable="false" data-prefix="far"
-                                                                                    data-icon="ellipsis-h" role="img"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 512 512"
-                                                                                    className="svg-inline--fa fa-ellipsis-h fa-w-16 k-icon mars disabled--text">
-                                                                                    <path data-v-7f8bad2e="" fill="currentColor"
-                                                                                        d="M304 256c0 26.5-21.5 48-48 48s-48-21.5-48-48 21.5-48 48-48 48 21.5 48 48zm120-48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm-336 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48z"
-                                                                                        className="">
-                                                                                    </path>
-                                                                                </svg>
-                                                                            </div>
-                                                                        </button></div>
-                                                                    <div id="k-flyout-block-eb9d96d1-b06e-49c5-b6fe-e63d36be5637"
-                                                                        className="k-flyout__block pica">
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Preview</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Edit</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Rename</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Duplicate
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Assign To
-                                                                                Clients</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row">
-                                                                            <div className="k-flyout__block-row--text">Add / Remove
-                                                                                Group</div>
-                                                                        </div>
-                                                                        <div className="k-flyout__block-row error--text">
-                                                                            <div className="k-flyout__block-row--text">Delete</div>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            </a>
                                                         </div>
                                                     ))}
 
 
-                                                    <div data-v-644ea9c9="" data-v-19d24620=""
-                                                        className="infinite-loading-container">
-                                                        <div data-v-644ea9c9="" className="infinite-status-prompt"
-                                                            style={{ "display": "none" }}>
-                                                            <div data-v-1faf422c="" data-v-46b20d22="" data-v-644ea9c9=""
-                                                                className="pa-mars k-loading colorOne--text" data-v-3b32196a="">
-                                                                {/* <svg data-v-1faf422c="" xmlns="http://www.w3.org/2000/svg"
-                                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                                                                    y="0px" viewBox="0 0 30 30"
-                                                                    style="width: 36px; height: 36px; fill: currentcolor;">
-                                                                    <rect data-v-1faf422c="" x="0" y="0" width="4"
-                                                                        height="10"
-                                                                        style="animation-duration: 0.4s; animation-delay: -0.266667s;">
-                                                                    </rect>
-                                                                    <rect data-v-1faf422c="" x="10" y="0" width="4"
-                                                                        height="10"
-                                                                        style="animation-duration: 0.4s; animation-delay: -0.133333s;">
-                                                                    </rect>
-                                                                    <rect data-v-1faf422c="" x="20" y="0" width="4"
-                                                                        height="10"
-                                                                        style="animation-duration: 0.4s; animation-delay: 0s;">
-                                                                    </rect>
-                                                                </svg> */}
-                                                            </div>
-                                                        </div>
-                                                        <div data-v-644ea9c9="" className="infinite-status-prompt"
-                                                            style={{
-                                                                "color": "rgb(102, 102, 102)",
-                                                                "font-size": "14px",
-                                                                "padding": "10px 0px"
-                                                            }}>
-                                                        </div>
-                                                        <div data-v-644ea9c9="" className="infinite-status-prompt"
-                                                            style={{
-                                                                "color": "rgb(102, 102, 102)",
-                                                                "font-size": "14px",
-                                                                "padding": "10px 0px",
-                                                                "display": "none"
-                                                            }}>
-                                                        </div>
-                                                        <div data-v-644ea9c9="" className="infinite-status-prompt"
-                                                            style={{
-                                                                "color": "rgb(102, 102, 102)",
-                                                                "font-size": "14px",
-                                                                "padding": "10px 0px",
-                                                                "display": "none"
-                                                            }}>
-                                                            <br data-v-644ea9c9="" />
-                                                            <button data-v-644ea9c9=""
-                                                                className="btn-try-infinite">Retry</button>
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { Form } from "react-bootstrap";
 import Header from './Header';
 import { Helmet } from "react-helmet";
+import { ReactNotifications, Store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 function CreateClient() {
+
+
+
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [Age, setAge] = useState("");
@@ -33,15 +36,48 @@ function CreateClient() {
       }),
     })
       .then(function (response) {
-        return response.text();
+        console.log(response.status);
+        if (response.status === 200) {
+          Store.addNotification({
+            title: "Success!",
+            message: "New Client added successfully",
+            type: "success",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true
+            }
+          });
+          window.location = "/clientlist";
+        }
+        else {
+          Store.addNotification({
+            title: "Failure!",
+            message: "Client already exists",
+            type: "danger",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true
+            }
+          });
+        }
       })
       .then((response) => {
         console.log(response);
+
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
 
   return (
     <div>

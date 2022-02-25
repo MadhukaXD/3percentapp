@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styled from "styled-components";
 import Header from './Header';
 import { NavLink, Link, useLocation } from "react-router-dom";
 
@@ -25,6 +24,7 @@ function AddExercises() {
             body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, }),
         })
             .then(function (response) {
+                console.log(response.status);
                 return response.text();
             })
             .then((response) => {
@@ -477,14 +477,11 @@ function AddExercises() {
                                                         </div>
                                                     </div>
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                        <button
-                                                            data-v-70fe1976="" to="[object Object]"
-                                                            className="k-button medium colorOne">
-                                                            <div className="k-button__content"
-                                                                style={{ "opacity": 1 }}>
-                                                                Upload here
-                                                            </div>
-                                                        </button>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
+                                                            <label class="custom-file-label" for="validatedCustomFile"></label>
+                                                            <div class="invalid-feedback"></div>
+                                                        </div>
                                                     </div>
                                                     <div class="k-card__content">
                                                         <div data-v-52fb9f55="" class="layout row wrap no-padding">

@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
-import styled from "styled-components";
 import axios from "axios"
 import Header from './Header';
+import { ReactNotifications, Store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 function EditExercise() {
 
-    const [ExerciseTitle, setExerciseTitle] = useState("");
-    const [ExerciseDescription, setExerciseDescription] = useState("");
-    const [ExerciseCategory, setExerciseCategory] = useState("");
-    const [Type, setType] = useState("");
-    const [MainMuscleWorked, setMainMuscleWorked] = useState("");
-    const [OtherMuscleWorked, setOtherMuscleWorked] = useState("");
-    const [Equipment, setEquipment] = useState("");
-    const [MechanicsType, setMechanicsType] = useState("");
-    const [Level, setLevel] = useState("");
-    const [Sport, setSport] = useState("");
-    const [Force, setForce] = useState("");
+    let [ExerciseTitle, setExerciseTitle] = useState("");
+    let [ExerciseDescription, setExerciseDescription] = useState("");
+    let [ExerciseCategory, setExerciseCategory] = useState("");
+    let [Type, setType] = useState("");
+    let [MainMuscleWorked, setMainMuscleWorked] = useState("");
+    let [OtherMuscleWorked, setOtherMuscleWorked] = useState("");
+    let [Equipment, setEquipment] = useState("");
+    let [MechanicsType, setMechanicsType] = useState("");
+    let [Level, setLevel] = useState("");
+    let [Sport, setSport] = useState("");
+    let [Force, setForce] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -25,6 +26,37 @@ function EditExercise() {
             body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, }),
         })
             .then(function (response) {
+                if (response.status === 200) {
+                    Store.addNotification({
+                        title: "Success!",
+                        message: "Exercise Updated successfully",
+                        type: "success",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                            duration: 5000,
+                            onScreen: true
+                        }
+                    });
+                    window.location = "/exerciselist";
+                }
+                else {
+                    Store.addNotification({
+                        title: "Failure!",
+                        message: "Please fill required fields",
+                        type: "danger",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animate__animated", "animate__fadeIn"],
+                        animationOut: ["animate__animated", "animate__fadeOut"],
+                        dismiss: {
+                            duration: 5000,
+                            onScreen: true
+                        }
+                    });
+                }
                 return response.text();
             })
             .then((response) => {
@@ -50,7 +82,7 @@ function EditExercise() {
         console.log(id);
     });
 
-
+    ExerciseTitle = ExerciseList.ExerciseTitle;
 
 
     const [DeleteExercise, setDeleteExercise] = useState([]);
@@ -123,7 +155,8 @@ function EditExercise() {
                                                                                     rows="5" data-mask="null"
                                                                                     aria-checked="Grams"
                                                                                     readOnly={true}
-                                                                                    value={ExerciseList.ExerciseTitle}
+                                                                                    key={ExerciseList.ExerciseTitle}
+                                                                                    defaultValue={ExerciseList.ExerciseTitle}
                                                                                     onChange={(e) => setExerciseTitle(e.target.value)} />
                                                                             </div>
                                                                         </div>
@@ -180,7 +213,8 @@ function EditExercise() {
                                                                                         role="text"
                                                                                         rows="5" data-mask="null"
                                                                                         aria-checked="Grams"
-                                                                                        value={ExerciseList.ExerciseDescription}
+                                                                                        key={ExerciseList.ExerciseDescription}
+                                                                                        defaultValue={ExerciseList.ExerciseDescription}
                                                                                         onChange={(e) => setExerciseDescription(e.target.value)}>
                                                                                     </textarea>
                                                                                 </div>
@@ -239,7 +273,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }} >
                                                                         <input type="text"
-                                                                            value={ExerciseList.ExerciseCategory}
+                                                                            key={ExerciseList.ExerciseCategory}
+                                                                            defaultValue={ExerciseList.ExerciseCategory}
                                                                             onChange={(e) => setExerciseCategory(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -260,7 +295,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={ExerciseList.Type}
+                                                                            key={ExerciseList.Type}
+                                                                            defaultValue={ExerciseList.Type}
                                                                             onChange={(e) => setType(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -281,7 +317,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={ExerciseList.MainMuscleWorked}
+                                                                            key={ExerciseList.MainMuscleWorked}
+                                                                            defaultValue={ExerciseList.MainMuscleWorked}
                                                                             onChange={(e) => setMainMuscleWorked(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -301,7 +338,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={ExerciseList.OtherMuscleWorked}
+                                                                            key={ExerciseList.OtherMuscleWorked}
+                                                                            defaultValue={ExerciseList.OtherMuscleWorked}
                                                                             onChange={(e) => setOtherMuscleWorked(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -323,7 +361,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }} >
                                                                         <input type="text"
-                                                                            value={ExerciseList.Equipment}
+                                                                            key={ExerciseList.Equipment}
+                                                                            defaultValue={ExerciseList.Equipment}
                                                                             onChange={(e) => setEquipment(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -344,7 +383,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={ExerciseList.MechanicsType}
+                                                                            key={ExerciseList.MechanicsType}
+                                                                            defaultValue={ExerciseList.MechanicsType}
                                                                             onChange={(e) => setMechanicsType(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -365,7 +405,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={ExerciseList.Level}
+                                                                            key={ExerciseList.Level}
+                                                                            defaultValue={ExerciseList.Level}
                                                                             onChange={(e) => setLevel(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -386,7 +427,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={ExerciseList.Sport}
+                                                                            key={ExerciseList.Sport}
+                                                                            defaultValue={ExerciseList.Sport}
                                                                             onChange={(e) => setSport(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -407,7 +449,8 @@ function EditExercise() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={ExerciseList.Force}
+                                                                            key={ExerciseList.Force}
+                                                                            defaultValue={ExerciseList.Force}
                                                                             onChange={(e) => setForce(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -505,14 +548,11 @@ function EditExercise() {
                                                         </div>
                                                     </div>
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                        <button
-                                                            data-v-70fe1976="" to="[object Object]"
-                                                            className="k-button medium colorOne">
-                                                            <div className="k-button__content"
-                                                                style={{ "opacity": 1 }}>
-                                                                Upload here
-                                                            </div>
-                                                        </button>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
+                                                            <label class="custom-file-label" for="validatedCustomFile"></label>
+                                                            <div class="invalid-feedback"></div>
+                                                        </div>
                                                     </div>
                                                     <div class="k-card__content">
                                                         <div data-v-52fb9f55="" class="layout row wrap no-padding">
@@ -533,7 +573,7 @@ function EditExercise() {
                                                     className="k-button medium colorOne">
                                                     <div className="k-button__content"
                                                         style={{ "opacity": 1 }}>
-                                                        Save exercise
+                                                        Update exercise
                                                     </div>
                                                 </button>
                                             </div>
