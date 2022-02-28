@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from './Header';
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
+import FileBase64 from 'react-file-base64';
 
 function AddFoods() {
 
@@ -26,13 +27,18 @@ function AddFoods() {
     const [MonosaturatedFat, setMonosaturatedFat] = useState("");
     const [Image, setImage] = useState("");
 
+    const onChangeFile = (e) => {
+        setImage(e.target.files[0]);
+        console.log(e.target.files[0]);
+    }
+
     const onSubmit = (e) => {
 
         e.preventDefault();
         fetch("https://the3percent-food.herokuapp.com/api/food", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ FoodName, Recipe, ServingSize, UnitMeasurement, Image, Protein, Carbs, Fat, Fibre, Sodium, Sugar, Calories, TotalCarbohydrates, SaturatedFat, Cholesterol, VitaminA, VitaminC, Calcium, Iron, }),
+            body: JSON.stringify({ FoodName, Recipe, ServingSize, UnitMeasurement, Image, Protein, Carbs, Fat, Fibre, Sodium, Sugar, Calories, TotalCarbohydrates, SaturatedFat, Cholesterol, VitaminA, VitaminC, Calcium, Iron, Image }),
         })
             .then(function (response) {
                 console.log(response.status);
@@ -834,9 +840,16 @@ function AddFoods() {
 
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
+                                                            <input
+                                                                type="file"
+                                                                class="custom-file-input"
+                                                                id="validatedCustomFile"
+                                                                required
+                                                                onChange={onChangeFile} />
                                                             <label class="custom-file-label" for="validatedCustomFile"></label>
                                                             <div class="invalid-feedback"></div>
+                                                            <img
+                                                            />
                                                         </div>
                                                     </div>
 

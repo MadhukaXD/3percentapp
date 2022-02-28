@@ -1,119 +1,127 @@
-import React from 'react';
-import LoginScreen from './components/LoginScreen'
-import Dashboard from './components/Dashboard'
-import CreateClient from './components/CreateClient'
-import AddFoods from './components/AddFoods'
-import AddExercises from './components/AddExercises'
-import CreateWorkouts from './components/CreateWorkouts'
-import CreateProgramme from './components/CreateProgramme'
-import Questions from './components/Questions'
-import FoodList from './components/FoodList'
-import ExerciseList from './components/ExerciseList'
-import WorkoutsList from './components/WorkoutsList'
-import ProgrammeList from './components/ProgrammeList'
-import CourseList from './components/CourseList'
-import ClientList from './components/ClientList'
-import ClientProfile from './components/ClientProfile'
-import ClientDashboard from './components/ClientDashboard';
-import ClientNutrition from './components/ClientNutrition';
-import ClientTraining from './components/ClientTraining';
-import ClientPhotos from './components/ClientPhotos';
-import EditFoods from './components/EditFoods';
-import EditExercise from './components/EditExercise';
-import Dash from './components/Dash';
+import React, { useState, useEffect, useCallback, Component } from 'react'
 import LoginMain from './components/LoginMain';
-import ClientConfirmation from './components/ClientConfirmation';
+import Routes from './Routes';
+
 
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  Link,
+  Redirect,
+  useLocation,
+  useHistory,
+  withRouter
 } from "react-router-dom";
 
+import jwt_decode from "jwt-decode";
+import SendmailTransport from 'nodemailer/lib/sendmail-transport'
+const jwt = require('jsonwebtoken');
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-       
-        <Switch>
-          <Route path="/login">
-            <LoginScreen />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route path="/createclient">
-            <CreateClient />
-          </Route>
-          <Route path="/addexercises">
-            <AddExercises />
-          </Route>
-          <Route path="/addfoods">
-            <AddFoods />
-          </Route>
-          <Route path="/createworkouts">
-            <CreateWorkouts />
-          </Route>
-          <Route path="/createprogrammes">
-            <CreateProgramme />
-          </Route>
-          <Route path="/questions">
-            <Questions />
-          </Route>
-          <Route path="/foodlist">
-            <FoodList />
-          </Route>
-          <Route path="/exerciselist">
-            <ExerciseList />
-          </Route>
-          <Route path="/workoutslist">
-            <WorkoutsList />
-          </Route>
-          <Route path="/programmelist">
-            <ProgrammeList />
-          </Route>
-          <Route path="/courselist">
-            <CourseList />
-          </Route>
-          <Route path="/clientlist">
-            <ClientList />
-          </Route>
-          <Route path="/clientprofile">
-            <ClientProfile />
-          </Route>
-          <Route path="/clientdashboard">
-            <ClientDashboard />
-          </Route>
-          <Route path="/clientnutrition">
-            <ClientNutrition />
-          </Route>
-          <Route path="/clienttraining">
-            <ClientTraining />
-          </Route>
-          <Route path="/clientphotos">
-            <ClientPhotos />
-          </Route>
-          <Route path="/editfoods">
-            <EditFoods />
-          </Route>
-          <Route path="/editexercise">
-            <EditExercise />
-          </Route>
-          <Route path="/dash">
-            <Dash />
-          </Route>
-          <Route path="/clientconfirmation">
-            <ClientConfirmation />
-          </Route>
-          <Route path="/">
-            <LoginMain />
-          </Route>
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
 
-        </Switch>
-      </Router>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    //this.logOut = this.logOut.bind(this);
+    this.state = {
+      showModeratorBoard: false,
+      showAdminBoard: false,
+      currentUser: undefined,
+      loginStatus: false,
+      users: JSON.parse(localStorage.getItem("user"))
+
+    };
+    // alert(12);
+
+    // const decodedJwt = parseJwt(this.state.users);
+    // console.log(decodedJwt);
+    // if (decodedJwt.exp * 1000 < Date.now()) {
+    //   alert();
+    // }else{
+    //   alert(2);
+    // }
+
+
+  }
+
+
+  // props.history.listen(() => {
+  //     const user = JSON.parse(localStorage.getItem("token"));
+  //     if (user) {
+  //       const decodedJwt = parseJwt(user.token);
+  //       if (decodedJwt.exp * 1000 < Date.now()) {
+  //         props.logOut();
+  //         this.setStatus({ loginStatus: true });
+  //       }
+  //     }
+  //   });
+
+  //  const  useras = JSON.parse(localStorage.getItem("twk_token"));
+  //   alert(useras)
+  //   if (useras) {
+  //     const decodedJwt = parseJwt(useras.token);
+  //       this.setStatus({ loginStatus: true });
+  //     }
+  //   }
+
+
+
+  //     if(this.state.users){
+  //   <Routes />
+  // }
+  // else{
+  //   <Switch>
+  //      <Route path="/">
+  //           <LoginMain />
+  //         </Route>
+  //   </Switch>
+  // }
+
+  //   </div>
+
+
+  // logOut() {
+
+  //   this.setState({
+  //     showModeratorBoard: false,
+  //     showAdminBoard: false,
+  //     currentUser: undefined,
+  //   });
+  // }
+  render() {
+    let {
+      users
+    } = this.state;
+
+    return (
+      <div className="App">
+        {this.state.users ? (
+          <Router>
+            <Routes />
+          </Router>
+        ) : (
+          <Router>
+            <Switch>
+                <Route path="/">
+                  <LoginMain />
+                </Route>
+              </Switch>
+            </Router>
+        )}
+
+      </div>
+
+
+
+    );
+  }
 }
 
 export default App;

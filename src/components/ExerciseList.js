@@ -7,12 +7,14 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 function ExerciseList() {
 
     const [ExerciseList, setExerciseList] = useState([]);
+    let [isLoad, setIsLoad] = useState("");
 
     useEffect(() => {
         axios
             .get('https://the3percent-exercises.herokuapp.com/api/exercise')
             .then(res => setExerciseList(res.data))
             .catch(error => console.log(error));
+        setIsLoad('1');
     });
 
     return (
@@ -261,6 +263,11 @@ function ExerciseList() {
                                 </div>
                                 <div className="container grid-gap-earth">
                                     <div data-v-5a98f47a="" className="layout row wrap">
+                                        {isLoad == '0' ? (
+                                            <div class='loader'><div class=''></div></div>
+                                        ) : (
+                                            <div></div>
+                                        )}
                                         <div data-v-5a98f47a="" className="flex xs12">
                                             <div data-v-19d24620="" data-v-5a98f47a="" macro-type="grams">
                                                 <div data-v-19d24620="">

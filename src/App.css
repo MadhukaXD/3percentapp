@@ -131469,3 +131469,74 @@ svg:not(:root).svg-inline--fa {
   padding:10px;
 
 }
+.loader{
+  width: 100%;
+  height: 100vh;
+  background: #e3641042;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  align-content: space-between;
+}
+.loader:after{
+  content:"";
+}
+.loader div {
+  position: relative;
+
+  width: 50px;
+  height: 10px;
+  background: #fff;
+  border-radius: 5px;
+  -webkit-animation: load 1.8s ease-in-out infinite;
+          animation: load 1.8s ease-in-out infinite;
+}
+.loader div:before, .loader div:after {
+  position: absolute;
+  display: block;
+  content: "";
+  -webkit-animation: load 1.8s ease-in-out infinite;
+          animation: load 1.8s ease-in-out infinite;
+  height: 10px;
+  border-radius: 5px;
+}
+.loader div:before {
+  top: -20px;
+  left: 10px;
+  width: 40px;
+  background: #fff;
+}
+.loader div:after {
+  bottom: -20px;
+  width: 35px;
+  background: #fff;
+}
+
+@-webkit-keyframes load {
+  0% {
+    transform: translateX(40px);
+  }
+  50% {
+    transform: translateX(-30px);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}
+
+@keyframes load {
+  0% {
+    transform: translateX(40px);
+  }
+  50% {
+    transform: translateX(-30px);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}

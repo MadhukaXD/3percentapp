@@ -26,6 +26,7 @@ function EditFoods() {
     let [Iron, setIron] = useState("");
     let [MonosaturatedFat, setMonosaturatedFat] = useState("");
     let [Image, setImage] = useState("");
+    let [isLoad, setIsLoad] = useState("");
 
 
     const onSubmit = (e) => {
@@ -90,7 +91,10 @@ function EditFoods() {
         axios
             .get(apiurl, { id: Food_id })
             .then(res => setFood(res.data))
+
             .catch(error => console.log(error));
+
+        setIsLoad('0');
     }, []);
 
 
@@ -103,6 +107,8 @@ function EditFoods() {
                 setRecipe(data.Recipe);
                 setServingSize(data.ServingSize);
                 setUnitMeasurement(data.UnitMeasurement);
+                setIsLoad('1');
+
             });
     }, []); // Pass empty array to only run once on mount.
 
@@ -117,6 +123,11 @@ function EditFoods() {
 
     return (
         <div id="app name" className="grey-background">
+            {isLoad == '0' ? (
+                <div class='loader'><div class=''></div></div>
+            ) : (
+                <div></div>
+            )}
             <div data-app="true" className="k-app light">
                 <div className="k-layout-main__wrapper">
                     <Header />
@@ -901,7 +912,7 @@ function EditFoods() {
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                         <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
+                                                                <input type="file" class="custom-file-input" id="validatedCustomFile" required />
                                                                 <label class="custom-file-label" for="validatedCustomFile"></label>
                                                                 <div class="invalid-feedback"></div>
                                                             </div>

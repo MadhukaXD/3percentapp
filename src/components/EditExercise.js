@@ -17,6 +17,7 @@ function EditExercise() {
     let [Level, setLevel] = useState("");
     let [Sport, setSport] = useState("");
     let [Force, setForce] = useState("");
+    let [isLoad, setIsLoad] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -80,7 +81,7 @@ function EditExercise() {
             .get(apiurl, { id: ExerciseList_id })
             .then(res => setExerciseList(res.data))
             .catch(error => console.log(error));
-        console.log();
+        setIsLoad('0');
     });
 
     React.useEffect(() => {
@@ -99,6 +100,7 @@ function EditExercise() {
                 setLevel(data.Level);
                 setSport(data.Sport);
                 setForce(data.Force);
+                setIsLoad('1');
             });
     }, []); // Pass empty array to only run once on mount.
 
@@ -114,6 +116,11 @@ function EditExercise() {
 
     return (
         <div id="app name" className="grey-background">
+            {isLoad == '0' ? (
+                <div class='loader'><div class=''></div></div>
+            ) : (
+                <div></div>
+            )}
             <div data-app="true" className="k-app light">
                 <div className="k-layout-main__wrapper">
                     <Header />

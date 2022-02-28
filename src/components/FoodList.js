@@ -7,13 +7,14 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 function FoodList() {
 
     const [Food, setFood] = useState([]);
+    let [isLoad, setIsLoad] = useState("");
 
     useEffect(() => {
         axios
-            .get('https://the3percent-food.herokuapp.com/api/food')
+            .get('https://the3percent-food.herokuapp.com/api/food/')
             .then(res => setFood(res.data))
             .catch(error => console.log(error));
-
+        setIsLoad('1');
     });
 
     const [query, setquery] = useState("");
@@ -26,6 +27,7 @@ function FoodList() {
 
 
     async function getRecipe() {
+        setIsLoad('0');
         var result = await axios.get(url);
         setrecipes(result.data.hits);
         console.log(result);
@@ -304,6 +306,11 @@ function FoodList() {
                                 </div>
                                 <div className="container grid-gap-earth">
                                     <div data-v-5a98f47a="" className="layout row wrap">
+                                        {isLoad == '0' ? (
+                                            <div class='loader'><div class=''></div></div>
+                                        ) : (
+                                            <div></div>
+                                        )}
                                         <div data-v-5a98f47a="" className="flex xs12">
                                             <div data-v-19d24620="" data-v-5a98f47a="" macro-type="grams">
                                                 <div data-v-19d24620="">
@@ -422,6 +429,7 @@ function FoodList() {
                                                                                 className="k-image colorTwo">
                                                                                 <div data-v-c9edefc2="" className="k-image__sizer"
                                                                                     style={{ "padding-bottom": "100%" }}>
+                                                                                    <img src={Food.Image} />
                                                                                 </div>
                                                                                 <div data-v-c9edefc2="" className="k-image__image"
                                                                                     style={{ "background-image": "url(&quot;/3/img/14.1ac5241b.png&quot;)" }}>
@@ -433,21 +441,21 @@ function FoodList() {
                                                                             {Food.FoodName}
                                                                         </div>
                                                                         <div data-v-12e8f0c3=""
-                                                                            className="flex sm2 hidden-xs-only d-flex align-center">
+                                                                            className="flex sm2 hidden-xs-only d-flex align-center col-md-4">
                                                                             <div data-v-f1ed5950="" data-v-12e8f0c3=""
                                                                                 className="k-avatar__row"
                                                                                 style={{ "height": "32px" }}>
                                                                             </div>
                                                                         </div>
                                                                         <div data-v-12e8f0c3=""
-                                                                            className="flex sm2 hidden-xs-only d-flex align-center">
+                                                                            className="flex sm2 hidden-xs-only d-flex align-center col-md-4">
                                                                             <div data-v-62035167="" data-v-12e8f0c3=""
                                                                                 className="k-counter brevier show">
                                                                                 <div data-v-62035167=""
                                                                                     className="k-counter__value colorOne">0</div>
                                                                             </div>
                                                                         </div>
-                                                                        <div data-v-12e8f0c3=""
+                                                                        <div data-v-12e8f0c3="" 
                                                                             className="flex xs2 hidden-md-and-down d-flex align-center">
                                                                             <div data-v-23bc496c="" data-v-12e8f0c3="" size="40px"
                                                                                 className="mr-mars k-avatar colorOne"
@@ -553,14 +561,14 @@ function FoodList() {
 
                                                                     </div>
                                                                     <div data-v-12e8f0c3=""
-                                                                        className="flex sm2 hidden-xs-only d-flex align-center">
+                                                                            className="flex sm2 hidden-xs-only d-flex align-center col-md-4">
                                                                         <div data-v-f1ed5950="" data-v-12e8f0c3=""
                                                                             className="k-avatar__row"
                                                                             style={{ "height": "32px" }}>
                                                                         </div>
                                                                     </div>
                                                                     <div data-v-12e8f0c3=""
-                                                                        className="flex sm2 hidden-xs-only d-flex align-center">
+                                                                            className="flex sm2 hidden-xs-only d-flex align-center col-md-4">
                                                                         <div data-v-62035167="" data-v-12e8f0c3=""
                                                                             className="k-counter brevier show">
                                                                             <div data-v-62035167=""
@@ -568,7 +576,7 @@ function FoodList() {
                                                                         </div>
                                                                     </div>
                                                                     <div data-v-12e8f0c3=""
-                                                                        className="flex xs2 hidden-md-and-down d-flex align-center">
+                                                                            className="flex xs2 hidden-md-and-down d-flex align-center col-md-4">
                                                                         <div data-v-23bc496c="" data-v-12e8f0c3="" size="40px"
                                                                             className="mr-mars k-avatar colorOne"
                                                                             style={{
@@ -584,7 +592,7 @@ function FoodList() {
 
                                                                     </div>
                                                                     <div data-v-12e8f0c3=""
-                                                                            className="flex hidden-sm-and-down md2 d-flex align-center">
+                                                                            className="flex hidden-sm-and-down md2 d-flex align-center col-md-4">
 
                                                                     </div>
                                                                 </div>

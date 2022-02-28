@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
+import jwt_decode from "jwt-decode";
+const jwt = require('jsonwebtoken');
 
 function LoginMain() {
 
@@ -21,6 +23,7 @@ function LoginMain() {
             })
             .then((response) => {
                 console.log(response['token']);
+                
                 if (response['token']) {
                     setAuthenticated(true);
                     window.location = "/dash";
