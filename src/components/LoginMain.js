@@ -21,8 +21,13 @@ function LoginMain() {
             .then(function (response) {
                 return response.json();
             })
-            .then((response) => {
-                console.log(response['token']);
+            .then((response) => { 
+                console.log(response);
+                if (response.token) {
+                    localStorage.setItem("user", JSON.stringify(response.token));
+                }
+
+
                 
                 if (response['token']) {
                     setAuthenticated(true);
