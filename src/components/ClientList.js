@@ -6,11 +6,15 @@ import Header from './Header';
 function ClientList() {
 
     const [ClientList, setClientList] = useState([]);
+    let [isLoad, setIsLoad] = useState("0");
 
     useEffect(() => {
         axios
             .get('https://the3percent-client.herokuapp.com/api/users')
-            .then(res => setClientList(res.data))
+            .then(function (res) {
+                setClientList(res.data);
+                setIsLoad('1');
+            })
             .catch(error => console.log(error));
     });
 
@@ -46,7 +50,7 @@ function ClientList() {
                                     <div className="layout row wrap">
                                         <div className="flex pt-earth xs12">
                                             <div data-v-194e1f66="" className="d-flex canon" >
-                                                <div data-v-194e1f66="" className="colortwo--text tw-text-2xl" >
+                                                <div data-v-194e1f66="" className="colorTwo--text tw-text-2xl" >
                                                     Client List </div>
                                             </div>
                                         </div>
@@ -111,7 +115,7 @@ function ClientList() {
                                                                             data-icon="sort" role="img"
                                                                             xmlns="http://www.w3.org/2000/svg"
                                                                             viewBox="0 0 320 512"
-                                                                            className="svg-inline--fa fa-sort fa-w-10 k-icon earth colortwotranslucent">
+                                                                            className="svg-inline--fa fa-sort fa-w-10 k-icon earth colortwotranslucent colorTwo--text">
                                                                             <path data-v-7f8bad2e="" fill="currentColor"
                                                                                 d="M272 288H48.1c-42.6 0-64.2 51.7-33.9 81.9l111.9 112c18.7 18.7 49.1 18.7 67.9 0l112-112c30-30.1 8.7-81.9-34-81.9zM160 448L48 336h224L160 448zM48 224h223.9c42.6 0 64.2-51.7 33.9-81.9l-111.9-112c-18.7-18.7-49.1-18.7-67.9 0l-112 112C-16 172.2 5.3 224 48 224zM160 64l112 112H48L160 64z"
                                                                                 className="">
@@ -242,7 +246,7 @@ function ClientList() {
                                                                             data-icon="filter" role="img"
                                                                             xmlns="http://www.w3.org/2000/svg"
                                                                             viewBox="0 0 512 512"
-                                                                            className="svg-inline--fa fa-filter fa-w-16 k-icon earth colortwotranslucent">
+                                                                            className="svg-inline--fa fa-filter fa-w-16 k-icon earth colortwotranslucent colorTwo--text">
                                                                             <path data-v-7f8bad2e="" fill="currentColor"
                                                                                 d="M463.952 0H48.057C5.419 0-16.094 51.731 14.116 81.941L176 243.882V416c0 15.108 7.113 29.335 19.2 40l64 47.066c31.273 21.855 76.8 1.538 76.8-38.4V243.882L497.893 81.941C528.042 51.792 506.675 0 463.952 0zM288 224v240l-64-48V224L48 48h416L288 224z"
                                                                                 className="">
@@ -260,6 +264,11 @@ function ClientList() {
                                 </div>
                                 <div className="container grid-gap-earth">
                                     <div data-v-5a98f47a="" className="layout row wrap">
+                                        {isLoad == '0' ? (
+                                            <div class='loader'><div class=''></div></div>
+                                        ) : (
+                                            <div></div>
+                                        )}
                                         <div data-v-5a98f47a="" className="flex xs12">
                                             <div data-v-19d24620="" data-v-5a98f47a="" macro-type="grams">
                                                 <div data-v-19d24620="">

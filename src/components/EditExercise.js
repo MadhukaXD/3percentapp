@@ -3,6 +3,7 @@ import axios from "axios"
 import Header from './Header';
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
+import { Form } from "react-bootstrap";
 
 function EditExercise() {
 
@@ -17,6 +18,8 @@ function EditExercise() {
     let [Level, setLevel] = useState("");
     let [Sport, setSport] = useState("");
     let [Force, setForce] = useState("");
+    let [VideoTitle, setVideoTitle] = useState("");
+    let [VideoURL, setVideoURL] = useState("");
     let [isLoad, setIsLoad] = useState("");
 
     const onSubmit = (e) => {
@@ -25,7 +28,7 @@ function EditExercise() {
         fetch("https://the3percent-exercises.herokuapp.com/api/exercise", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, }),
+            body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, VideoTitle, VideoURL }),
         })
             .then(function (response) {
                 if (response.status === 200) {
@@ -284,6 +287,7 @@ function EditExercise() {
                                                 <hr /><br />
                                                 <div class="k-card__content">
                                                     <div data-v-52fb9f55="" class="layout row wrap no-padding">
+
                                                         <div data-v-52fb9f55="" class="flex py-none xs4 md4">
                                                             <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0" >
@@ -291,16 +295,23 @@ function EditExercise() {
                                                                     class="minion k-input__label colorOne--text">
                                                                     Exercise Category* (Barbell /Bodyweight /Cables etc)
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                <div>
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }} >
-                                                                        <input type="text"
-                                                                            key={ExerciseList.ExerciseCategory}
-                                                                            defaultValue={ExerciseList.ExerciseCategory}
-                                                                            onChange={(e) => setExerciseCategory(e.target.value)} />
+                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                            onChange={(e) => setExerciseCategory(e.target.value)}>
+                                                                            <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExerciseList.ExerciseCategory}
+                                                                                defaultValue={ExerciseList.ExerciseCategory}>
+                                                                                <option value="Barbell">Barbell</option>
+                                                                                <option value="Bodyweight">Bodyweight</option>
+                                                                                <option value="Cables">Cables</option>
+                                                                                <option value="Abs">Abs</option>
+                                                                            </select>
+                                                                        </Form.Group>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -311,18 +322,25 @@ function EditExercise() {
                                                                 min="0">
                                                                 <label for="object-584956"
                                                                     class="minion k-input__label colorOne--text">
-                                                                    Type* (Strength / Powerlifting / Plyometrics / Stretching etc)
+                                                                    Type* (Strength / Powerlifting / Stretching etc)
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                <div>
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
-                                                                        <input type="text"
-                                                                            key={ExerciseList.Type}
-                                                                            defaultValue={ExerciseList.Type}
-                                                                            onChange={(e) => setType(e.target.value)} />
+                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                            onChange={(e) => setType(e.target.value)}>
+                                                                            <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExerciseList.Type}
+                                                                                defaultValue={ExerciseList.Type}>
+                                                                                <option value="Strength">Strength</option>
+                                                                                <option value="Powerlifting">Powerlifting</option>
+                                                                                <option value="Plyometrics">Plyometrics</option>
+                                                                                <option value="Stretching">Stretching</option>
+                                                                            </select>
+                                                                        </Form.Group>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -335,16 +353,26 @@ function EditExercise() {
                                                                     class="minion k-input__label colorOne--text">
                                                                     Main Muscle Worked* (Biceps / Shoulders / Chest etc)
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                <div >
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
-                                                                        <input type="text"
-                                                                            key={ExerciseList.MainMuscleWorked}
-                                                                            defaultValue={ExerciseList.MainMuscleWorked}
-                                                                            onChange={(e) => setMainMuscleWorked(e.target.value)} />
+                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                            onChange={(e) => setMainMuscleWorked(e.target.value)} >
+                                                                            <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExerciseList.MainMuscleWorked}
+                                                                                defaultValue={ExerciseList.MainMuscleWorked}>
+                                                                                <option value="Shoulders">Shoulders</option>
+                                                                                <option value="Chest">Chest</option>
+                                                                                <option value="Biceps">Biceps</option>
+                                                                                <option value="Triceps">Triceps</option>
+                                                                                <option value="Back">Back</option>
+                                                                                <option value="Legs">Legs</option>
+                                                                                <option value="Forearm">Forearm</option>
+                                                                            </select>
+                                                                        </Form.Group>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -379,16 +407,25 @@ function EditExercise() {
                                                                     Equipment
                                                                     (Dumbbell / Barbell / Body Only)
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                <div>
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }} >
-                                                                        <input type="text"
-                                                                            key={ExerciseList.Equipment}
-                                                                            defaultValue={ExerciseList.Equipment}
-                                                                            onChange={(e) => setEquipment(e.target.value)} />
+                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                            onChange={(e) => setEquipment(e.target.value)} >
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExerciseList.Equipment}
+                                                                                defaultValue={ExerciseList.Equipment}>
+                                                                                <option value="Dumbbell">Dumbbell</option>
+                                                                                <option value="Barbell">Barbell</option>
+                                                                                <option value="Bars">Bars</option>
+                                                                                <option value="Benches">Benches</option>
+                                                                                <option value="Cables">Cables</option>
+                                                                                <option value="Tredmill">Tredmill</option>
+                                                                            </select>
+                                                                        </Form.Group>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -401,16 +438,21 @@ function EditExercise() {
                                                                     class="minion k-input__label colorOne--text">
                                                                     Mechanics Type ( Isolation / Compound )
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                <div>
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
-                                                                        <input type="text"
-                                                                            key={ExerciseList.MechanicsType}
-                                                                            defaultValue={ExerciseList.MechanicsType}
-                                                                            onChange={(e) => setMechanicsType(e.target.value)} />
+                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                            onChange={(e) => setMechanicsType(e.target.value)} >
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExerciseList.MechanicsType}
+                                                                                defaultValue={ExerciseList.MechanicsType}>
+                                                                                <option value="Isolation">Isolation</option>
+                                                                                <option value="Compound">Compound</option>
+                                                                            </select>
+                                                                        </Form.Group>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -423,16 +465,22 @@ function EditExercise() {
                                                                     class="minion k-input__label colorOne--text">
                                                                     Level (Beginner / Intermediate / Expert)
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                <div>
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
-                                                                        <input type="text"
-                                                                            key={ExerciseList.Level}
-                                                                            defaultValue={ExerciseList.Level}
-                                                                            onChange={(e) => setLevel(e.target.value)} />
+                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                            onChange={(e) => setLevel(e.target.value)}>
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExerciseList.Level}
+                                                                                defaultValue={ExerciseList.Level}>
+                                                                                <option value="Beginner">Beginner</option>
+                                                                                <option value="Intermediate">Intermediate</option>
+                                                                                <option value="Expert">Expert</option>
+                                                                            </select>
+                                                                        </Form.Group>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -445,16 +493,21 @@ function EditExercise() {
                                                                     class="minion k-input__label colorOne--text">
                                                                     Sport (Yes / No)
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                <div>
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
-                                                                        <input type="text"
-                                                                            key={ExerciseList.Sport}
-                                                                            defaultValue={ExerciseList.Sport}
-                                                                            onChange={(e) => setSport(e.target.value)} />
+                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                            onChange={(e) => setSport(e.target.value)}>
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExerciseList.Sport}
+                                                                                defaultValue={ExerciseList.Sport}>
+                                                                                <option value="Yes">Yes</option>
+                                                                                <option value="No">No</option>
+                                                                            </select>
+                                                                        </Form.Group>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -467,16 +520,22 @@ function EditExercise() {
                                                                     class="minion k-input__label colorOne--text">
                                                                     Force ( Pull / Push / Static)
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                <div>
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
-                                                                        <input type="text"
-                                                                            key={ExerciseList.Force}
-                                                                            defaultValue={ExerciseList.Force}
-                                                                            onChange={(e) => setForce(e.target.value)} />
+                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                            onChange={(e) => setForce(e.target.value)}>
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExerciseList.Force}
+                                                                                defaultValue={ExerciseList.Force}>
+                                                                                <option value="Pull">Pull</option>
+                                                                                <option value="Push">Push</option>
+                                                                                <option value="Static">Static</option>
+                                                                            </select>
+                                                                        </Form.Group>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -501,6 +560,7 @@ function EditExercise() {
                                                                         Exercise Video - will be displayed first
                                                                     </div>
                                                                 </span>
+
                                                             </div>
                                                             <div data-v-194e1f66=""
                                                                 class="k-title__subtitle-wrapper long-primer">
@@ -516,6 +576,89 @@ function EditExercise() {
 
                                                 <div class="k-card__content">
                                                     <div data-v-52fb9f55="" class="layout row wrap no-padding">
+                                                    </div>
+                                                </div>
+                                                <div data-v-52fb9f55="" className="flex py-none xs12">
+                                                    <div data-v-52fb9f55="" className="k-select"
+                                                        field="[object Object]">
+                                                        <div className="k-select__input-group">
+                                                            <div className="k-input k-input--has-changed"
+                                                                style={{ "--componentThemeColor": "var(--colorOne)" }}>
+                                                                <label for="object-110314"
+                                                                    className="minion k-input__label colorOne--text">
+                                                                    Video Title*
+                                                                </label>
+
+                                                                <div
+                                                                    className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                    <div className="pica"
+                                                                        style={{
+                                                                            "flex-grow": "1",
+                                                                            "position": "relative"
+                                                                        }}>
+                                                                        <input type="text"
+                                                                            data-vv-name="object-110314"
+                                                                            data-vv-as="macro type"
+                                                                            appendcb="function(){}"
+                                                                            aria-label="Macro Type"
+                                                                            autocomplete="on" id="object-110314"
+                                                                            label="Macro Type"
+                                                                            name="object-110314"
+                                                                            prependcb="function(){}" role="text"
+                                                                            rows="5" data-mask="null"
+                                                                            aria-checked="Grams"
+                                                                            key={ExerciseList.VideoTitle}
+                                                                            defaultValue={ExerciseList.VideoTitle}
+                                                                            onChange={(e) => setVideoTitle(e.target.value)}
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div data-v-6b0e4150="" ></div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="k-select__list-container"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div data-v-52fb9f55="" className="flex py-none xs12">
+                                                    <div data-v-52fb9f55="" className="k-select"
+                                                        field="[object Object]">
+                                                        <div className="k-select__input-group">
+                                                            <div className="k-input k-input--has-changed"
+                                                                style={{ "--componentThemeColor": "var(--colorOne)" }}>
+                                                                <label for="object-110314"
+                                                                    className="minion k-input__label colorOne--text">
+                                                                    Video URL*
+                                                                </label>
+
+                                                                <div
+                                                                    className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                    <div className="pica"
+                                                                        style={{
+                                                                            "flex-grow": "1",
+                                                                            "position": "relative"
+                                                                        }}>
+                                                                        <input type="text"
+                                                                            data-vv-name="object-110314"
+                                                                            data-vv-as="macro type"
+                                                                            appendcb="function(){}"
+                                                                            aria-label="Macro Type"
+                                                                            autocomplete="on" id="object-110314"
+                                                                            label="Macro Type"
+                                                                            name="object-110314"
+                                                                            prependcb="function(){}" role="text"
+                                                                            rows="5" data-mask="null"
+                                                                            aria-checked="Grams"
+                                                                            key={ExerciseList.VideoURL}
+                                                                            defaultValue={ExerciseList.VideoURL}
+                                                                            onChange={(e) => setVideoURL(e.target.value)}
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div data-v-6b0e4150="" ></div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="k-select__list-container"></div>
                                                     </div>
                                                 </div>
                                             </div>

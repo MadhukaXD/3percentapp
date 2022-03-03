@@ -3,6 +3,7 @@ import Header from './Header';
 import { Helmet } from "react-helmet";
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
+import { Form } from "react-bootstrap";
 
 function CreateClient() {
 
@@ -257,7 +258,7 @@ function CreateClient() {
                                     "flex-grow": "2",
                                     "position": "relative"
                                   }}>
-                                  <input type="text"
+                                  <input type="number"
                                     value={Age}
                                     onChange={(e) => setAge(e.target.value)} />
                                 </div>
@@ -271,26 +272,33 @@ function CreateClient() {
                               <label for="object-497406" class="minion k-input__label colorOne--text">
                                 Gender
                               </label>
-                              <div class="k-input-container d-flex align-center k-input__field k-input__field--active">    
+                              <div >    
                                 <div class="pica"
                                   style={{
                                     "flex-grow": "2",
                                     "position": "relative"
                                   }}>
-                                  <input type="text"
+                                  <Form.Group className="mb-3" controlId="formBasicEmail"
                                     value={Gender}
-                                    onChange={(e) => setGender(e.target.value)} />
+                                    onChange={(e) => setGender(e.target.value)}>
+                                    <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                      <option selected>Choose...</option>
+                                      <option value="male">Male</option>
+                                      <option value="female">Female</option>
+                                    </select>
+                                  </Form.Group>
                                 </div>
                               </div>
                             </div>
                           </div>
+
 
                           <div data-v-52fb9f55="" class="flex py-none xs4 md4">
                             <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                               min="0" >
                               <label for="object-537921"
                                 class="minion k-input__label colorOne--text">
-                                AddType
+                                Add Type
                               </label>
                               <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
                                 <div class="pica"
@@ -311,7 +319,7 @@ function CreateClient() {
                               min="0"  >
                               <label for="object-86824"
                                 class="minion k-input__label colorOne--text">
-                                PhoneNumber
+                                Phone Number
                               </label>
                               <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
                                 <div class="pica"
@@ -319,7 +327,7 @@ function CreateClient() {
                                     "flex-grow": "2",
                                     "position": "relative"
                                   }}>
-                                  <input type="text"
+                                  <input type="number"
                                     value={PhoneNumber}
                                     onChange={(e) => setPhoneNumber(e.target.value)} />
                                 </div>

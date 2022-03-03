@@ -25,6 +25,7 @@ import EditExercise from './components/EditExercise';
 import Dash from './components/Dash';
 import LoginMain from './components/LoginMain';
 import ClientConfirmation from './components/ClientConfirmation';
+import EditFoods2 from './components/EditFoods2';
 
 class Routes extends Component {
 
@@ -109,6 +110,9 @@ class Routes extends Component {
                             </Route>
                             <Route path="/editfoods">
                                 <EditFoods />
+                            </Route>
+                            <Route path="/editfoods2">
+                                <EditFoods2 />
                             </Route>
                             <Route path="/editexercise">
                                 <EditExercise />

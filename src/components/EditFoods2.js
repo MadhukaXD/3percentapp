@@ -8,7 +8,7 @@ import { Form } from "react-bootstrap"
 function EditFoods() {
 
     let [FoodName, setFoodName] = useState("");
-    let [Recipe, setRecipe] = useState("");
+    let [Recipe, setRecipe] = useState([]);
     let [ServingSize, setServingSize] = useState("");
     let [UnitMeasurement, setUnitMeasurement] = useState("");
     let [Protein, setProtein] = useState("");
@@ -27,7 +27,7 @@ function EditFoods() {
     let [Iron, setIron] = useState("");
     let [MonosaturatedFat, setMonosaturatedFat] = useState("");
     let [Image, setImage] = useState("");
-    let [isLoad, setIsLoad] = useState("");
+    let [isLoad, setIsLoad] = useState("0");
 
 
     const onSubmit = (e) => {
@@ -81,45 +81,70 @@ function EditFoods() {
             });
     };
 
-    const [Food, setFood] = useState([]);
+    // const [Food, setFood] = useState([]);
 
-    const queryParams = new URLSearchParams(window.location.search);
-    const Food_id = queryParams.get('Food_id');
+    // const queryParams = new URLSearchParams(window.location.search);
+    // const Food_id = queryParams.get('Food_id');
 
-    const apiurl = "https://the3percent-food.herokuapp.com/api/food/" + Food_id;
+    // const apiurl = "https://the3percent-food.herokuapp.com/api/food/" + Food_id;
     // console.log(apiurl);
-    useState(() => {
-        axios
-            .get(apiurl, { id: Food_id })
-            .then(res => setFood(res.data))
-            .catch(error => console.log(error));
-        setIsLoad('0');
-    }, []);
+    // useState(() => {
+    //     axios
+    //         .get(apiurl, { id: Food_id })
+    //         .then(res => setFood(res.data))
+    //         .catch(error => console.log(error));
+    //     setIsLoad('0');
+    // }, []);
 
+    const YOUR_APP_ID = "01d8742f";
+    const YOUR_APP_KEY = "9e53540443514fc483049039c942aba6";
+
+    let [Thirdpartyfood, setThirdpartyfood] = useState([]);
+    let [digest, setdigest] = useState([""]);
+
+    const queryParams2 = new URLSearchParams(window.location.search);
+    const uri = queryParams2.get('uri');
+
+    // var url = `https://api.edamam.com/api/recipes/v2/` + uri + `?type=public&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}`;
+
+
+    // useState(() => {
+    //     axios
+    //         .get(url, { id: uri })
+    //         .then(res => setThirdpartyfood(res.data.recipe))
+    //         .catch(error => console.log(error));
+
+    // }, []);
 
     React.useEffect(() => {
-        fetch('https://the3percent-food.herokuapp.com/api/food/' + Food_id)
+        fetch(`https://api.edamam.com/api/recipes/v2/` + uri + `?type=public&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}`)
             .then(results => results.json())
             .then(data => {
-                // console.log(data.Recipe);
-                setFoodName(data.FoodName);
-                setRecipe(data.Recipe);
-                setServingSize(data.ServingSize);
-                setUnitMeasurement(data.UnitMeasurement);
+                setThirdpartyfood(data.recipe);
+                setFoodName(data.recipe.label)
+
+                let recp = '';
+                for (let i = 0; i < data.recipe.ingredientLines.length; i++) {
+
+                    recp += data.recipe.ingredientLines[i] + ',';
+                }
+                setRecipe(recp);
+                console.log(recp);
+                // setdigest(data.recipe.digest);
+                // setFoodName(data.FoodName);
+                // setRecipe(data.Recipe);
+                // console.log(data.recipe);
+                // // setFoodName(data.FoodName);
+                // setRecipe(data.Recipe);
+                // setServingSize(data.ServingSize);
+                // setUnitMeasurement(data.UnitMeasurement);
                 setIsLoad('1');
-                console.log(data);
+
             });
     }, []); // Pass empty array to only run once on mount.
 
-    // console.log(Food.Recipe)
-    // const [DeleteFood, setDeleteFood] = useState([]);
-
-    // function Delete() {
-    //     axios
-    //         .delete(apiurl, { id: Food_id })
-    //         .then(res => setDeleteFood(res.data))
-    //         .catch(error => console.log(error));
-    // }
+    console.log(Thirdpartyfood["ingredientLines"])
+    console.log(JSON.stringify(Thirdpartyfood["ingredientLines"]))
 
     return (
         <div id="app name" className="grey-background">
@@ -187,8 +212,8 @@ function EditFoods() {
                                                                                     rows="5" data-mask="null"
                                                                                     aria-checked="Grams"
                                                                                     readOnly={true}
-                                                                                    key={Food.FoodName}
-                                                                                    defaultValue={Food.FoodName}
+                                                                                    key={Thirdpartyfood["label"]}
+                                                                                    defaultValue={Thirdpartyfood["label"]}
                                                                                     onChange={(e) => setFoodName(e.target.value)}
                                                                                 />
                                                                             </div>
@@ -244,13 +269,11 @@ function EditFoods() {
                                                                                         role="text"
                                                                                         rows="5" data-mask="null"
                                                                                         aria-checked="Grams"
-
                                                                                         key={Recipe}
                                                                                         defaultValue={Recipe}
                                                                                         onChange={(e) => setRecipe(e.target.value)}
-                                                                                        // onInputChange={(e) => setRecipe(e.target.defaultValue)}
+                                                                                        onInputChange={(e) => setRecipe(e.target.value)}
                                                                                     >
-
                                                                                     </textarea>
                                                                                 </div>
                                                                             </div>
@@ -264,7 +287,10 @@ function EditFoods() {
                                                     </div>
                                                 </div>
                                                 <div className="k-row__slot--middle"
-                                                    style={{ "paddingBottom": "30px" }}>
+                                                    style={{
+                                                        "paddingBottom": "40px",
+                                                        "paddingTop": "30px",
+                                                    }}>
                                                     <span data-v-194e1f66=""
                                                         className="k-title">
                                                         <div data-v-194e1f66="" className="d-flex pica"><span
@@ -283,97 +309,10 @@ function EditFoods() {
                                                         </div>
                                                     </span>
                                                 </div>
-                                                <div className="k-card__content">
+                                                <div className="k-card__content" style={{
+                                                    "paddingBottom": "30px"
+                                                }}>
                                                     <div data-v-52fb9f55="" className="layout row wrap no-padding">
-
-
-                                                        <div data-v-52fb9f55="" className="flex py-none xs12">
-                                                            <div data-v-52fb9f55="" className="k-select"
-                                                                field="[object Object]">
-                                                                <div className="k-select__input-group">
-                                                                    <div className="k-input k-input--has-changed"
-                                                                        style={{ "--componentThemeColor": "var(--colorOne)" }}>
-                                                                        <label for="object-110314"
-                                                                            className="minion k-input__label colorOne--text">
-                                                                            Unit Measurement
-                                                                        </label>
-                                                                        <div>
-                                                                            <div className="pica"
-                                                                                style={{
-                                                                                    "flex-grow": "1",
-                                                                                    "position": "relative"
-                                                                                }}>
-                                                                                <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                                    onChange={(e) => setUnitMeasurement(e.target.value)}>
-                                                                                    <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
-                                                                                        key={Food.UnitMeasurement}
-                                                                                        defaultValue={Food.UnitMeasurement}>
-                                                                                        <option selected>Choose...</option>
-                                                                                        <option value="Cup">Cup</option>
-                                                                                        <option value="Portion">Portion</option>
-                                                                                        <option value="Centilitre">Centilitre</option>
-                                                                                        <option value="Gram">Gram</option>
-                                                                                        <option value="Gallon">Gallon</option>
-                                                                                    </select>
-                                                                                </Form.Group>
-                                                                                {/* <input type="text"
-                                                                                    data-vv-name="object-110314"
-                                                                                    data-vv-as="macro type"
-                                                                                    appendcb="function(){}"
-                                                                                    aria-label="Macro Type"
-                                                                                    autocomplete="on" id="object-110314"
-                                                                                    label="Macro Type"
-                                                                                    name="object-110314"
-                                                                                    prependcb="function(){}" role="text"
-                                                                                    rows="5" data-mask="null"
-                                                                                    aria-checked="Grams"
-                                                                                    onInputChange={(e) => setUnitMeasurement(e.target.defaultValue)}
-                                                                                /> */}
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div data-v-6b0e4150="" ></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="k-select__list-container"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-v-52fb9f55="" className="flex pb-none xs12">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
-                                                                style={{ "--componentThemeColor": "var(--colorOne)" }}>
-                                                                <label
-                                                                    for="object-344170"
-                                                                    className="minion k-input__label grey-one--text">
-                                                                    Serving Size
-                                                                </label>
-                                                                <div
-                                                                    className="">
-                                                                    <div className="pica"
-                                                                        style={{
-                                                                            "flex-grow": 1,
-                                                                            "position": "relative"
-                                                                        }}>
-                                                                        <input
-                                                                            type="number" data-vv-name="object-344170"
-                                                                            data-vv-as="client total daily calorie target"
-                                                                            appendcb="function(){}" aria-checked="0"
-                                                                            aria-label="Client total daily calorie target"
-                                                                            id="object-344170"
-                                                                            label="Client total daily calorie target"
-                                                                            name="object-344170"
-                                                                            className="k-input-container d-flex align-center k-input__field k-input__field--active"
-                                                                            prependcb="function(){}" role="number"
-                                                                            min="0" rows="5" data-mask="null"
-                                                                            key={Food.ServingSize}
-                                                                            defaultValue={Food.ServingSize}
-                                                                            onChange={(e) => setServingSize(e.target.value)}
-                                                                            onInputChange={(e) => setServingSize(e.target.defaultValue)}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div data-v-6b0e4150="" ></div>
-                                                            </div>
-                                                        </div>
 
                                                         <div data-v-52fb9f55="" className="flex py-none xs4 md2">
                                                             <div data-v-52fb9f55="" className="k-input k-input--has-changed"
@@ -397,9 +336,10 @@ function EditFoods() {
                                                                             label="Protein (g)" name="object-640858"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Protein}
-                                                                            defaultValue={Food.Protein}
-                                                                            onChange={(e) => setProtein(e.target.value)} />
+                                                                        // key={Thirdpartyfood["digest"]["2"]["total"]}
+                                                                        // defaultValue={Thirdpartyfood["digest"]["2"]["total"]}
+                                                                        // onChange={(e) => setProtein(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150="">
@@ -429,9 +369,10 @@ function EditFoods() {
                                                                             label="Carbs (g)" name="object-584956"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Carbs}
-                                                                            defaultValue={Food.Carbs}
-                                                                            onChange={(e) => setCarbs(e.target.value)} />
+                                                                        // key={Food.Carbs}
+                                                                        // defaultValue={Food.Carbs}
+                                                                        // onChange={(e) => setCarbs(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -459,9 +400,10 @@ function EditFoods() {
                                                                             name="object-582949"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Fat}
-                                                                            defaultValue={Food.Fat}
-                                                                            onChange={(e) => setFat(e.target.value)} />
+                                                                        // key={Food.Fat}
+                                                                        // defaultValue={Food.Fat}
+                                                                        // onChange={(e) => setFat(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -489,9 +431,10 @@ function EditFoods() {
                                                                             label="Fibre (g)" name="object-497406"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Fibre}
-                                                                            defaultValue={Food.Fibre}
-                                                                            onChange={(e) => setFibre(e.target.value)} />
+                                                                        // key={Food.Fibre}
+                                                                        // defaultValue={Food.Fibre}
+                                                                        // onChange={(e) => setFibre(e.target.value)} 
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -519,9 +462,10 @@ function EditFoods() {
                                                                             label="Sodium (mg)" name="object-537921"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Sodium}
-                                                                            defaultValue={Food.Sodium}
-                                                                            onChange={(e) => setSodium(e.target.value)} />
+                                                                        // key={Food.Sodium}
+                                                                        // defaultValue={Food.Sodium}
+                                                                        // onChange={(e) => setSodium(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -549,9 +493,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Sugar}
-                                                                            defaultValue={Food.Sugar}
-                                                                            onChange={(e) => setSugar(e.target.value)} />
+                                                                        // key={Food.Sugar}
+                                                                        // defaultValue={Food.Sugar}
+                                                                        // onChange={(e) => setSugar(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -579,9 +524,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Calories}
-                                                                            defaultValue={Food.Calories}
-                                                                            onChange={(e) => setCalories(e.target.value)} />
+                                                                            key={Thirdpartyfood["calories"]}
+                                                                            defaultValue={Thirdpartyfood["calories"]}
+                                                                        // onChange={(e) => setCalories(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -609,9 +555,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.TotalCarbohydrates}
-                                                                            defaultValue={Food.TotalCarbohydrates}
-                                                                            onChange={(e) => setTotalCarbohydrates(e.target.value)} />
+                                                                        // key={Food.TotalCarbohydrates}
+                                                                        // defaultValue={Food.TotalCarbohydrates}
+                                                                        // onChange={(e) => setTotalCarbohydrates(e.target.value)} 
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -639,9 +586,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.SaturatedFat}
-                                                                            defaultValue={Food.SaturatedFat}
-                                                                            onChange={(e) => setSaturatedFat(e.target.value)} />
+                                                                        // key={Food.SaturatedFat}
+                                                                        // defaultValue={Food.SaturatedFat}
+                                                                        // onChange={(e) => setSaturatedFat(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -669,9 +617,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Cholesterol}
-                                                                            defaultValue={Food.Cholesterol}
-                                                                            onChange={(e) => setCholesterol(e.target.value)} />
+                                                                        // key={Food.Cholesterol}
+                                                                        // defaultValue={Food.Cholesterol}
+                                                                        // onChange={(e) => setCholesterol(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -699,9 +648,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.VitaminA}
-                                                                            defaultValue={Food.VitaminA}
-                                                                            onChange={(e) => setVitaminA(e.target.value)} />
+                                                                        // key={Food.VitaminA}
+                                                                        // defaultValue={Food.VitaminA}
+                                                                        // onChange={(e) => setVitaminA(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -729,9 +679,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.VitaminC}
-                                                                            defaultValue={Food.VitaminC}
-                                                                            onChange={(e) => setVitaminC(e.target.value)} />
+                                                                        // key={Food.VitaminC}
+                                                                        // defaultValue={Food.VitaminC}
+                                                                        // onChange={(e) => setVitaminC(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -759,9 +710,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Calcium}
-                                                                            defaultValue={Food.Calcium}
-                                                                            onChange={(e) => setCalcium(e.target.value)} />
+                                                                        // key={Thirdpartyfood["totalNutrients"]["PROCNT"]["quantity"]}
+                                                                        // defaultValue={Thirdpartyfood["totalNutrients"]["PROCNT"]["quantity"]}
+                                                                        // onChange={(e) => setCalcium(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -789,9 +741,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Iron}
-                                                                            defaultValue={Food.Iron}
-                                                                            onChange={(e) => setIron(e.target.value)} />
+                                                                        // key={Food.Iron}
+                                                                        // defaultValue={Food.Iron}
+                                                                        // onChange={(e) => setIron(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -819,9 +772,10 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.MonosaturatedFat}
-                                                                            defaultValue={Food.MonosaturatedFat}
-                                                                            onChange={(e) => setMonosaturatedFat(e.target.value)} />
+                                                                        // key={Food.MonosaturatedFat}
+                                                                        // defaultValue={Food.MonosaturatedFat}
+                                                                        // onChange={(e) => setMonosaturatedFat(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150=""></div>
@@ -895,6 +849,8 @@ function EditFoods() {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <img src={Thirdpartyfood["image"]}
+                                                    />
 
                                                     <div class="k-card__content">
                                                         <div data-v-52fb9f55="" class="layout row wrap no-padding">

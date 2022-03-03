@@ -7,14 +7,17 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 function FoodList() {
 
     const [Food, setFood] = useState([]);
-    let [isLoad, setIsLoad] = useState("");
+    let [isLoad, setIsLoad] = useState("0");
 
     useEffect(() => {
         axios
             .get('https://the3percent-food.herokuapp.com/api/food/')
-            .then(res => setFood(res.data))
+            .then(function (res) {
+                setFood(res.data);
+                setIsLoad('1');
+            })
             .catch(error => console.log(error));
-        setIsLoad('1');
+
     });
 
     const [query, setquery] = useState("");
@@ -23,35 +26,31 @@ function FoodList() {
     const YOUR_APP_ID = "01d8742f";
     const YOUR_APP_KEY = "9e53540443514fc483049039c942aba6";
 
-    var url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=10`;
+    var url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=25`;
 
 
     async function getRecipe() {
-        setIsLoad('0');
         var result = await axios.get(url);
         setrecipes(result.data.hits);
-        console.log(result);
+        setIsLoad('1');
+        // let test = ((result.data.hits[0].recipe.uri).split('#')[1]).split('_')[1];
+        // test=test.split('#');
+        // test=test[1];
+        // test=test.split('_');
+        console.log(result.data.hits);
+        setquery("");
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
         getRecipe();
+        setShow(!show)
+
     };
 
-    const [visible, setVisible] = React.useState(false);
 
-    // const toggleBtn = document.querySelector('#foodsearchbar');
-    // const divlist = document.querySelector('.k-row clickable standalone image-middle');
+    const [show, setShow] = useState(true);
 
-
-    // toggleBtn.addEventListener('click', () => {
-    //     console.log('hellow')
-    //     if (divlist.style.display === 'none') {
-    //         divlist.style.display = 'block';
-    //     } else {
-    //         divlist.style.display = 'none';
-    //     }
-    // });
 
     return (
         <div id="app" className="grey-background" >
@@ -85,7 +84,7 @@ function FoodList() {
                                     <div className="layout row wrap">
                                         <div className="flex pt-earth xs12">
                                             <div data-v-194e1f66="" className="d-flex canon" >
-                                                <div data-v-194e1f66="" className="colortwo--text tw-text-2xl" >
+                                                <div data-v-194e1f66="" className="colorTwo--text tw-text-2xl" >
                                                     Food List </div>
                                             </div>
                                         </div>
@@ -147,7 +146,8 @@ function FoodList() {
                                                                     "border-left-width": "1px"
                                                                 }} />
                                                             <div data-v-1b4e9c52="" className="k-flyout">
-                                                                <div className="k-flyout__activator"><button data-v-1b4e9c52=""
+                                                                <div className="k-flyout__activator">
+                                                                    <button data-v-1b4e9c52=""
                                                                     to="[object Object]"
                                                                     className="action-toolbar__icon k-button flat icon medium colorOne--text">
                                                                     <div className="k-button__content"
@@ -157,7 +157,7 @@ function FoodList() {
                                                                             data-icon="sort" role="img"
                                                                             xmlns="http://www.w3.org/2000/svg"
                                                                             viewBox="0 0 320 512"
-                                                                            className="svg-inline--fa fa-sort fa-w-10 k-icon earth colortwotranslucent">
+                                                                                className="svg-inline--fa fa-sort fa-w-10 k-icon earth colortwotranslucent colorTwo--text">
                                                                             <path data-v-7f8bad2e="" fill="currentColor"
                                                                                 d="M272 288H48.1c-42.6 0-64.2 51.7-33.9 81.9l111.9 112c18.7 18.7 49.1 18.7 67.9 0l112-112c30-30.1 8.7-81.9-34-81.9zM160 448L48 336h224L160 448zM48 224h223.9c42.6 0 64.2-51.7 33.9-81.9l-111.9-112c-18.7-18.7-49.1-18.7-67.9 0l-112 112C-16 172.2 5.3 224 48 224zM160 64l112 112H48L160 64z"
                                                                                 className="">
@@ -288,7 +288,7 @@ function FoodList() {
                                                                             data-icon="filter" role="img"
                                                                             xmlns="http://www.w3.org/2000/svg"
                                                                             viewBox="0 0 512 512"
-                                                                            className="svg-inline--fa fa-filter fa-w-16 k-icon earth colortwotranslucent">
+                                                                            className="svg-inline--fa fa-filter fa-w-16 k-icon earth colortwotranslucent colorTwo--text">
                                                                             <path data-v-7f8bad2e="" fill="currentColor"
                                                                                 d="M463.952 0H48.057C5.419 0-16.094 51.731 14.116 81.941L176 243.882V416c0 15.108 7.113 29.335 19.2 40l64 47.066c31.273 21.855 76.8 1.538 76.8-38.4V243.882L497.893 81.941C528.042 51.792 506.675 0 463.952 0zM288 224v240l-64-48V224L48 48h416L288 224z"
                                                                                 className="">
@@ -381,7 +381,7 @@ function FoodList() {
                                                             <div style={{ "width": "60px" }}></div>
                                                         </div>
                                                     </div>
-
+                                                    {show ? <div>
                                                     {Food.map((Food, key) => (
                                                         <div data-v-12e8f0c3="" data-v-19d24620=""
                                                             id="k-row-e02c9d68-bf46-4c60-aacb-9f41ee3fec08"
@@ -469,7 +469,7 @@ function FoodList() {
                                                                                         "width": "40px"
                                                                                     }}>kd</span>
                                                                             </div>
-                                                                            kasun dias
+                                                                            Admin
                                                                         </div>
                                                                         <div data-v-12e8f0c3=""
                                                                             className="flex hidden-sm-and-down md2 d-flex align-center">
@@ -478,7 +478,7 @@ function FoodList() {
                                                                     </div>
                                                                 </div>
                                                             </NavLink>
-                                                            {/* <button
+                                                            <button
                                                                 data-v-1b4e9c52="" to="[object Object]"
                                                                 className="action-toolbar__icon k-button  flat icon medium ">
                                                                 <div className="k-button__content"
@@ -496,9 +496,10 @@ function FoodList() {
                                                                         </path>
                                                                     </svg>
                                                                 </div>
-                                                            </button> */}
+                                                            </button>
                                                         </div>
                                                     ))}
+                                                    </div> : null}
 
                                                     {recipes.map((recipe, key) => (
                                                         <div data-v-12e8f0c3="" data-v-19d24620=""
@@ -535,7 +536,7 @@ function FoodList() {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <a href={"editfoods?url=" + recipe["recipe"]["url"]}>
+                                                            <a href={"editfoods2?uri=" + (recipe["recipe"]["uri"].split('#')[1]).split('_')[1]}>
                                                             <div className="k-row__slot--middle">
                                                                 <div data-v-12e8f0c3="" className="layout row wrap">
                                                                     <div data-v-12e8f0c3=""
@@ -600,7 +601,6 @@ function FoodList() {
                                                             </a>
                                                         </div>
                                                     ))}
-
 
 
                                                 </div>

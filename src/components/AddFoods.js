@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from './Header';
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import FileBase64 from 'react-file-base64';
+import { Form } from "react-bootstrap"
 
 function AddFoods() {
 
@@ -211,57 +211,86 @@ function AddFoods() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
-                                                    <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
-                                                        <div data-v-52fb9f55=""
-                                                            id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                            className="k-row thin">
-
-                                                            <div className="k-row__slot--middle"><span data-v-194e1f66=""
-                                                                className="k-title">
-                                                                <div data-v-194e1f66="" className="d-flex pica"><span
-                                                                    data-v-194e1f66="" data-v-52fb9f55=""
-                                                                    className="k-title">
-                                                                    <div data-v-194e1f66="" className="d-flex pica">
-                                                                        Macronutrients
-                                                                    </div>
-
-                                                                </span>
-                                                                </div>
-                                                                <div data-v-194e1f66=""
-                                                                    className="k-title__subtitle-wrapper long-primer">
-                                                                    <span
-                                                                        data-v-194e1f66="" className="">
-                                                                    </span>
-                                                                </div>
-                                                            </span>
+                                                <div className="k-row__slot--middle"
+                                                    style={{ "paddingBottom": "30px" }}>
+                                                    <span data-v-194e1f66=""
+                                                        className="k-title">
+                                                        <div data-v-194e1f66="" className="d-flex pica"><span
+                                                            data-v-194e1f66="" data-v-52fb9f55=""
+                                                            className="k-title">
+                                                            <div data-v-194e1f66="" className="d-flex pica">
+                                                                Macronutrients
                                                             </div>
-                                                            <hr />
-                                                            <div className="k-row__slot--right">
-                                                                <div data-v-52fb9f55="" className="k-toggle">
-                                                                    <input
-                                                                        id="object-646812" label="" type="checkbox" />
-                                                                    <label
-                                                                        for="object-646812" />
-                                                                </div>
-                                                                <div className="k-toggle__track colorOne--text">
-                                                                </div>
-                                                                <div className="k-toggle__dot"
-                                                                    style={{ "background-color": "rgb(255, 255, 255)" }}>
-                                                                </div>
-                                                            </div>
+                                                        </span>
                                                         </div>
-                                                    </div>
+                                                        <div data-v-194e1f66=""
+                                                            className="k-title__subtitle-wrapper long-primer">
+                                                            <span
+                                                                data-v-194e1f66="" className="">
+                                                            </span>
+                                                        </div>
+                                                    </span>
                                                 </div>
+
                                                 <div className="k-card__content">
                                                     <div data-v-52fb9f55="" className="layout row wrap no-padding">
+
+                                                        <div data-v-52fb9f55="" className="flex py-none xs12">
+                                                            <div data-v-52fb9f55="" className="k-select"
+                                                                field="[object Object]">
+                                                                <div className="k-select__input-group">
+                                                                    <div className="k-input k-input--has-changed"
+                                                                        style={{ "--componentThemeColor": "var(--colorOne)" }}>
+                                                                        <label for="object-110314"
+                                                                            className="minion k-input__label colorOne--text">
+                                                                            Unit Measurement
+                                                                        </label>
+                                                                        <div>
+                                                                            <div className="pica"
+                                                                                style={{
+                                                                                    "flex-grow": "1",
+                                                                                    "position": "relative"
+                                                                                }}>
+                                                                                <Form.Group className="mb-3" controlId="formBasicEmail"
+                                                                                    value={UnitMeasurement}
+                                                                                    onChange={(e) => setUnitMeasurement(e.target.value)}>
+                                                                                    <select class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                                        <option selected>Choose...</option>
+                                                                                        <option value="Cup">Cup</option>
+                                                                                        <option value="Portion">Portion</option>
+                                                                                        <option value="Centilitre">Centilitre</option>
+                                                                                        <option value="Gram">Gram</option>
+                                                                                        <option value="Gallon">Gallon</option>
+                                                                                    </select>
+                                                                                </Form.Group>
+                                                                                {/* <input type="text"
+                                                                                    data-vv-name="object-110314"
+                                                                                    data-vv-as="macro type"
+                                                                                    appendcb="function(){}"
+                                                                                    aria-label="Macro Type"
+                                                                                    autocomplete="on" id="object-110314"
+                                                                                    label="Macro Type"
+                                                                                    name="object-110314"
+                                                                                    prependcb="function(){}" role="text"
+                                                                                    rows="5" data-mask="null"
+                                                                                    aria-checked="Grams"
+                                                                                /> */}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div data-v-6b0e4150="" ></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="k-select__list-container"></div>
+                                                            </div>
+                                                        </div>
+
                                                         <div data-v-52fb9f55="" className="flex pb-none xs12">
                                                             <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label
                                                                     for="object-344170"
                                                                     className="minion k-input__label grey-one--text">
-                                                                    Serving Size (g)
+                                                                    Serving Size
                                                                 </label>
                                                                 <div
                                                                     className="">
@@ -271,7 +300,7 @@ function AddFoods() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
-                                                                            type="text" data-vv-name="object-344170"
+                                                                            type="number" data-vv-name="object-344170"
                                                                             data-vv-as="client total daily calorie target"
                                                                             appendcb="function(){}" aria-checked="0"
                                                                             aria-label="Client total daily calorie target"
@@ -286,60 +315,6 @@ function AddFoods() {
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150="" ></div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-v-52fb9f55="" className="flex py-none xs12">
-                                                            <div data-v-52fb9f55="" className="k-select"
-                                                                field="[object Object]">
-                                                                <div className="k-select__input-group">
-                                                                    <div className="k-input k-input--has-changed"
-                                                                        style={{ "--componentThemeColor": "var(--colorOne)" }}>
-                                                                        <label for="object-110314"
-                                                                            className="minion k-input__label colorOne--text">
-                                                                            Unit Measurement
-                                                                        </label>
-                                                                        <div
-                                                                            className="k-input-container d-flex align-center k-input__field k-input__field--active">
-                                                                            <div className="pica"
-                                                                                style={{
-                                                                                    "flex-grow": "1",
-                                                                                    "position": "relative"
-                                                                                }}>
-                                                                                <input type="text"
-                                                                                    data-vv-name="object-110314"
-                                                                                    data-vv-as="macro type"
-                                                                                    appendcb="function(){}"
-                                                                                    aria-label="Macro Type"
-                                                                                    autocomplete="on" id="object-110314"
-                                                                                    label="Macro Type"
-                                                                                    name="object-110314"
-                                                                                    prependcb="function(){}" role="text"
-                                                                                    rows="5" data-mask="null"
-                                                                                    aria-checked="Grams"
-                                                                                    value={UnitMeasurement}
-                                                                                    onChange={(e) => setUnitMeasurement(e.target.value)} />
-                                                                            </div>
-                                                                            <div
-                                                                                className="k-input__field-icon pica right colorOne--text">
-                                                                                <svg data-v-7f8bad2e=""
-                                                                                    aria-hidden="true" focusable="false"
-                                                                                    data-prefix="far"
-                                                                                    data-icon="chevron-down" role="img"
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 448 512"
-                                                                                    className="svg-inline--fa fa-chevron-down fa-w-14 k-icon mars grey-one--text">
-                                                                                    <path data-v-7f8bad2e=""
-                                                                                        fill="currentColor"
-                                                                                        d="M441.9 167.3l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L224 328.2 42.9 147.5c-4.7-4.7-12.3-4.7-17 0L6.1 167.3c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"
-                                                                                        className="">
-                                                                                    </path>
-                                                                                </svg>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div data-v-6b0e4150="" ></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="k-select__list-container"></div>
                                                             </div>
                                                         </div>
                                                         <div data-v-52fb9f55="" className="flex py-none xs4 md2">
