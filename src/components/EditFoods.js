@@ -562,7 +562,7 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Calories (g)
+                                                                    Calories 
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">

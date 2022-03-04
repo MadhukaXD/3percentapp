@@ -4,6 +4,9 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { Form } from "react-bootstrap";
+import YoutubeEmbed from './YoutubeEmbed';
+import getYouTubeID from 'get-youtube-id';
+import ImageUploading from './ImageUploader'
 
 function AddExercises() {
 
@@ -70,7 +73,8 @@ function AddExercises() {
             });
     };
 
-
+    let id = getYouTubeID(VideoURL);
+    // console.log(id);
     return (
 
         <div id="app name" className="grey-background">
@@ -594,10 +598,12 @@ function AddExercises() {
                                                                             aria-checked="Grams"
                                                                             value={VideoURL}
                                                                             onChange={(e) => setVideoURL(e.target.value)}
+
                                                                         />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150="" ></div>
+                                                                <YoutubeEmbed embedId={id} />
                                                             </div>
                                                         </div>
                                                         <div className="k-select__list-container"></div>
@@ -657,13 +663,7 @@ function AddExercises() {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
-                                                            <label class="custom-file-label" for="validatedCustomFile"></label>
-                                                            <div class="invalid-feedback"></div>
-                                                        </div>
-                                                    </div>
+
                                                     <div class="k-card__content">
                                                         <div data-v-52fb9f55="" class="layout row wrap no-padding">
                                                         </div>
@@ -674,6 +674,7 @@ function AddExercises() {
                                                     </div>
                                                 </div>
                                             </div>
+
 
 
                                             <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">

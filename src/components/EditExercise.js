@@ -4,6 +4,8 @@ import Header from './Header';
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { Form } from "react-bootstrap";
+import YoutubeEmbed from './YoutubeEmbed';
+import getYouTubeID from 'get-youtube-id';
 
 function EditExercise() {
 
@@ -72,6 +74,8 @@ function EditExercise() {
             });
     };
 
+
+
     const [ExerciseList, setExerciseList] = useState([]);
 
     const queryParams = new URLSearchParams(window.location.search);
@@ -107,6 +111,7 @@ function EditExercise() {
             });
     }, []); // Pass empty array to only run once on mount.
 
+    let id = getYouTubeID(ExerciseList.VideoURL);
 
     // const [DeleteExercise, setDeleteExercise] = useState([]);
 
@@ -656,6 +661,7 @@ function EditExercise() {
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150="" ></div>
+                                                                <YoutubeEmbed embedId={id} />
                                                             </div>
                                                         </div>
                                                         <div className="k-select__list-container"></div>

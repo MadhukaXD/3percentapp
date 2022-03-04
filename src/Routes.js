@@ -26,6 +26,8 @@ import Dash from './components/Dash';
 import LoginMain from './components/LoginMain';
 import ClientConfirmation from './components/ClientConfirmation';
 import EditFoods2 from './components/EditFoods2';
+import ImageUploader from './components/ImageUploader';
+
 
 class Routes extends Component {
 
@@ -56,6 +58,9 @@ class Routes extends Component {
                             </Route>
                             <Route path="/dashboard">
                                 <Dashboard />
+                            </Route>
+                            <Route path="/image">
+                                <ImageUploader />
                             </Route>
                             <Route path="/createclient">
                                 <CreateClient />

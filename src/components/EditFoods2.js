@@ -5,13 +5,13 @@ import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { Form } from "react-bootstrap"
 
-function EditFoods() {
+function EditFoods() {  
 
     let [FoodName, setFoodName] = useState("");
     let [Recipe, setRecipe] = useState([]);
     let [ServingSize, setServingSize] = useState("");
     let [UnitMeasurement, setUnitMeasurement] = useState("");
-    let [Protein, setProtein] = useState("");
+    let [Protein, setProtein] = useState([]);
     let [Carbs, setCarbs] = useState("");
     let [Fat, setFat] = useState("");
     let [Fibre, setFibre] = useState("");
@@ -27,12 +27,12 @@ function EditFoods() {
     let [Iron, setIron] = useState("");
     let [MonosaturatedFat, setMonosaturatedFat] = useState("");
     let [Image, setImage] = useState("");
-    let [isLoad, setIsLoad] = useState("0");
+    let [isLoad, setIsLoad] = useState(0);
 
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // alert(Recipe);
+        alert(Protein);
         fetch("https://the3percent-food.herokuapp.com/api/food", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -81,26 +81,12 @@ function EditFoods() {
             });
     };
 
-    // const [Food, setFood] = useState([]);
-
-    // const queryParams = new URLSearchParams(window.location.search);
-    // const Food_id = queryParams.get('Food_id');
-
-    // const apiurl = "https://the3percent-food.herokuapp.com/api/food/" + Food_id;
-    // console.log(apiurl);
-    // useState(() => {
-    //     axios
-    //         .get(apiurl, { id: Food_id })
-    //         .then(res => setFood(res.data))
-    //         .catch(error => console.log(error));
-    //     setIsLoad('0');
-    // }, []);
-
     const YOUR_APP_ID = "01d8742f";
     const YOUR_APP_KEY = "9e53540443514fc483049039c942aba6";
 
     let [Thirdpartyfood, setThirdpartyfood] = useState([]);
-    let [digest, setdigest] = useState([""]);
+    let [Nutrients, setNutrients] = useState([]);
+    let [protein, setprotein] = useState([]);
 
     const queryParams2 = new URLSearchParams(window.location.search);
     const uri = queryParams2.get('uri');
@@ -121,19 +107,44 @@ function EditFoods() {
             .then(results => results.json())
             .then(data => {
                 setThirdpartyfood(data.recipe);
-                setFoodName(data.recipe.label)
+                setFoodName(data.recipe.label);
+
+
+                // setprotein(data.recipe.totalNutrients.PROCNT);
+                setProtein(data.recipe.totalNutrients.PROCNT);
+                console.log(data.recipe.totalNutrients['CHOCDF.net']['quantity']);
+
+                setCarbs(data.recipe.totalNutrients.CHOCDF);
+                setFat(data.recipe.totalNutrients.FAT);
+                setFibre(data.recipe.totalNutrients.FIBTG);
+                setSodium(data.recipe.totalNutrients.NA);
+                setSugar(data.recipe.totalNutrients.SUGAR);
+                setSaturatedFat(data.recipe.totalNutrients.FASAT);
+                setCholesterol(data.recipe.totalNutrients.CHOLE);
+                setVitaminA(data.recipe.totalNutrients.VITA_RAE);
+                setVitaminC(data.recipe.totalNutrients.VITC);
+                setCalcium(data.recipe.totalNutrients.CA);
+                setIron(data.recipe.totalNutrients.FE);
+                setMonosaturatedFat(data.recipe.totalNutrients.FAMS);
+                setTotalCarbohydrates(data.recipe.totalNutrients['CHOCDF.net']);
 
                 let recp = '';
                 for (let i = 0; i < data.recipe.ingredientLines.length; i++) {
 
-                    recp += data.recipe.ingredientLines[i] + ',';
+                    recp += data.recipe.ingredientLines[i];
+                    if (i != (data.recipe.ingredientLines.length - 1)) {
+                        recp += ',';
+                    }
                 }
+                recp.substring(0, recp.length - 1);
                 setRecipe(recp);
-                console.log(recp);
+                // console.log(recp);
                 // setdigest(data.recipe.digest);
                 // setFoodName(data.FoodName);
                 // setRecipe(data.Recipe);
                 // console.log(data.recipe);
+                // console.log(data.recipe.totalNutrients.CA);
+                // console.log(data.recipe.totalNutrients.CA.quantity);
                 // // setFoodName(data.FoodName);
                 // setRecipe(data.Recipe);
                 // setServingSize(data.ServingSize);
@@ -142,14 +153,14 @@ function EditFoods() {
 
             });
     }, []); // Pass empty array to only run once on mount.
-
-    console.log(Thirdpartyfood["ingredientLines"])
-    console.log(JSON.stringify(Thirdpartyfood["ingredientLines"]))
+    // console.log(Thirdpartyfood)
+    // console.log(Nutrients["quantity"])
+    // console.log(JSON.stringify(Thirdpartyfood["ingredientLines"]))
 
     return (
         <div id="app name" className="grey-background">
             {isLoad == '0' ? (
-                <div class='loader'><div class=''></div></div>
+                <div className='loader'><div className=''></div></div>
             ) : (
                 <div></div>
             )}
@@ -166,7 +177,7 @@ function EditFoods() {
                             <div data-v-2913046a="" className="background-ribbon" style={{ "height": "230px" }}>
                                 <div data-v-2913046a="" className="header-image-background background-ribbon__old"
                                     style={{
-                                        "background-color": "rgb(20, 10, 37)",
+                                        "backgroundColor": "rgb(20, 10, 37)",
                                         "background-position-y": "0%"
                                     }}>
                                 </div>
@@ -195,7 +206,7 @@ function EditFoods() {
                                                                             className="k-input-container d-flex align-center k-input__field k-input__field--active pa-earth">
                                                                             <div className="pica largetext"
                                                                                 style={{
-                                                                                    "flex-grow": "1",
+                                                                                    "flexGrow": "1",
                                                                                     "position": "relative"
                                                                                 }}>
                                                                                 <input
@@ -204,7 +215,7 @@ function EditFoods() {
                                                                                     data-vv-as="macro type"
                                                                                     appendcb="function(){}"
                                                                                     aria-label="Macro Type"
-                                                                                    autocomplete="on" id="object-110314"
+                                                                                    autoComplete="on" id="object-110314"
                                                                                     label="Macro Type"
                                                                                     name="object-110314"
                                                                                     prependcb="function(){}" role="text"
@@ -254,7 +265,7 @@ function EditFoods() {
                                                                                 className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <div className="pica"
                                                                                     style={{
-                                                                                        "flex-grow": "2",
+                                                                                        "flexGrow": "2",
                                                                                         "position": "relative"
                                                                                     }}>
                                                                                     <textarea type="text"
@@ -262,7 +273,7 @@ function EditFoods() {
                                                                                         data-vv-as="macro type"
                                                                                         appendcb="function(){}"
                                                                                         aria-label="Macro Type"
-                                                                                        autocomplete="on" id="object-110314"
+                                                                                        autoComplete="on" id="object-110314"
                                                                                         label="Macro Type"
                                                                                         name="object-110314"
                                                                                         prependcb="function(){}"
@@ -272,7 +283,7 @@ function EditFoods() {
                                                                                         key={Recipe}
                                                                                         defaultValue={Recipe}
                                                                                         onChange={(e) => setRecipe(e.target.value)}
-                                                                                        onInputChange={(e) => setRecipe(e.target.value)}
+                                                                                        // onInputChange={(e) => setRecipe(e.target.value)}
                                                                                     >
                                                                                     </textarea>
                                                                                 </div>
@@ -319,13 +330,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-640858"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Protein (g)
+                                                                    Protein ({Protein["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -336,9 +347,9 @@ function EditFoods() {
                                                                             label="Protein (g)" name="object-640858"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Thirdpartyfood["digest"]["2"]["total"]}
-                                                                        // defaultValue={Thirdpartyfood["digest"]["2"]["total"]}
-                                                                        // onChange={(e) => setProtein(e.target.value)}
+                                                                            key={Number(Protein["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Protein["quantity"]).toFixed(2)}
+                                                                            onChange={(e) => setProtein(e.target.value)}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -351,14 +362,14 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-584956"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Carbs (g)
+                                                                    Carbs ({Carbs["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
 
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -369,9 +380,9 @@ function EditFoods() {
                                                                             label="Carbs (g)" name="object-584956"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.Carbs}
-                                                                        // defaultValue={Food.Carbs}
-                                                                        // onChange={(e) => setCarbs(e.target.value)}
+                                                                            key={Number(Carbs["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Carbs["quantity"]).toFixed(2)}
+                                                                            onChange={(e) => setCarbs(e.target.value)}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -383,13 +394,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne);" }}>
                                                                 <label for="object-582949"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Fat (g)
+                                                                    Fat ({Fat["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": 1,
+                                                                            "flexGrow": 1,
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -400,8 +411,8 @@ function EditFoods() {
                                                                             name="object-582949"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.Fat}
-                                                                        // defaultValue={Food.Fat}
+                                                                            key={Number(Fat["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Fat["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setFat(e.target.value)}
                                                                         />
                                                                     </div>
@@ -414,13 +425,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-497406"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Fibre (g)
+                                                                    Fibre ({Fibre["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "1",
+                                                                            "flexGrow": "1",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -431,8 +442,8 @@ function EditFoods() {
                                                                             label="Fibre (g)" name="object-497406"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.Fibre}
-                                                                        // defaultValue={Food.Fibre}
+                                                                            key={Number(Fibre["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Fibre["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setFibre(e.target.value)} 
                                                                         />
                                                                     </div>
@@ -445,13 +456,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-537921"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Sodium (mg)
+                                                                    Sodium ({Sodium["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -462,8 +473,8 @@ function EditFoods() {
                                                                             label="Sodium (mg)" name="object-537921"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.Sodium}
-                                                                        // defaultValue={Food.Sodium}
+                                                                            key={Number(Sodium["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Sodium["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setSodium(e.target.value)}
                                                                         />
                                                                     </div>
@@ -476,13 +487,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Sugar (g)
+                                                                    Sugar ({Sugar["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -493,8 +504,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.Sugar}
-                                                                        // defaultValue={Food.Sugar}
+                                                                            key={Number(Sugar["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Sugar["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setSugar(e.target.value)}
                                                                         />
                                                                     </div>
@@ -507,13 +518,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Calories (g)
+                                                                    Calories
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -524,8 +535,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Thirdpartyfood["calories"]}
-                                                                            defaultValue={Thirdpartyfood["calories"]}
+                                                                            key={Number(Thirdpartyfood["calories"]).toFixed(2)}
+                                                                            defaultValue={Number(Thirdpartyfood["calories"]).toFixed(2)}
                                                                         // onChange={(e) => setCalories(e.target.value)}
                                                                         />
                                                                     </div>
@@ -538,13 +549,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Total Carbohydrates (g)
+                                                                    Total Carbohydrates ({TotalCarbohydrates["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -555,8 +566,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.TotalCarbohydrates}
-                                                                        // defaultValue={Food.TotalCarbohydrates}
+                                                                            key={Number(TotalCarbohydrates["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(TotalCarbohydrates["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setTotalCarbohydrates(e.target.value)} 
                                                                         />
                                                                     </div>
@@ -569,13 +580,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Saturated Fat (g)
+                                                                    Saturated Fat ({SaturatedFat["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -586,8 +597,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.SaturatedFat}
-                                                                        // defaultValue={Food.SaturatedFat}
+                                                                            key={Number(SaturatedFat["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(SaturatedFat["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setSaturatedFat(e.target.value)}
                                                                         />
                                                                     </div>
@@ -600,13 +611,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Cholesterol (g)
+                                                                    Cholesterol ({Cholesterol["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -617,8 +628,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.Cholesterol}
-                                                                        // defaultValue={Food.Cholesterol}
+                                                                            key={Number(Cholesterol["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Cholesterol["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setCholesterol(e.target.value)}
                                                                         />
                                                                     </div>
@@ -631,13 +642,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Vitamin A (g)
+                                                                    Vitamin A ({VitaminA["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -648,8 +659,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.VitaminA}
-                                                                        // defaultValue={Food.VitaminA}
+                                                                            key={Number(VitaminA["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(VitaminA["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setVitaminA(e.target.value)}
                                                                         />
                                                                     </div>
@@ -662,13 +673,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Vitamin C (g)
+                                                                    Vitamin C ({VitaminC["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -679,8 +690,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.VitaminC}
-                                                                        // defaultValue={Food.VitaminC}
+                                                                            key={Number(VitaminC["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(VitaminC["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setVitaminC(e.target.value)}
                                                                         />
                                                                     </div>
@@ -693,13 +704,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Calcium (g)
+                                                                    Calcium ({Calcium["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -710,8 +721,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Thirdpartyfood["totalNutrients"]["PROCNT"]["quantity"]}
-                                                                        // defaultValue={Thirdpartyfood["totalNutrients"]["PROCNT"]["quantity"]}
+                                                                            key={Number(Calcium["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Calcium["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setCalcium(e.target.value)}
                                                                         />
                                                                     </div>
@@ -724,13 +735,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Iron (g)
+                                                                    Iron ({Iron["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -741,8 +752,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.Iron}
-                                                                        // defaultValue={Food.Iron}
+                                                                            key={Number(Iron["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(Iron["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setIron(e.target.value)}
                                                                         />
                                                                     </div>
@@ -755,13 +766,13 @@ function EditFoods() {
                                                                 min="0" style={{ "--componentThemeColor": "var(--colorOne)" }}>
                                                                 <label for="object-86824"
                                                                     className="minion k-input__label colorOne--text">
-                                                                    Monosaturated Fat (g)
+                                                                    Monosaturated Fat ({MonosaturatedFat["unit"]})
                                                                 </label>
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
                                                                         style={{
-                                                                            "flex-grow": "2",
+                                                                            "flexGrow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input
@@ -772,8 +783,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                        // key={Food.MonosaturatedFat}
-                                                                        // defaultValue={Food.MonosaturatedFat}
+                                                                            key={Number(MonosaturatedFat["quantity"]).toFixed(2)}
+                                                                            defaultValue={Number(MonosaturatedFat["quantity"]).toFixed(2)}
                                                                         // onChange={(e) => setMonosaturatedFat(e.target.value)}
                                                                         />
                                                                     </div>
@@ -784,27 +795,27 @@ function EditFoods() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
-                                                <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                            <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
+                                                <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                     <div data-v-52fb9f55=""
                                                         id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                        class="k-row thin">
-                                                        <div class="k-row__slot--middle"><span data-v-194e1f66=""
-                                                            class="k-title">
-                                                            <div data-v-194e1f66="" class="d-flex pica">
+                                                        className="k-row thin">
+                                                        <div className="k-row__slot--middle"><span data-v-194e1f66=""
+                                                            className="k-title">
+                                                            <div data-v-194e1f66="" className="d-flex pica">
                                                                 <span
                                                                     data-v-194e1f66="" data-v-52fb9f55=""
-                                                                    class="k-title">
-                                                                    <div data-v-194e1f66="" class="d-flex pica">
+                                                                    className="k-title">
+                                                                    <div data-v-194e1f66="" className="d-flex pica">
                                                                         Exercise Image(s) - drag to sort
 
                                                                     </div>
                                                                 </span>
                                                             </div>
                                                             <div data-v-194e1f66=""
-                                                                class="k-title__subtitle-wrapper long-primer">
+                                                                className="k-title__subtitle-wrapper long-primer">
                                                                 <span
-                                                                    data-v-194e1f66="" class="">
+                                                                    data-v-194e1f66="" className="">
                                                                 </span>
                                                             </div>
                                                         </span>
@@ -812,27 +823,27 @@ function EditFoods() {
                                                     </div>
                                                 </div>
                                                 <hr /><br />
-                                                <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
-                                                    <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                                <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
+                                                    <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                         <div data-v-52fb9f55=""
                                                             id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                            class="k-row thin">
-                                                            <div class="k-row__slot--middle"><span data-v-194e1f66=""
-                                                                class="k-title">
-                                                                <div data-v-194e1f66="" class="d-flex pica">
+                                                            className="k-row thin">
+                                                            <div className="k-row__slot--middle"><span data-v-194e1f66=""
+                                                                className="k-title">
+                                                                <div data-v-194e1f66="" className="d-flex pica">
                                                                     <span
                                                                         data-v-194e1f66="" data-v-52fb9f55=""
-                                                                        class="k-title">
-                                                                        <div data-v-194e1f66="" class="d-flex pica">
+                                                                        className="k-title">
+                                                                        <div data-v-194e1f66="" className="d-flex pica">
 
 
                                                                         </div>
                                                                     </span>
                                                                 </div>
                                                                 <div data-v-194e1f66=""
-                                                                    class="k-title__subtitle-wrapper long-primer">
+                                                                    className="k-title__subtitle-wrapper long-primer">
                                                                     <span
-                                                                        data-v-194e1f66="" class="">
+                                                                        data-v-194e1f66="" className="">
                                                                     </span>
                                                                 </div>
                                                             </span>
@@ -842,23 +853,23 @@ function EditFoods() {
 
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                         <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                            <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="validatedCustomFile" required />
-                                                                <label class="custom-file-label" for="validatedCustomFile"></label>
-                                                                <div class="invalid-feedback"></div>
+                                                            <div className="custom-file">
+                                                                <input type="file" className="custom-file-input" id="validatedCustomFile" required />
+                                                                <label className="custom-file-label" for="validatedCustomFile"></label>
+                                                                <div className="invalid-feedback"></div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <img src={Thirdpartyfood["image"]}
                                                     />
 
-                                                    <div class="k-card__content">
-                                                        <div data-v-52fb9f55="" class="layout row wrap no-padding">
+                                                    <div className="k-card__content">
+                                                        <div data-v-52fb9f55="" className="layout row wrap no-padding">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="k-card__content">
-                                                    <div data-v-52fb9f55="" class="layout row wrap no-padding">
+                                                <div className="k-card__content">
+                                                    <div data-v-52fb9f55="" className="layout row wrap no-padding">
                                                     </div>
                                                 </div>
                                             </div>
@@ -886,7 +897,7 @@ function EditFoods() {
             </div>
             <div data-v-2211593a="" className="__cov-progress"
                 style={{
-                    "background-color": "rgb(66, 90, 247)",
+                    "backgroundColor": "rgb(66, 90, 247)",
                     "opacity": "0",
                     "position": "fixed",
                     "top": "0px",

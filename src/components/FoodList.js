@@ -30,22 +30,29 @@ function FoodList() {
 
 
     async function getRecipe() {
-        var result = await axios.get(url);
-        setrecipes(result.data.hits);
-        setIsLoad('1');
+        var result = await axios
+            .get(url)
+            .then(function (result) {
+                setrecipes(result.data.hits);
+
+                setquery("");
+                setIsLoad('1');
+            })
+
+
         // let test = ((result.data.hits[0].recipe.uri).split('#')[1]).split('_')[1];
         // test=test.split('#');
         // test=test[1];
         // test=test.split('_');
-        console.log(result.data.hits);
-        setquery("");
+        // console.log(result.data.hits);
+
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
         getRecipe();
         setShow(!show)
-
+        setIsLoad('0');
     };
 
 

@@ -3,6 +3,9 @@ import Header from './Header';
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { Form } from "react-bootstrap"
+// import ImageUploader from './ImageUploader'
+import ImageUploading from "react-images-uploading";
+
 
 function AddFoods() {
 
@@ -27,18 +30,15 @@ function AddFoods() {
     const [MonosaturatedFat, setMonosaturatedFat] = useState("");
     const [Image, setImage] = useState("");
 
-    const onChangeFile = (e) => {
-        setImage(e.target.files[0]);
-        console.log(e.target.files[0]);
-    }
+
 
     const onSubmit = (e) => {
-
+        console.log(Image);
         e.preventDefault();
         fetch("https://the3percent-food.herokuapp.com/api/food", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ FoodName, Recipe, ServingSize, UnitMeasurement, Image, Protein, Carbs, Fat, Fibre, Sodium, Sugar, Calories, TotalCarbohydrates, SaturatedFat, Cholesterol, VitaminA, VitaminC, Calcium, Iron, Image }),
+            body: JSON.stringify({ FoodName, Recipe, ServingSize, UnitMeasurement, Protein, Carbs, Fat, Fibre, Sodium, Sugar, Calories, TotalCarbohydrates, SaturatedFat, Cholesterol, VitaminA, VitaminC, Calcium, Iron, Image }),
         })
             .then(function (response) {
                 console.log(response.status);
@@ -82,6 +82,18 @@ function AddFoods() {
             });
 
     };
+
+    const [images, setImages] = React.useState([]);
+    const maxNumber = 69;
+    const onChange = (imageList, addUpdateIndex) => {
+        // data for submit
+        // console.log(imageList, addUpdateIndex);
+        setImage(imageList["0"]["data_url"]);
+        setImages(imageList);
+        console.log(imageList["0"]["data_url"]);
+
+    };
+
 
     return (
         <div id="app name" className="grey-background">
@@ -785,7 +797,7 @@ function AddFoods() {
                                                     </div>
                                                 </div>
                                                 <hr /><br />
-                                                <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
+                                                {/* <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
                                                     <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                         <div data-v-52fb9f55=""
                                                             id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
@@ -811,28 +823,89 @@ function AddFoods() {
                                                             </span>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> */}
 
-                                                    <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
+                                                {/* <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                         <div class="custom-file">
                                                             <input
                                                                 type="file"
                                                                 class="custom-file-input"
                                                                 id="validatedCustomFile"
-                                                                required
-                                                                onChange={onChangeFile} />
+                                                                required />
                                                             <label class="custom-file-label" for="validatedCustomFile"></label>
                                                             <div class="invalid-feedback"></div>
                                                             <img
                                                             />
                                                         </div>
-                                                    </div>
+                                                    </div> */}
 
-                                                    <div class="k-card__content">
+                                                {/* <div class="k-card__content">
                                                         <div data-v-52fb9f55="" class="layout row wrap no-padding">
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> */}
+
+                                                {/* <ImageUploader
+                                                    value={Image}
+                                                    onChange={(e) => setImage(e.target.value)} /> */}
+
+                                                <div className="image_uploader"
+                                                    style={{
+                                                        "height": "180px",
+                                                        "width": "1171p",
+                                                        "border": "1px dashed #7A7A7A",
+                                                        "boxSizing": "border-box"
+                                                    }}>
+                                                    <ImageUploading
+                                                        multiple
+                                                        value={images}
+                                                        onChange={onChange}
+                                                        maxNumber={maxNumber}
+                                                        dataURLKey="data_url"
+                                                    >
+                                                        {({
+                                                            imageList,
+                                                            onImageUpload,
+                                                            onImageRemoveAll,
+                                                            onImageUpdate,
+                                                            onImageRemove,
+                                                            isDragging,
+                                                            dragProps
+                                                        }) => (
+                                                            // write your building UI
+                                                            <div className="upload__image-wrapper"
+                                                                style={{}}>
+                                                                <button className="upload_image_button"
+                                                                    style={isDragging ? { color: "red" } : null}
+                                                                    onClick={onImageUpload}
+                                                                    {...dragProps}
+                                                                >
+                                                                    Upload image
+                                                                </button>
+                                                                {imageList.map((image, index) => (
+                                                                    <div key={index} className="image-item"
+                                                                        style={{
+                                                                            "display ": "flex",
+                                                                            "margin": "10px 0"
+                                                                        }}>
+                                                                        <img src={image.data_url} alt="" width="100"
+                                                                            value={Image}
+                                                                            onChange={(e) => setImage(e.target.value)}
+                                                                        />
+                                                                        {/* <input type="text" value={image.data_url}/> */}
+                                                                        <div className="image-item__btn-wrapper"
+                                                                        >
+                                                                            <button className="btn btn-primary" onClick={() => onImageUpdate(index)}>Update</button>
+                                                                            <button className="btn btn-danger" onClick={() => onImageRemove(index)}>Remove</button>
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        )
+                                                        }
+                                                    </ImageUploading >
+                                                </div >
+
                                                 <div class="k-card__content">
                                                     <div data-v-52fb9f55="" class="layout row wrap no-padding">
                                                     </div>
