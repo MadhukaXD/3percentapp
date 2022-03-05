@@ -6,7 +6,6 @@ import 'react-notifications-component/dist/theme.css'
 import { Form } from "react-bootstrap";
 import YoutubeEmbed from './YoutubeEmbed';
 import getYouTubeID from 'get-youtube-id';
-import ImageUploading from './ImageUploader'
 
 function AddExercises() {
 

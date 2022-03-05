@@ -34,7 +34,7 @@ function FoodList() {
             .get(url)
             .then(function (result) {
                 setrecipes(result.data.hits);
-
+                console.log(result.data.hits);
                 setquery("");
                 setIsLoad('1');
             })
@@ -57,7 +57,6 @@ function FoodList() {
 
 
     const [show, setShow] = useState(true);
-
 
     return (
         <div id="app" className="grey-background" >

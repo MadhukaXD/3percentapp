@@ -53,8 +53,8 @@ class Routes extends Component {
                     <Router>
 
                         <Switch>
-                            <Route path="/login">
-                                <LoginScreen />
+                            <Route path="/loginmain">
+                                <LoginMain />
                             </Route>
                             <Route path="/dashboard">
                                 <Dashboard />
