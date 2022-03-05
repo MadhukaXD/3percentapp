@@ -21,6 +21,11 @@ class Header extends Component {
         const isActive = this.state.isActive;
         const isActiveProfile = this.state.isActiveProfile;
 
+        const onSubmit = (e) => {
+            e.preventDefault();
+            window.localStorage.clear();
+        };
+
     return (
         <div
             className="menu-bar--sticky-top"
@@ -48,7 +53,7 @@ class Header extends Component {
                                                 data-v-711ca0e8
                                                 className="k-logo-block__image"
                                                 style={{
-                                                    "background-image": "url(/images/logo3.png)",
+                                                    "backgroundImage": "url(/images/logo3.png)",
                                                 }}
                                             ></div>
                                         </div>
@@ -89,7 +94,7 @@ class Header extends Component {
                                             to={`${process.env.PUBLIC_URL}/createclient`}
                                             key={`${process.env.PUBLIC_URL}/createclient`}
                                         >
-                                            <svg data-v-7f8bad2e="true" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="id-card-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-id-card-alt fa-w-18 k-icon mars noColor--text"><g data-v-7f8bad2e="true" class="fa-group"><path data-v-7f8bad2e="true" fill="currentColor" d="M528 64H352v64h16a16 16 0 0 1 0 32H208a16 16 0 0 1 0-32h16V64H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h480a48 48 0 0 0 48-48V112a48 48 0 0 0-48-48zM288 224a64 64 0 1 1-64 64 64 64 0 0 1 64-64zm93.3 224H194.7c-10.4 0-18.8-10-15.6-19.8A64 64 0 0 1 240 384h8.2a103 103 0 0 0 79.6 0h8.2a64.09 64.09 0 0 1 60.9 44.2c3.2 9.8-5.2 19.8-15.6 19.8z" class="fa-secondary"></path><path data-v-7f8bad2e="true" fill="currentColor" d="M352 32a32 32 0 0 0-32-32h-64a32 32 0 0 0-32 32v96h128zm-64 320a64 64 0 1 0-64-64 64 64 0 0 0 64 64zm108.9 76.2A64.09 64.09 0 0 0 336 384h-8.2a103 103 0 0 1-79.6 0H240a64 64 0 0 0-60.9 44.2c-3.2 9.8 5.2 19.8 15.6 19.8h186.6c10.4 0 18.8-10 15.6-19.8z" class="fa-primary"></path></g></svg>
+                                            <svg data-v-7f8bad2e="true" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="id-card-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" className="svg-inline--fa fa-id-card-alt fa-w-18 k-icon mars noColor--text"><g data-v-7f8bad2e="true" className="fa-group"><path data-v-7f8bad2e="true" fill="currentColor" d="M528 64H352v64h16a16 16 0 0 1 0 32H208a16 16 0 0 1 0-32h16V64H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h480a48 48 0 0 0 48-48V112a48 48 0 0 0-48-48zM288 224a64 64 0 1 1-64 64 64 64 0 0 1 64-64zm93.3 224H194.7c-10.4 0-18.8-10-15.6-19.8A64 64 0 0 1 240 384h8.2a103 103 0 0 0 79.6 0h8.2a64.09 64.09 0 0 1 60.9 44.2c3.2 9.8-5.2 19.8-15.6 19.8z" className="fa-secondary"></path><path data-v-7f8bad2e="true" fill="currentColor" d="M352 32a32 32 0 0 0-32-32h-64a32 32 0 0 0-32 32v96h128zm-64 320a64 64 0 1 0-64-64 64 64 0 0 0 64 64zm108.9 76.2A64.09 64.09 0 0 0 336 384h-8.2a103 103 0 0 1-79.6 0H240a64 64 0 0 0-60.9 44.2c-3.2 9.8 5.2 19.8 15.6 19.8h186.6c10.4 0 18.8-10 15.6-19.8z" className="fa-primary"></path></g></svg>
                                             &nbsp; Client
                                         </NavLink> */}
 
@@ -99,7 +104,7 @@ class Header extends Component {
                                             to={`${process.env.PUBLIC_URL}/addexercises`}
                                             key={`${process.env.PUBLIC_URL}/addexercises`}
                                         >
-                                            <svg data-v-7f8bad2e="true" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="fire-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-fire-alt fa-w-14 k-icon mars noColor--text"><g data-v-7f8bad2e="true" class="fa-group"><path data-v-7f8bad2e="true" fill="currentColor" d="M323.56 51.2a597.38 597.38 0 0 0-56.22 60C240.08 73.62 206.28 35.53 168 0 69.74 91.17 0 210 0 281.6 0 408.85 100.29 512 224 512s224-103.15 224-230.4c0-53.27-52-163.14-124.44-230.4zm-1.12 366.87A165.81 165.81 0 0 1 226.86 448c-43.93 0-84.43-14.89-114.06-41.92a146.18 146.18 0 0 1-35.88-50.39C68.35 335.82 64 314 64 290.75c0-59.43 42.8-106.39 104.3-180.12 30 34.59 18.49 19.78 100.7 124.59l62-70.74c24.32 40.25 27.78 45.59 34.84 59.1a157.93 157.93 0 0 1 15 104.62c-7.49 36.85-28.24 68.8-58.4 89.87z" class="fa-secondary"></path><path data-v-7f8bad2e="true" fill="currentColor" d="M304.09 391.85A134.39 134.39 0 0 1 226.86 416C154.71 416 96 368.26 96 290.75c0-38.61 24.31-72.63 72.79-130.75 6.93 8 98.83 125.34 98.83 125.34l58.63-66.88c4.14 6.85 7.91 13.55 11.27 20 27.35 52.19 15.81 119-33.43 153.42z" class="fa-primary"></path></g></svg> &nbsp;Exercises
+                                            <svg data-v-7f8bad2e="true" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="fire-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="svg-inline--fa fa-fire-alt fa-w-14 k-icon mars noColor--text"><g data-v-7f8bad2e="true" className="fa-group"><path data-v-7f8bad2e="true" fill="currentColor" d="M323.56 51.2a597.38 597.38 0 0 0-56.22 60C240.08 73.62 206.28 35.53 168 0 69.74 91.17 0 210 0 281.6 0 408.85 100.29 512 224 512s224-103.15 224-230.4c0-53.27-52-163.14-124.44-230.4zm-1.12 366.87A165.81 165.81 0 0 1 226.86 448c-43.93 0-84.43-14.89-114.06-41.92a146.18 146.18 0 0 1-35.88-50.39C68.35 335.82 64 314 64 290.75c0-59.43 42.8-106.39 104.3-180.12 30 34.59 18.49 19.78 100.7 124.59l62-70.74c24.32 40.25 27.78 45.59 34.84 59.1a157.93 157.93 0 0 1 15 104.62c-7.49 36.85-28.24 68.8-58.4 89.87z" className="fa-secondary"></path><path data-v-7f8bad2e="true" fill="currentColor" d="M304.09 391.85A134.39 134.39 0 0 1 226.86 416C154.71 416 96 368.26 96 290.75c0-38.61 24.31-72.63 72.79-130.75 6.93 8 98.83 125.34 98.83 125.34l58.63-66.88c4.14 6.85 7.91 13.55 11.27 20 27.35 52.19 15.81 119-33.43 153.42z" className="fa-primary"></path></g></svg> &nbsp;Exercises
                                         </NavLink>
 
                                         <NavLink
@@ -108,7 +113,7 @@ class Header extends Component {
                                             to={`${process.env.PUBLIC_URL}/addfoods`}
                                             key={`${process.env.PUBLIC_URL}/addfoods`}
                                         >
-                                            <svg data-v-7f8bad2e="true" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="utensils-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-utensils-alt fa-w-18 k-icon mars noColor--text"><g data-v-7f8bad2e="true" class="fa-group"><path data-v-7f8bad2e="true" fill="currentColor" d="M74.8 424a32 32 0 0 0-1.4 46.6l32 32a32 32 0 0 0 46.6-1.4l117.5-132.7-56.6-66.8zM546.5 94.82L452.7 176c-1.5 1.4-5.9-3-4.6-4.6l78.8-96.9c12.4-15.3-10.4-37.8-25.5-25.5l-96.9 78.8c-1.7 1.4-6-3.1-4.7-4.6L481 29.42c12.8-14.7-8.7-38-24.8-26.2-3.9 2.8-76.9 54.5-98.7 76.2-33.3 33.3-37.5 72.1-16.1 108.4-30.4 26.9-19.6 17.4-48.4 42.9l54 50.1c26.5-30 14.4-16.2 41-46.3 35 20.7 74.3 18.1 108.5-16.2 21.7-21.7 73.4-94.6 76.2-98.6 11.8-16.2-11.5-37.6-26.2-24.9z" class="fa-secondary"></path><path data-v-7f8bad2e="true" fill="currentColor" d="M501.7 424.42a32 32 0 0 1 .8 46.1l-32 32a32.09 32.09 0 0 1-46-.7C405.4 479.22 223.9 265.32 216 256 56 256 0 165.92 0 32.12c0-27.9 33.3-42.5 53.8-23.5z" class="fa-primary"></path></g></svg> &nbsp;
+                                            <svg data-v-7f8bad2e="true" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="utensils-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" className="svg-inline--fa fa-utensils-alt fa-w-18 k-icon mars noColor--text"><g data-v-7f8bad2e="true" className="fa-group"><path data-v-7f8bad2e="true" fill="currentColor" d="M74.8 424a32 32 0 0 0-1.4 46.6l32 32a32 32 0 0 0 46.6-1.4l117.5-132.7-56.6-66.8zM546.5 94.82L452.7 176c-1.5 1.4-5.9-3-4.6-4.6l78.8-96.9c12.4-15.3-10.4-37.8-25.5-25.5l-96.9 78.8c-1.7 1.4-6-3.1-4.7-4.6L481 29.42c12.8-14.7-8.7-38-24.8-26.2-3.9 2.8-76.9 54.5-98.7 76.2-33.3 33.3-37.5 72.1-16.1 108.4-30.4 26.9-19.6 17.4-48.4 42.9l54 50.1c26.5-30 14.4-16.2 41-46.3 35 20.7 74.3 18.1 108.5-16.2 21.7-21.7 73.4-94.6 76.2-98.6 11.8-16.2-11.5-37.6-26.2-24.9z" className="fa-secondary"></path><path data-v-7f8bad2e="true" fill="currentColor" d="M501.7 424.42a32 32 0 0 1 .8 46.1l-32 32a32.09 32.09 0 0 1-46-.7C405.4 479.22 223.9 265.32 216 256 56 256 0 165.92 0 32.12c0-27.9 33.3-42.5 53.8-23.5z" className="fa-primary"></path></g></svg> &nbsp;
                                             Food
                                         </NavLink>
 
@@ -118,7 +123,7 @@ class Header extends Component {
                                             to={`${process.env.PUBLIC_URL}/createworkouts`}
                                             key={`${process.env.PUBLIC_URL}/createworkouts`}
                                         >
-                                            <svg data-v-7f8bad2e="true" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="fire-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-fire-alt fa-w-14 k-icon mars noColor--text"><g data-v-7f8bad2e="true" class="fa-group"><path data-v-7f8bad2e="true" fill="currentColor" d="M323.56 51.2a597.38 597.38 0 0 0-56.22 60C240.08 73.62 206.28 35.53 168 0 69.74 91.17 0 210 0 281.6 0 408.85 100.29 512 224 512s224-103.15 224-230.4c0-53.27-52-163.14-124.44-230.4zm-1.12 366.87A165.81 165.81 0 0 1 226.86 448c-43.93 0-84.43-14.89-114.06-41.92a146.18 146.18 0 0 1-35.88-50.39C68.35 335.82 64 314 64 290.75c0-59.43 42.8-106.39 104.3-180.12 30 34.59 18.49 19.78 100.7 124.59l62-70.74c24.32 40.25 27.78 45.59 34.84 59.1a157.93 157.93 0 0 1 15 104.62c-7.49 36.85-28.24 68.8-58.4 89.87z" class="fa-secondary"></path><path data-v-7f8bad2e="true" fill="currentColor" d="M304.09 391.85A134.39 134.39 0 0 1 226.86 416C154.71 416 96 368.26 96 290.75c0-38.61 24.31-72.63 72.79-130.75 6.93 8 98.83 125.34 98.83 125.34l58.63-66.88c4.14 6.85 7.91 13.55 11.27 20 27.35 52.19 15.81 119-33.43 153.42z" class="fa-primary"></path></g></svg> &nbsp;
+                                            <svg data-v-7f8bad2e="true" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="fire-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="svg-inline--fa fa-fire-alt fa-w-14 k-icon mars noColor--text"><g data-v-7f8bad2e="true" className="fa-group"><path data-v-7f8bad2e="true" fill="currentColor" d="M323.56 51.2a597.38 597.38 0 0 0-56.22 60C240.08 73.62 206.28 35.53 168 0 69.74 91.17 0 210 0 281.6 0 408.85 100.29 512 224 512s224-103.15 224-230.4c0-53.27-52-163.14-124.44-230.4zm-1.12 366.87A165.81 165.81 0 0 1 226.86 448c-43.93 0-84.43-14.89-114.06-41.92a146.18 146.18 0 0 1-35.88-50.39C68.35 335.82 64 314 64 290.75c0-59.43 42.8-106.39 104.3-180.12 30 34.59 18.49 19.78 100.7 124.59l62-70.74c24.32 40.25 27.78 45.59 34.84 59.1a157.93 157.93 0 0 1 15 104.62c-7.49 36.85-28.24 68.8-58.4 89.87z" className="fa-secondary"></path><path data-v-7f8bad2e="true" fill="currentColor" d="M304.09 391.85A134.39 134.39 0 0 1 226.86 416C154.71 416 96 368.26 96 290.75c0-38.61 24.31-72.63 72.79-130.75 6.93 8 98.83 125.34 98.83 125.34l58.63-66.88c4.14 6.85 7.91 13.55 11.27 20 27.35 52.19 15.81 119-33.43 153.42z" className="fa-primary"></path></g></svg> &nbsp;
                                             Workout
                                         </NavLink> */}
 
@@ -184,15 +189,22 @@ class Header extends Component {
                                                     </div>
                                                 </div>
                                             </button>
-                                            <div className={isActiveProfile ? "active dropdownsec k-card raised" : 'dropdownsec k-card raised'}>
+                                            <div className={isActiveProfile ? "active dropdownsec k-card raised" : 'dropdownsec k-card raised'}
+                                                onClick={onSubmit}
+                                                style={{
+                                                    "marginRight": "400px",
+                                                    "width": "85px",
+                                                    "height": "46px",
+                                                    "padding": "0"
+                                                }}>
                                                 <NavLink
                                                     strict
                                                     exact
                                                     to={`${process.env.PUBLIC_URL}/loginmain`}
                                                     key={`${process.env.PUBLIC_URL}/loginmain`}
                                                 >
-
                                                     &nbsp; Logout
+
                                                 </NavLink>
                                             </div>
                                         </div>

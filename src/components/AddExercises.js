@@ -87,7 +87,8 @@ function AddExercises() {
                                 "height": "230px",
                                 "top": "-5rem"
                             }}>
-                            <div data-v-2913046a="" className="background-ribbon" style={{ "height": "230px" }}>
+                            <div data-v-2913046a="" className="background-ribbon"
+                                style={{ "height": "230px" }}>
                                 <div data-v-2913046a="" className="header-image-background background-ribbon__old"
                                     style={{
                                         "background-color": "rgb(20, 10, 37)",
@@ -206,26 +207,26 @@ function AddExercises() {
                                                 </div>
                                             </div>
 
-                                            <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
-                                                <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                            <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
+                                                <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                     <div data-v-52fb9f55=""
                                                         id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                        class="k-row thin">
-                                                        <div class="k-row__slot--middle"><span data-v-194e1f66=""
-                                                            class="k-title">
-                                                            <div data-v-194e1f66="" class="d-flex pica">
+                                                        className="k-row thin">
+                                                        <div className="k-row__slot--middle"><span data-v-194e1f66=""
+                                                            className="k-title">
+                                                            <div data-v-194e1f66="" className="d-flex pica">
                                                                 <span
                                                                     data-v-194e1f66="" data-v-52fb9f55=""
-                                                                    class="k-title">
-                                                                    <div data-v-194e1f66="" class="d-flex pica">
+                                                                    className="k-title">
+                                                                    <div data-v-194e1f66="" className="d-flex pica">
                                                                         Breakdown
                                                                     </div>
                                                                 </span>
                                                             </div>
                                                             <div data-v-194e1f66=""
-                                                                class="k-title__subtitle-wrapper long-primer">
+                                                                className="k-title__subtitle-wrapper long-primer">
                                                                 <span
-                                                                    data-v-194e1f66="" class="">
+                                                                    data-v-194e1f66="" className="">
                                                                 </span>
                                                             </div>
                                                         </span>
@@ -233,18 +234,18 @@ function AddExercises() {
                                                     </div>
                                                 </div>
                                                 <hr /><br />
-                                                <div class="k-card__content">
-                                                    <div data-v-52fb9f55="" class="layout row wrap no-padding">
+                                                <div className="k-card__content">
+                                                    <div data-v-52fb9f55="" className="layout row wrap no-padding">
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0" >
                                                                 <label for="object-640858"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                    className="minion k-input__label colorOne--text">
                                                                     Exercise Category* (Barbell /Bodyweight /Cables etc)
                                                                 </label>
                                                                 <div >
-                                                                    <div class="pica"
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -252,7 +253,7 @@ function AddExercises() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             value={ExerciseCategory}
                                                                             onChange={(e) => setExerciseCategory(e.target.value)}>
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Barbell">Barbell</option>
                                                                                 <option value="Bodyweight">Bodyweight</option>
@@ -265,15 +266,15 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0">
                                                                 <label for="object-584956"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                    className="minion k-input__label colorOne--text">
                                                                     Type* (Strength / Powerlifting / Stretching etc)
                                                                 </label>
                                                                 <div >
-                                                                    <div class="pica"
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -281,7 +282,7 @@ function AddExercises() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             value={Type}
                                                                             onChange={(e) => setType(e.target.value)}>
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Strength">Strength</option>
                                                                                 <option value="Powerlifting">Powerlifting</option>
@@ -294,15 +295,15 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0" >
                                                                 <label for="object-582949"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                    className="minion k-input__label colorOne--text">
                                                                     Main Muscle Worked* (Biceps / Shoulders / Chest etc)
                                                                 </label>
                                                                 <div>
-                                                                    <div class="pica"
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -310,7 +311,7 @@ function AddExercises() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             value={MainMuscleWorked}
                                                                             onChange={(e) => setMainMuscleWorked(e.target.value)}>
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Shoulders">Shoulders</option>
                                                                                 <option value="Chest">Chest</option>
@@ -326,14 +327,14 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0" >
-                                                                <label for="object-497406" class="minion k-input__label colorOne--text">
+                                                                <label for="object-497406" className="minion k-input__label colorOne--text">
                                                                     Other Muscles Worked
                                                                 </label>
-                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
-                                                                    <div class="pica"
+                                                                <div className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -346,16 +347,16 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0" >
                                                                 <label for="object-537921"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                    className="minion k-input__label colorOne--text">
                                                                     Equipment
                                                                     (Dumbbell / Barbell / Body Only)
                                                                 </label>
                                                                 <div>
-                                                                    <div class="pica"
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -363,7 +364,7 @@ function AddExercises() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             value={Equipment}
                                                                             onChange={(e) => setEquipment(e.target.value)}>
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Dumbbell">Dumbbell</option>
                                                                                 <option value="Barbell">Barbell</option>
@@ -378,15 +379,15 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0"  >
                                                                 <label for="object-86824"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                    className="minion k-input__label colorOne--text">
                                                                     Mechanics Type ( Isolation / Compound )
                                                                 </label>
                                                                 <div>
-                                                                    <div class="pica"
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -394,7 +395,7 @@ function AddExercises() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             value={MechanicsType}
                                                                             onChange={(e) => setMechanicsType(e.target.value)}>
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Isolation">Isolation</option>
                                                                                 <option value="Compound">Compound</option>
@@ -405,15 +406,15 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0"  >
                                                                 <label for="object-86824"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                    className="minion k-input__label colorOne--text">
                                                                     Level (Beginner / Intermediate / Expert)
                                                                 </label>
                                                                 <div >
-                                                                    <div class="pica"
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -421,7 +422,7 @@ function AddExercises() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             value={Level}
                                                                             onChange={(e) => setLevel(e.target.value)}>
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Beginner">Beginner</option>
                                                                                 <option value="Intermediate">Intermediate</option>
@@ -433,15 +434,15 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0"  >
                                                                 <label for="object-86824"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                    className="minion k-input__label colorOne--text">
                                                                     Sport (Yes / No)
                                                                 </label>
                                                                 <div>
-                                                                    <div class="pica"
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -449,7 +450,7 @@ function AddExercises() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             value={Sport}
                                                                             onChange={(e) => setSport(e.target.value)}>
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Yes">Yes</option>
                                                                                 <option value="No">No</option>
@@ -460,15 +461,15 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
                                                                 min="0"  >
                                                                 <label for="object-86824"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                    className="minion k-input__label colorOne--text">
                                                                     Force ( Pull / Push / Static)
                                                                 </label>
                                                                 <div>
-                                                                    <div class="pica"
+                                                                    <div className="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
@@ -476,7 +477,7 @@ function AddExercises() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             value={Force}
                                                                             onChange={(e) => setForce(e.target.value)}>
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Pull">Pull</option>
                                                                                 <option value="Push">Push</option>
@@ -492,27 +493,27 @@ function AddExercises() {
                                                 </div>
                                             </div>
 
-                                            <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
-                                                <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                            <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
+                                                <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                     <div data-v-52fb9f55=""
                                                         id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                        class="k-row thin">
-                                                        <div class="k-row__slot--middle"><span data-v-194e1f66=""
-                                                            class="k-title">
-                                                            <div data-v-194e1f66="" class="d-flex pica">
+                                                        className="k-row thin">
+                                                        <div className="k-row__slot--middle"><span data-v-194e1f66=""
+                                                            className="k-title">
+                                                            <div data-v-194e1f66="" className="d-flex pica">
                                                                 <span
                                                                     data-v-194e1f66="" data-v-52fb9f55=""
-                                                                    class="k-title">
-                                                                    <div data-v-194e1f66="" class="d-flex pica">
+                                                                    className="k-title">
+                                                                    <div data-v-194e1f66="" className="d-flex pica">
                                                                         Exercise Video - will be displayed first
                                                                     </div>
                                                                 </span>
 
                                                             </div>
                                                             <div data-v-194e1f66=""
-                                                                class="k-title__subtitle-wrapper long-primer">
+                                                                className="k-title__subtitle-wrapper long-primer">
                                                                 <span
-                                                                    data-v-194e1f66="" class="">
+                                                                    data-v-194e1f66="" className="">
                                                                 </span>
                                                             </div>
                                                         </span>
@@ -521,8 +522,8 @@ function AddExercises() {
                                                 </div>
                                                 <hr /><br />
 
-                                                <div class="k-card__content">
-                                                    <div data-v-52fb9f55="" class="layout row wrap no-padding">
+                                                <div className="k-card__content">
+                                                    <div data-v-52fb9f55="" className="layout row wrap no-padding">
                                                     </div>
                                                 </div>
                                                 <div data-v-52fb9f55="" className="flex py-none xs12">
@@ -610,26 +611,26 @@ function AddExercises() {
                                                 </div>
                                             </div>
 
-                                            <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
-                                                <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                            <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
+                                                <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                     <div data-v-52fb9f55=""
                                                         id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                        class="k-row thin">
-                                                        <div class="k-row__slot--middle"><span data-v-194e1f66=""
-                                                            class="k-title">
-                                                            <div data-v-194e1f66="" class="d-flex pica">
+                                                        className="k-row thin">
+                                                        <div className="k-row__slot--middle"><span data-v-194e1f66=""
+                                                            className="k-title">
+                                                            <div data-v-194e1f66="" className="d-flex pica">
                                                                 <span
                                                                     data-v-194e1f66="" data-v-52fb9f55=""
-                                                                    class="k-title">
-                                                                    <div data-v-194e1f66="" class="d-flex pica">
+                                                                    className="k-title">
+                                                                    <div data-v-194e1f66="" className="d-flex pica">
                                                                         Exercise Image(s) - drag to sort
                                                                     </div>
                                                                 </span>
                                                             </div>
                                                             <div data-v-194e1f66=""
-                                                                class="k-title__subtitle-wrapper long-primer">
+                                                                className="k-title__subtitle-wrapper long-primer">
                                                                 <span
-                                                                    data-v-194e1f66="" class="">
+                                                                    data-v-194e1f66="" className="">
                                                                 </span>
                                                             </div>
                                                         </span>
@@ -637,25 +638,25 @@ function AddExercises() {
                                                     </div>
                                                 </div>
                                                 <hr /><br />
-                                                <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
-                                                    <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                                <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
+                                                    <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                         <div data-v-52fb9f55=""
                                                             id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                            class="k-row thin">
-                                                            <div class="k-row__slot--middle"><span data-v-194e1f66=""
-                                                                class="k-title">
-                                                                <div data-v-194e1f66="" class="d-flex pica">
+                                                            className="k-row thin">
+                                                            <div className="k-row__slot--middle"><span data-v-194e1f66=""
+                                                                className="k-title">
+                                                                <div data-v-194e1f66="" className="d-flex pica">
                                                                     <span
                                                                         data-v-194e1f66="" data-v-52fb9f55=""
-                                                                        class="k-title">
-                                                                        <div data-v-194e1f66="" class="d-flex pica">
+                                                                        className="k-title">
+                                                                        <div data-v-194e1f66="" className="d-flex pica">
                                                                         </div>
                                                                     </span>
                                                                 </div>
                                                                 <div data-v-194e1f66=""
-                                                                    class="k-title__subtitle-wrapper long-primer">
+                                                                    className="k-title__subtitle-wrapper long-primer">
                                                                     <span
-                                                                        data-v-194e1f66="" class="">
+                                                                        data-v-194e1f66="" className="">
                                                                     </span>
                                                                 </div>
                                                             </span>
@@ -663,13 +664,13 @@ function AddExercises() {
                                                         </div>
                                                     </div>
 
-                                                    <div class="k-card__content">
-                                                        <div data-v-52fb9f55="" class="layout row wrap no-padding">
+                                                    <div className="k-card__content">
+                                                        <div data-v-52fb9f55="" className="layout row wrap no-padding">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="k-card__content">
-                                                    <div data-v-52fb9f55="" class="layout row wrap no-padding">
+                                                <div className="k-card__content">
+                                                    <div data-v-52fb9f55="" className="layout row wrap no-padding">
                                                     </div>
                                                 </div>
                                             </div>

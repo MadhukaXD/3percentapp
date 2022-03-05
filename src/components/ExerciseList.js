@@ -375,7 +375,7 @@ function ExerciseList() {
                                                                     </div>
                                                                     <div data-v-19d24620=""
                                                                         className="flex md2 hidden-sm-and-down"
-                                                                        style={{ "paddingLeft": "px" }}>
+                                                                        style={{ "paddingLeft": "17px" }}>
                                                                         Date Updated
                                                                     </div>
                                                                 </div>

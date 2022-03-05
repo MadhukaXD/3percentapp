@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //import { play, exit } from './components/Timelines/Timelines'
-import LoginScreen from './components/LoginScreen'
 import Dashboard from './components/Dashboard'
 import CreateClient from './components/CreateClient'
 import AddFoods from './components/AddFoods'
