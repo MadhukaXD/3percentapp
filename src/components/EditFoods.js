@@ -107,7 +107,7 @@ function EditFoods() {
                 setServingSize(data.ServingSize);
                 setUnitMeasurement(data.UnitMeasurement);
                 setIsLoad('1');
-                console.log(data);
+                // console.log(data);
             });
     }, []); // Pass empty array to only run once on mount.
 
@@ -397,8 +397,8 @@ function EditFoods() {
                                                                             label="Protein (g)" name="object-640858"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Protein}
-                                                                            defaultValue={Food.Protein}
+                                                                            key={Number(Food.Protein).toFixed(2)}
+                                                                            defaultValue={Number(Food.Protein).toFixed(2)}
                                                                             onChange={(e) => setProtein(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -429,8 +429,8 @@ function EditFoods() {
                                                                             label="Carbs (g)" name="object-584956"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Carbs}
-                                                                            defaultValue={Food.Carbs}
+                                                                            key={Number(Food.Carbs).toFixed(2)}
+                                                                            defaultValue={Number(Food.Carbs).toFixed(2)}
                                                                             onChange={(e) => setCarbs(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -459,8 +459,8 @@ function EditFoods() {
                                                                             name="object-582949"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Fat}
-                                                                            defaultValue={Food.Fat}
+                                                                            key={Number(Food.Fat).toFixed(2)}
+                                                                            defaultValue={Number(Food.Fat).toFixed(2)}
                                                                             onChange={(e) => setFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -489,8 +489,8 @@ function EditFoods() {
                                                                             label="Fibre (g)" name="object-497406"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Fibre}
-                                                                            defaultValue={Food.Fibre}
+                                                                            key={Number(Food.Fibre).toFixed(2)}
+                                                                            defaultValue={Number(Food.Fibre).toFixed(2)}
                                                                             onChange={(e) => setFibre(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -519,8 +519,8 @@ function EditFoods() {
                                                                             label="Sodium (mg)" name="object-537921"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Sodium}
-                                                                            defaultValue={Food.Sodium}
+                                                                            key={Number(Food.Sodium).toFixed(2)}
+                                                                            defaultValue={Number(Food.Sodium).toFixed(2)}
                                                                             onChange={(e) => setSodium(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -549,8 +549,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Sugar}
-                                                                            defaultValue={Food.Sugar}
+                                                                            key={Number(Food.Sugar).toFixed(2)}
+                                                                            defaultValue={Number(Food.Sugar).toFixed(2)}
                                                                             onChange={(e) => setSugar(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -579,8 +579,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Calories}
-                                                                            defaultValue={Food.Calories}
+                                                                            key={Number(Food.Calories).toFixed(2)}
+                                                                            defaultValue={Number(Food.Calories).toFixed(2)}
                                                                             onChange={(e) => setCalories(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -609,8 +609,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.TotalCarbohydrates}
-                                                                            defaultValue={Food.TotalCarbohydrates}
+                                                                            key={Number(Food.TotalCarbohydrates).toFixed(2)}
+                                                                            defaultValue={Number(Food.TotalCarbohydrates).toFixed(2)}
                                                                             onChange={(e) => setTotalCarbohydrates(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -639,8 +639,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.SaturatedFat}
-                                                                            defaultValue={Food.SaturatedFat}
+                                                                            key={Number(Food.SaturatedFat).toFixed(2)}
+                                                                            defaultValue={Number(Food.SaturatedFat).toFixed(2)}
                                                                             onChange={(e) => setSaturatedFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -669,8 +669,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Cholesterol}
-                                                                            defaultValue={Food.Cholesterol}
+                                                                            key={Number(Food.Cholesterol).toFixed(2)}
+                                                                            defaultValue={Number(Food.Cholesterol).toFixed(2)}
                                                                             onChange={(e) => setCholesterol(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -699,8 +699,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.VitaminA}
-                                                                            defaultValue={Food.VitaminA}
+                                                                            key={Number(Food.VitaminA).toFixed(2)}
+                                                                            defaultValue={Number(Food.VitaminA).toFixed(2)}
                                                                             onChange={(e) => setVitaminA(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -729,8 +729,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.VitaminC}
-                                                                            defaultValue={Food.VitaminC}
+                                                                            key={Number(Food.VitaminC).toFixed(2)}
+                                                                            defaultValue={Number(Food.VitaminC).toFixed(2)}
                                                                             onChange={(e) => setVitaminC(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -759,8 +759,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Calcium}
-                                                                            defaultValue={Food.Calcium}
+                                                                            key={Number(Food.Calcium).toFixed(2)}
+                                                                            defaultValue={Number(Food.Calcium).toFixed(2)}
                                                                             onChange={(e) => setCalcium(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -789,8 +789,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.Iron}
-                                                                            defaultValue={Food.Iron}
+                                                                            key={Number(Food.Iron).toFixed(2)}
+                                                                            defaultValue={Number(Food.Iron).toFixed(2)}
                                                                             onChange={(e) => setIron(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -819,8 +819,8 @@ function EditFoods() {
                                                                             label="Sugar (g)" name="object-86824"
                                                                             prependcb="function(){}" role="number"
                                                                             min="0" rows="5" data-mask="null"
-                                                                            key={Food.MonosaturatedFat}
-                                                                            defaultValue={Food.MonosaturatedFat}
+                                                                            key={Number(Food.MonosaturatedFat).toFixed(2)}
+                                                                            defaultValue={Number(Food.MonosaturatedFat).toFixed(2)}
                                                                             onChange={(e) => setMonosaturatedFat(e.target.value)} />
                                                                     </div>
                                                                 </div>
