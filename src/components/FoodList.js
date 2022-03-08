@@ -34,7 +34,7 @@ function FoodList() {
             .get(url)
             .then(function (result) {
                 setrecipes(result.data.hits);
-                console.log(result.data.hits);
+                // console.log(result.data.hits);
                 setquery("");
                 setIsLoad('1');
             })
@@ -52,7 +52,6 @@ function FoodList() {
         e.preventDefault();
         getRecipe();
         setShow(!show)
-        setIsLoad('0');
     };
 
 

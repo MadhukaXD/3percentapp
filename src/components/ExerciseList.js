@@ -40,7 +40,7 @@ function ExerciseList() {
             .request(options)
             .then(function (response) {
                 setexercises(response.data);
-                console.log(response.data);
+                console.log(exercises);
                 setIsLoad('1');
             }).catch(function (error) {
                 console.error(error);
@@ -545,6 +545,10 @@ function ExerciseList() {
                                                                 </div>
                                                             </div>
                                                             <div className="k-row__slot--middle">
+                                                                <NavLink
+                                                                    strict
+                                                                    exact
+                                                                    to={"editexercise2?exercises" + ["id"]}>
                                                                 <div data-v-12e8f0c3="" className="layout row wrap">
                                                                     <div data-v-12e8f0c3=""
                                                                         className="flex xs12 sm8 md6 lg4 xs4 d-flex align-center pica">
@@ -596,6 +600,7 @@ function ExerciseList() {
 
                                                                     </div>
                                                                 </div>
+                                                                </NavLink >
                                                             </div>
                                                             <button
                                                                 data-v-1b4e9c52="" to="[object Object]"
