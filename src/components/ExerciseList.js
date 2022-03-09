@@ -34,7 +34,7 @@ function ExerciseList() {
             url: 'https://exercisedb.p.rapidapi.com/exercises/name/' + query,
             headers: {
                 'x-rapidapi-host': 'exercisedb.p.rapidapi.com',
-                'x-rapidapi-key': '01d65dc629msh086d1cf5a8b8f46p141bf4jsnf7f136618536'
+                'x-rapidapi-key': '7f614a6c33msha01e400e1ace471p1e3678jsn350e491184a1'
             }
         };
 
@@ -441,6 +441,7 @@ function ExerciseList() {
                                                                                     style={{ "padding-bottom": "100%" }} >
                                                                                     {/* <YoutubeEmbed embedId={ExerciseList.VideoURL} /> */}
                                                                                     {/* <YoutubeEmbed embedId={id} /> */}
+                                                                                    <img src={ExerciseList.Image} />
                                                                                 </div>
                                                                                 <div data-v-c9edefc2="" className="k-image__image"
                                                                                 >

@@ -21,15 +21,16 @@ function EditExercise2() {
     let [Force, setForce] = useState("");
     let [VideoTitle, setVideoTitle] = useState("");
     let [VideoURL, setVideoURL] = useState("");
+    let [Image, setImage] = useState("");
     let [isLoad, setIsLoad] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // alert(ExerciseDescription);
+        // alert(MainMuscleWorked);
         fetch("https://the3percent-exercises.herokuapp.com/api/exercise", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, VideoTitle, VideoURL }),
+            body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, VideoTitle, VideoURL, Image }),
         })
             .then(function (response) {
                 if (response.status === 200) {
@@ -46,7 +47,7 @@ function EditExercise2() {
                             onScreen: true
                         }
                     });
-                    // window.location = "/exerciselist";
+                    window.location = "/exerciselist";
                 }
                 else {
                     Store.addNotification({
@@ -82,18 +83,27 @@ function EditExercise2() {
     const id = queryParams2.get('id');
 
     React.useEffect(() => {
-        fetch(`https://exercisedb.p.rapidapi.com/exercises/exercise/0009` + id, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "exercisedb.p.rapidapi.com",
-                "x-rapidapi-key": "01d65dc629msh086d1cf5a8b8f46p141bf4jsnf7f136618536"
+        const options = {
+            method: 'GET',
+            url: 'https://exercisedb.p.rapidapi.com/exercises/exercise/' + id,
+            headers: {
+                'x-rapidapi-host': 'exercisedb.p.rapidapi.com',
+                'x-rapidapi-key': '7f614a6c33msha01e400e1ace471p1e3678jsn350e491184a1'
             }
-        })
-            .then(results => {
-                console.log(results);
-            })
-            .catch(err => {
-                console.error(err);
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                setThirdpartyfood(response.data);
+                setExerciseTitle(response.data.name);
+                setMainMuscleWorked(response.data.bodyPart);
+                setOtherMuscleWorked(response.data.target);
+                setEquipment(response.data.equipment);
+                setImage(response.data.gifUrl);
+                // console.log(Image);
+            }).catch(function (error) {
+                console.error(error);
             });
     }, []); // Pass empty array to only run once on mount.
 
@@ -173,8 +183,8 @@ function EditExercise2() {
                                                                                     rows="5" data-mask="null"
                                                                                     aria-checked="Grams"
                                                                                     readOnly={true}
-                                                                                    // key={ExerciseList.ExerciseTitle}
-                                                                                    // defaultValue={ExerciseList.ExerciseTitle}
+                                                                                    key={Thirdpartyfood["name"]}
+                                                                                    defaultValue={Thirdpartyfood["name"]}
                                                                                     onChange={(e) => setExerciseTitle(e.target.value)} />
                                                                             </div>
                                                                         </div>
@@ -297,6 +307,7 @@ function EditExercise2() {
                                                                             // key={ExerciseList.ExerciseCategory}
                                                                             // defaultValue={ExerciseList.ExerciseCategory}
                                                                             >
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Barbell">Barbell</option>
                                                                                 <option value="Bodyweight">Bodyweight</option>
                                                                                 <option value="Cables">Cables</option>
@@ -324,9 +335,10 @@ function EditExercise2() {
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
                                                                             onChange={(e) => setType(e.target.value)}>
                                                                             <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
-                                                                            // key={ExerciseList.Type}
-                                                                            // defaultValue={ExerciseList.Type}
+                                                                                // key={Thirdpartyfood.bodyPart}
+                                                                                // defaultValue={Thirdpartyfood.bodyPart}
                                                                             >
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Strength">Strength</option>
                                                                                 <option value="Powerlifting">Powerlifting</option>
                                                                                 <option value="Plyometrics">Plyometrics</option>
@@ -341,31 +353,19 @@ function EditExercise2() {
                                                         <div data-v-52fb9f55="" class="flex py-none xs4 md4">
                                                             <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0" >
-                                                                <label for="object-582949"
-                                                                    class="minion k-input__label colorOne--text">
-                                                                    Main Muscle Worked* (Biceps / Shoulders / Chest etc)
+                                                                <label for="object-497406" class="minion k-input__label colorOne--text">
+                                                                    Main Muscle Worked*
                                                                 </label>
-                                                                <div >
+                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
-                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            onChange={(e) => setMainMuscleWorked(e.target.value)} >
-                                                                            <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
-                                                                            // key={ExerciseList.MainMuscleWorked}
-                                                                            // defaultValue={ExerciseList.MainMuscleWorked}
-                                                                            >
-                                                                                <option value="Shoulders">Shoulders</option>
-                                                                                <option value="Chest">Chest</option>
-                                                                                <option value="Biceps">Biceps</option>
-                                                                                <option value="Triceps">Triceps</option>
-                                                                                <option value="Back">Back</option>
-                                                                                <option value="Legs">Legs</option>
-                                                                                <option value="Forearm">Forearm</option>
-                                                                            </select>
-                                                                        </Form.Group>
+                                                                        <input type="text"
+                                                                            key={Thirdpartyfood.bodyPart}
+                                                                            defaultValue={Thirdpartyfood.bodyPart}
+                                                                            onChange={(e) => setMainMuscleWorked(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -384,8 +384,8 @@ function EditExercise2() {
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            // key={ExerciseList.OtherMuscleWorked}
-                                                                            // defaultValue={ExerciseList.OtherMuscleWorked}
+                                                                            key={Thirdpartyfood.target}
+                                                                            defaultValue={Thirdpartyfood.target}
                                                                             onChange={(e) => setOtherMuscleWorked(e.target.value)} />
                                                                     </div>
                                                                 </div>
@@ -395,31 +395,19 @@ function EditExercise2() {
                                                         <div data-v-52fb9f55="" class="flex py-none xs4 md4">
                                                             <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0" >
-                                                                <label for="object-537921"
-                                                                    class="minion k-input__label colorOne--text">
+                                                                <label for="object-497406" class="minion k-input__label colorOne--text">
                                                                     Equipment
-                                                                    (Dumbbell / Barbell / Body Only)
                                                                 </label>
-                                                                <div>
+                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
-                                                                        }} >
-                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            onChange={(e) => setEquipment(e.target.value)} >
-                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
-                                                                            // key={ExerciseList.Equipment}
-                                                                            // defaultValue={ExerciseList.Equipment}
-                                                                            >
-                                                                                <option value="Dumbbell">Dumbbell</option>
-                                                                                <option value="Barbell">Barbell</option>
-                                                                                <option value="Bars">Bars</option>
-                                                                                <option value="Benches">Benches</option>
-                                                                                <option value="Cables">Cables</option>
-                                                                                <option value="Tredmill">Tredmill</option>
-                                                                            </select>
-                                                                        </Form.Group>
+                                                                        }}>
+                                                                        <input type="text"
+                                                                            key={Thirdpartyfood.equipment}
+                                                                            defaultValue={Thirdpartyfood.equipment}
+                                                                            onChange={(e) => setEquipment(e.target.value)} />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -444,6 +432,7 @@ function EditExercise2() {
                                                                             // key={ExerciseList.MechanicsType}
                                                                             // defaultValue={ExerciseList.MechanicsType}
                                                                             >
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Isolation">Isolation</option>
                                                                                 <option value="Compound">Compound</option>
                                                                             </select>
@@ -472,6 +461,7 @@ function EditExercise2() {
                                                                             // key={ExerciseList.Level}
                                                                             // defaultValue={ExerciseList.Level}
                                                                             >
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Beginner">Beginner</option>
                                                                                 <option value="Intermediate">Intermediate</option>
                                                                                 <option value="Expert">Expert</option>
@@ -501,6 +491,7 @@ function EditExercise2() {
                                                                             // key={ExerciseList.Sport}
                                                                             // defaultValue={ExerciseList.Sport}
                                                                             >
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Yes">Yes</option>
                                                                                 <option value="No">No</option>
                                                                             </select>
@@ -529,6 +520,7 @@ function EditExercise2() {
                                                                             // key={ExerciseList.Force}
                                                                             // defaultValue={ExerciseList.Force}
                                                                             >
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Pull">Pull</option>
                                                                                 <option value="Push">Push</option>
                                                                                 <option value="Static">Static</option>
@@ -715,10 +707,18 @@ function EditExercise2() {
                                                         </div>
                                                     </div>
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="validatedCustomFile" required multiple />
-                                                            <label class="custom-file-label" for="validatedCustomFile"></label>
-                                                            <div class="invalid-feedback"></div>
+                                                        <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
+                                                            <input
+                                                                type="number" data-vv-name="object-86824"
+                                                                data-vv-as="sugar (g)"
+                                                                appendcb="function(){}" aria-checked="0"
+                                                                aria-label="Sugar (g)" id="object-86824"
+                                                                label="Sugar (g)" name="object-86824"
+                                                                prependcb="function(){}" role="number"
+                                                                min="0" rows="5" data-mask="null"
+                                                                onChange={(e) => setImage(e.target.value)}
+                                                            />
+                                                            <img src={Thirdpartyfood["gifUrl"]} />
                                                         </div>
                                                     </div>
                                                     <div class="k-card__content">
