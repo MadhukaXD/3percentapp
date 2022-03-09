@@ -2,7 +2,8 @@
   "name": "the3percent-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "main": "index.js",
+  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
@@ -76,7 +77,7 @@
     "npm": "8.1.0"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "server.js",
+  
   "author": "",
   "license": "ISC"
 }

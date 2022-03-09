@@ -138,7 +138,8 @@ function EditFoods() {
             .then(data => {
                 setThirdpartyfood(data.recipe);
                 setFoodName(data.recipe.label);
-                setCalories(data.recipe.calories)
+                setImage(data.recipe.image);
+                setCalories(data.recipe.calories);
 
                 setprotein1(data.recipe.totalNutrients.PROCNT);
                 setProtein(data.recipe.totalNutrients.PROCNT.quantity);
@@ -902,15 +903,20 @@ function EditFoods() {
 
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                         <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                            <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="validatedCustomFile" required />
-                                                                <label class="custom-file-label" for="validatedCustomFile"></label>
-                                                                <div class="invalid-feedback"></div>
-                                                            </div>
+                                                            <input
+                                                                type="number" data-vv-name="object-86824"
+                                                                data-vv-as="sugar (g)"
+                                                                appendcb="function(){}" aria-checked="0"
+                                                                aria-label="Sugar (g)" id="object-86824"
+                                                                label="Sugar (g)" name="object-86824"
+                                                                prependcb="function(){}" role="number"
+                                                                min="0" rows="5" data-mask="null"
+                                                                onChange={(e) => setImage(e.target.value)}
+                                                            />
+                                                            <img src={Thirdpartyfood["image"]} />
                                                         </div>
                                                     </div>
-                                                    <img src={Thirdpartyfood["image"]}
-                                                    />
+
 
                                                     <div class="k-card__content">
                                                         <div data-v-52fb9f55="" class="layout row wrap no-padding">

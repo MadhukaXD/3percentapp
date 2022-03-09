@@ -311,6 +311,7 @@ function EditExercise() {
                                                                             <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                                 key={ExerciseList.ExerciseCategory}
                                                                                 defaultValue={ExerciseList.ExerciseCategory}>
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Barbell">Barbell</option>
                                                                                 <option value="Bodyweight">Bodyweight</option>
                                                                                 <option value="Cables">Cables</option>
@@ -340,6 +341,7 @@ function EditExercise() {
                                                                             <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                                 key={ExerciseList.Type}
                                                                                 defaultValue={ExerciseList.Type}>
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Strength">Strength</option>
                                                                                 <option value="Powerlifting">Powerlifting</option>
                                                                                 <option value="Plyometrics">Plyometrics</option>
@@ -369,6 +371,7 @@ function EditExercise() {
                                                                             <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                                 key={ExerciseList.MainMuscleWorked}
                                                                                 defaultValue={ExerciseList.MainMuscleWorked}>
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Shoulders">Shoulders</option>
                                                                                 <option value="Chest">Chest</option>
                                                                                 <option value="Biceps">Biceps</option>
@@ -423,6 +426,7 @@ function EditExercise() {
                                                                             <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                                 key={ExerciseList.Equipment}
                                                                                 defaultValue={ExerciseList.Equipment}>
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Dumbbell">Dumbbell</option>
                                                                                 <option value="Barbell">Barbell</option>
                                                                                 <option value="Bars">Bars</option>
@@ -454,6 +458,7 @@ function EditExercise() {
                                                                             <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                                 key={ExerciseList.MechanicsType}
                                                                                 defaultValue={ExerciseList.MechanicsType}>
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Isolation">Isolation</option>
                                                                                 <option value="Compound">Compound</option>
                                                                             </select>
@@ -481,6 +486,7 @@ function EditExercise() {
                                                                             <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                                 key={ExerciseList.Level}
                                                                                 defaultValue={ExerciseList.Level}>
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Beginner">Beginner</option>
                                                                                 <option value="Intermediate">Intermediate</option>
                                                                                 <option value="Expert">Expert</option>
@@ -509,6 +515,7 @@ function EditExercise() {
                                                                             <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                                 key={ExerciseList.Sport}
                                                                                 defaultValue={ExerciseList.Sport}>
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Yes">Yes</option>
                                                                                 <option value="No">No</option>
                                                                             </select>
@@ -536,6 +543,7 @@ function EditExercise() {
                                                                             <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
                                                                                 key={ExerciseList.Force}
                                                                                 defaultValue={ExerciseList.Force}>
+                                                                                <option selected>Choose...</option>
                                                                                 <option value="Pull">Pull</option>
                                                                                 <option value="Push">Push</option>
                                                                                 <option value="Static">Static</option>

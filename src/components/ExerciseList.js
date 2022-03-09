@@ -3,6 +3,8 @@ import styled from "styled-components"
 import axios from "axios"
 import Header from './Header';
 import { NavLink, Link, useLocation } from "react-router-dom";
+import YoutubeEmbed from './YoutubeEmbed';
+import getYouTubeID from 'get-youtube-id';
 
 function ExerciseList() {
 
@@ -40,7 +42,7 @@ function ExerciseList() {
             .request(options)
             .then(function (response) {
                 setexercises(response.data);
-                console.log(exercises);
+                console.log(response.data);
                 setIsLoad('1');
             }).catch(function (error) {
                 console.error(error);
@@ -55,6 +57,8 @@ function ExerciseList() {
     };
 
     const [show, setShow] = useState(true);
+
+    let id = getYouTubeID(ExerciseList.VideoURL);
 
     return (
         <div id="app" className="grey-background" >
@@ -434,10 +438,12 @@ function ExerciseList() {
                                                                             <div data-v-c9edefc2="" data-v-12e8f0c3=""
                                                                                 className="k-image colorTwo">
                                                                                 <div data-v-c9edefc2="" className="k-image__sizer"
-                                                                                    style={{ "padding-bottom": "100%" }}>
+                                                                                    style={{ "padding-bottom": "100%" }} >
+                                                                                    {/* <YoutubeEmbed embedId={ExerciseList.VideoURL} /> */}
+                                                                                    {/* <YoutubeEmbed embedId={id} /> */}
                                                                                 </div>
                                                                                 <div data-v-c9edefc2="" className="k-image__image"
-                                                                                    style={{ "background-image": "url(&quot;/3/img/14.1ac5241b.png&quot;)" }}>
+                                                                                >
                                                                                 </div>
                                                                                 <div data-v-c9edefc2="" className="k-image__content"
                                                                                     style={{ "display": "none" }}>
@@ -548,7 +554,7 @@ function ExerciseList() {
                                                                 <NavLink
                                                                     strict
                                                                     exact
-                                                                    to={"editexercise2?exercises" + ["id"]}>
+                                                                    to={"editexercise2?id=" + exercises.id}>
                                                                 <div data-v-12e8f0c3="" className="layout row wrap">
                                                                     <div data-v-12e8f0c3=""
                                                                         className="flex xs12 sm8 md6 lg4 xs4 d-flex align-center pica">

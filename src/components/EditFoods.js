@@ -888,11 +888,7 @@ function EditFoods() {
 
                                                     <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                         <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
-                                                            <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="validatedCustomFile" required />
-                                                                <label class="custom-file-label" for="validatedCustomFile"></label>
-                                                                <div class="invalid-feedback"></div>
-                                                            </div>
+                                                            <img src={Food.Image} />
                                                         </div>
                                                     </div>
 
