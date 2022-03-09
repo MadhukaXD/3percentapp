@@ -9,19 +9,20 @@ import getYouTubeID from 'get-youtube-id';
 
 function AddExercises() {
 
-    const [ExerciseTitle, setExerciseTitle] = useState("");
-    const [ExerciseDescription, setExerciseDescription] = useState("");
-    const [ExerciseCategory, setExerciseCategory] = useState("");
-    const [Type, setType] = useState("");
-    const [MainMuscleWorked, setMainMuscleWorked] = useState("");
-    const [OtherMuscleWorked, setOtherMuscleWorked] = useState("");
-    const [Equipment, setEquipment] = useState("");
-    const [MechanicsType, setMechanicsType] = useState("");
-    const [Level, setLevel] = useState("");
-    const [Sport, setSport] = useState("");
-    const [Force, setForce] = useState("");
-    const [VideoTitle, setVideoTitle] = useState("");
-    const [VideoURL, setVideoURL] = useState("");
+    let [ExerciseTitle, setExerciseTitle] = useState("");
+    let [ExerciseDescription, setExerciseDescription] = useState("");
+    let [ExerciseCategory, setExerciseCategory] = useState("");
+    let [Type, setType] = useState("");
+    let [MainMuscleWorked, setMainMuscleWorked] = useState("");
+    let [OtherMuscleWorked, setOtherMuscleWorked] = useState("");
+    let [Equipment, setEquipment] = useState("");
+    let [MechanicsType, setMechanicsType] = useState("");
+    let [Level, setLevel] = useState("");
+    let [Sport, setSport] = useState("");
+    let [Force, setForce] = useState("");
+    let [VideoTitle, setVideoTitle] = useState("");
+    let [VideoURL, setVideoURL] = useState("");
+    let [Image, setImage] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -73,6 +74,69 @@ function AddExercises() {
     };
 
     let id = getYouTubeID(VideoURL);
+
+
+    // let myarray =
+    //     [
+
+
+
+    //     ];
+
+    // for (let i = 0; i < myarray.length; i++) {
+    //     console.log(myarray[i]);
+    //     ExerciseTitle = myarray[i].name;
+    //     MainMuscleWorked = myarray[i].target;
+    //     Equipment = myarray[i].equipment;
+    //     Image = myarray[i].gifUrl;
+
+    //     fetch("https://the3percent-exercises.herokuapp.com/api/exercise", {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify({ ExerciseTitle, MainMuscleWorked, Equipment, Image }),
+    //     })
+    //         .then(function (response) {
+    //             console.log(response.status);
+    //             if (response.status === 200) {
+    //                 Store.addNotification({
+    //                     title: "Success!",
+    //                     message: "New Exercise added successfully",
+    //                     type: "success",
+    //                     insert: "top",
+    //                     container: "top-right",
+    //                     animationIn: ["animate__animated", "animate__fadeIn"],
+    //                     animationOut: ["animate__animated", "animate__fadeOut"],
+    //                     dismiss: {
+    //                         duration: 5000,
+    //                         onScreen: true
+    //                     }
+    //                 });
+    //                 //window.location = "/exerciselist";
+    //             }
+    //             else {
+    //                 Store.addNotification({
+    //                     title: "Failure!",
+    //                     message: "Please fill required fields",
+    //                     type: "danger",
+    //                     insert: "top",
+    //                     container: "top-right",
+    //                     animationIn: ["animate__animated", "animate__fadeIn"],
+    //                     animationOut: ["animate__animated", "animate__fadeOut"],
+    //                     dismiss: {
+    //                         duration: 5000,
+    //                         onScreen: true
+    //                     }
+    //                 });
+    //             }
+    //         })
+    //         .then((response) => {
+    //             console.log(response);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         });
+    // }
+
     // console.log(id);
     return (
 
