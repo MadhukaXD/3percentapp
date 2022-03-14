@@ -194,8 +194,6 @@ function Dash() {
                                                                 </NavLink>
                                                                 </Col>
 
-
-
                                                                 <Col md={6} className="pb-3">
                                                                     <div className="flex xs1">
                                                                         <div className="dashboard-action-button k-card raised"
@@ -231,6 +229,7 @@ function Dash() {
                                                                         </div>
                                                                     </div>
                                                                 </Col>
+
 
                                                                 <Col md={6} className="pb-3">
                                                                     <div className="flex xs1">

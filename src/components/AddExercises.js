@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Header from './Header';
 import { NavLink, Link, useLocation } from "react-router-dom";
-import { ReactNotifications, Store } from 'react-notifications-component'
+import { ReactNotifications, Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
 import { Form } from "react-bootstrap";
 import YoutubeEmbed from './YoutubeEmbed';
@@ -47,7 +47,6 @@ function AddExercises() {
                             onScreen: true
                         }
                     });
-                    window.location = "/exerciselist";
                 }
                 else {
                     Store.addNotification({
@@ -64,6 +63,7 @@ function AddExercises() {
                         }
                     });
                 }
+                window.location = "/exerciselist";
             })
             .then((response) => {
                 console.log(response);
@@ -384,6 +384,7 @@ function AddExercises() {
                                                                                 <option value="Back">Back</option>
                                                                                 <option value="Legs">Legs</option>
                                                                                 <option value="Forearm">Forearm</option>
+                                                                                <option value="Abs">Abs</option>
                                                                             </select>
                                                                         </Form.Group>
                                                                     </div>
