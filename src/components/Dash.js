@@ -76,40 +76,45 @@ function Dash() {
                                                             <Row className="">
 
                                                                 <Col md={6} className="pb-3">
-                                                                    <div className="flex xs1">
-                                                                        <div className="dashboard-action-button k-card raised"
-                                                                            style={{ "opacity": "0.3" }}>
-                                                                            <div className="k-card__content">
-                                                                                <div className="pica grow">
-                                                                                    View<br />
-                                                                                    Clients
+                                                                    <NavLink
+                                                                        strict
+                                                                        exact
+                                                                        to={`${process.env.PUBLIC_URL}/clientlist`}
+                                                                        key={`${process.env.PUBLIC_URL}/clientlist`}>
+                                                                        <div className="flex xs1">
+                                                                            <div className="dashboard-action-button k-card raised"
+                                                                            >
+                                                                                <div className="k-card__content">
+                                                                                    <div className="pica grow">
+                                                                                        View<br />
+                                                                                        Clients
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="colorOne icon round-icon d-inline-flex align-center justify-center">
+                                                                                        <svg data-v-7f8bad2e aria-hidden="true"
+                                                                                            focusable="false" data-prefix="fad"
+                                                                                            data-icon="id-card-alt" role="img"
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            viewBox="0 0 576 512"
+                                                                                            className="svg-inline--fa fa-id-card-alt fa-w-18 k-icon mars noColor--text">
+                                                                                            <g data-v-7f8bad2e className="fa-group">
+                                                                                                <path data-v-7f8bad2e
+                                                                                                    fill="currentColor"
+                                                                                                    d="M528 64H352v64h16a16 16 0 0 1 0 32H208a16 16 0 0 1 0-32h16V64H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h480a48 48 0 0 0 48-48V112a48 48 0 0 0-48-48zM288 224a64 64 0 1 1-64 64 64 64 0 0 1 64-64zm93.3 224H194.7c-10.4 0-18.8-10-15.6-19.8A64 64 0 0 1 240 384h8.2a103 103 0 0 0 79.6 0h8.2a64.09 64.09 0 0 1 60.9 44.2c3.2 9.8-5.2 19.8-15.6 19.8z"
+                                                                                                    className="fa-secondary">
+                                                                                                </path>
+                                                                                                <path data-v-7f8bad2e
+                                                                                                    fill="currentColor"
+                                                                                                    d="M352 32a32 32 0 0 0-32-32h-64a32 32 0 0 0-32 32v96h128zm-64 320a64 64 0 1 0-64-64 64 64 0 0 0 64 64zm108.9 76.2A64.09 64.09 0 0 0 336 384h-8.2a103 103 0 0 1-79.6 0H240a64 64 0 0 0-60.9 44.2c-3.2 9.8 5.2 19.8 15.6 19.8h186.6c10.4 0 18.8-10 15.6-19.8z"
+                                                                                                    className="fa-primary">
+                                                                                                </path>
+                                                                                            </g>
+                                                                                        </svg>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div
-                                                                                    className="colorOne icon round-icon d-inline-flex align-center justify-center">
-                                                                                    <svg data-v-7f8bad2e aria-hidden="true"
-                                                                                        focusable="false" data-prefix="fad"
-                                                                                        data-icon="id-card-alt" role="img"
-                                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                                        viewBox="0 0 576 512"
-                                                                                        className="svg-inline--fa fa-id-card-alt fa-w-18 k-icon mars noColor--text">
-                                                                                        <g data-v-7f8bad2e className="fa-group">
-                                                                                            <path data-v-7f8bad2e
-                                                                                                fill="currentColor"
-                                                                                                d="M528 64H352v64h16a16 16 0 0 1 0 32H208a16 16 0 0 1 0-32h16V64H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h480a48 48 0 0 0 48-48V112a48 48 0 0 0-48-48zM288 224a64 64 0 1 1-64 64 64 64 0 0 1 64-64zm93.3 224H194.7c-10.4 0-18.8-10-15.6-19.8A64 64 0 0 1 240 384h8.2a103 103 0 0 0 79.6 0h8.2a64.09 64.09 0 0 1 60.9 44.2c3.2 9.8-5.2 19.8-15.6 19.8z"
-                                                                                                className="fa-secondary">
-                                                                                            </path>
-                                                                                            <path data-v-7f8bad2e
-                                                                                                fill="currentColor"
-                                                                                                d="M352 32a32 32 0 0 0-32-32h-64a32 32 0 0 0-32 32v96h128zm-64 320a64 64 0 1 0-64-64 64 64 0 0 0 64 64zm108.9 76.2A64.09 64.09 0 0 0 336 384h-8.2a103 103 0 0 1-79.6 0H240a64 64 0 0 0-60.9 44.2c-3.2 9.8 5.2 19.8 15.6 19.8h186.6c10.4 0 18.8-10 15.6-19.8z"
-                                                                                                className="fa-primary">
-                                                                                            </path>
-                                                                                        </g>
-                                                                                    </svg>
-                                                                                </div>
-
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </NavLink>
                                                                 </Col>
 
                                                                 <Col md={6} className="pb-3">
@@ -195,39 +200,44 @@ function Dash() {
                                                                 </Col>
 
                                                                 <Col md={6} className="pb-3">
-                                                                    <div className="flex xs1">
-                                                                        <div className="dashboard-action-button k-card raised"
-                                                                            style={{ "opacity": "0.3" }}>
-                                                                            <div className="k-card__content">
-                                                                                <div className="pica grow">
-                                                                                    View<br />
-                                                                                    Workouts
-                                                                                </div>
-                                                                                <div
-                                                                                    className="colorOne icon round-icon d-inline-flex align-center justify-center">
-                                                                                    <svg data-v-7f8bad2e aria-hidden="true"
-                                                                                        focusable="false" data-prefix="fad"
-                                                                                        data-icon="calendar-alt" role="img"
-                                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                                        viewBox="0 0 448 512"
-                                                                                        className="svg-inline--fa fa-calendar-alt fa-w-14 k-icon mars noColor--text">
-                                                                                        <g data-v-7f8bad2e className="fa-group">
-                                                                                            <path data-v-7f8bad2e
-                                                                                                fill="currentColor"
-                                                                                                d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm128 244a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm-80-180h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16zm-192 0h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16z"
-                                                                                                className="fa-secondary">
-                                                                                            </path>
-                                                                                            <path data-v-7f8bad2e
-                                                                                                fill="currentColor"
-                                                                                                d="M448 112v80H0v-80a48 48 0 0 1 48-48h48v48a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V64h128v48a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V64h48a48 48 0 0 1 48 48z"
-                                                                                                className="fa-primary">
-                                                                                            </path>
-                                                                                        </g>
-                                                                                    </svg>
+                                                                    <NavLink
+                                                                        strict
+                                                                        exact
+                                                                        to={`${process.env.PUBLIC_URL}/workoutslist`}
+                                                                        key={`${process.env.PUBLIC_URL}/workoutslist`}>
+                                                                        <div className="flex xs1">
+                                                                            <div className="dashboard-action-button k-card raised">
+                                                                                <div className="k-card__content">
+                                                                                    <div className="pica grow">
+                                                                                        View<br />
+                                                                                        Workouts
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="colorOne icon round-icon d-inline-flex align-center justify-center">
+                                                                                        <svg data-v-7f8bad2e aria-hidden="true"
+                                                                                            focusable="false" data-prefix="fad"
+                                                                                            data-icon="calendar-alt" role="img"
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            viewBox="0 0 448 512"
+                                                                                            className="svg-inline--fa fa-calendar-alt fa-w-14 k-icon mars noColor--text">
+                                                                                            <g data-v-7f8bad2e className="fa-group">
+                                                                                                <path data-v-7f8bad2e
+                                                                                                    fill="currentColor"
+                                                                                                    d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm128 244a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm-80-180h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16zm-192 0h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16z"
+                                                                                                    className="fa-secondary">
+                                                                                                </path>
+                                                                                                <path data-v-7f8bad2e
+                                                                                                    fill="currentColor"
+                                                                                                    d="M448 112v80H0v-80a48 48 0 0 1 48-48h48v48a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V64h128v48a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V64h48a48 48 0 0 1 48 48z"
+                                                                                                    className="fa-primary">
+                                                                                                </path>
+                                                                                            </g>
+                                                                                        </svg>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </NavLink>
                                                                 </Col>
 
 
@@ -404,8 +414,6 @@ function Dash() {
                                                                         </div>
                                                                     </div>
                                                                 </Col>
-
-
                                                             </Row>
                                                         </div>
 
@@ -525,10 +533,10 @@ function Dash() {
                                                                 "backgroundPosition": "center bottom",
                                                                 "background-size": "contain"
                                                             }}>
-                                                        </div>
-
+                                                            </div>
                                                     </div>
                                                 </div>
+
                                                 <div data-v-81efa066 tabindex="-1" role="tabpanel"
                                                     className="VueCarousel-slide VueCarousel-slide-active VueCarousel-slide-center">
                                                     <div data-v-81efa066 className="cta-container center-cta"
@@ -581,8 +589,7 @@ function Dash() {
                                                                             "height": "auto"
                                                                         }} />
                                                                     </div>
-                                                                </div>
-
+                                                                    </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -734,8 +741,7 @@ function Dash() {
                                                                                     style={{
                                                                                         "font-size": "16px",
                                                                                         "width": "40px"
-                                                                                    }}>kd</span>
-
+                                                                                        }}>kd</span>
                                                                             </div>
                                                                         </div>
                                                                             <div className="k-row__slot--middle">

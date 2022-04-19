@@ -116,7 +116,56 @@ function CreateWorkouts() {
                                 <div className="container grid-gap-earth">
                                     <div data-v-158550f2="" className="layout row wrap">
                                         <div data-v-158550f2="" className="flex xs12">
-                                            <div data-v-70fe1976="" data-v-158550f2=""></div>
+                                            <div data-v-70fe1976="" data-v-158550f2="">
+                                                <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
+                                                    <div className="k-card__content">
+                                                        <div data-v-52fb9f55="" className="layout row wrap no-padding">
+                                                            <div data-v-52fb9f55="" className="flex py-none xs12">
+                                                                <div data-v-52fb9f55="" className="k-select"
+                                                                    field="[object Object]">
+                                                                    <div className="k-select__input-group">
+                                                                        <div className="k-input k-input--has-changed"
+                                                                            style={{ "--componentThemeColor": "var(--colorOne)" }}>
+                                                                            <label for="object-110314"
+                                                                                className="minion k-input__label colorOne--text">
+                                                                                Workout Description
+                                                                            </label>
+                                                                            <div
+                                                                                className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                                <div className="pica"
+                                                                                    style={{
+                                                                                        "flex-grow": "2",
+                                                                                        "position": "relative"
+                                                                                    }}>
+                                                                                    <textarea type="text"
+                                                                                        data-vv-name="object-110314"
+                                                                                        data-vv-as="macro type"
+                                                                                        appendcb="function(){}"
+                                                                                        aria-label="Macro Type"
+                                                                                        autocomplete="on" id="object-110314"
+                                                                                        label="Macro Type"
+                                                                                        name="object-110314"
+                                                                                        prependcb="function(){}"
+                                                                                        role="text"
+                                                                                        rows="5" data-mask="null"
+                                                                                        aria-checked="Grams"
+                                                                                    // value={ExerciseDescription}
+                                                                                    // onChange={(e) => setExerciseDescription(e.target.value)}
+                                                                                    >
+                                                                                    </textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div data-v-6b0e4150="" ></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="k-select__list-container"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
                                                 <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                     <div data-v-52fb9f55=""
@@ -297,6 +346,83 @@ function CreateWorkouts() {
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
+                                                <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                                    <div data-v-52fb9f55=""
+                                                        id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
+                                                        class="k-row thin">
+                                                        <div class="k-row__slot--middle"><span data-v-194e1f66=""
+                                                            class="k-title">
+                                                            <div data-v-194e1f66="" class="d-flex pica">
+                                                                <span
+                                                                    data-v-194e1f66="" data-v-52fb9f55=""
+                                                                    class="k-title">
+                                                                    <div data-v-194e1f66="" class="d-flex pica">
+                                                                        Add Exercise
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            <div data-v-194e1f66=""
+                                                                class="k-title__subtitle-wrapper long-primer">
+                                                                <span
+                                                                    data-v-194e1f66="" class="">
+                                                                </span>
+                                                            </div>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr /><br />
+
+                                                <div className="row">
+                                                    <div data-v-52fb9f55="" class=""
+                                                        style={{
+                                                            "width": "200px",
+                                                            "height": "100px",
+                                                            "margin-left": "100px",
+                                                            "margin-top": "30px"
+                                                        }}>
+                                                        <img src="/images/food1.png" />
+                                                    </div>
+                                                    <div className=""
+                                                        style={{
+                                                            "margin-top": "30px",
+                                                            "margin-bottom": "20px",
+                                                            "width": "400px",
+                                                            "height": "100px",
+                                                        }}>
+                                                        <p className="paragon grey-one--text mb-moon" >
+                                                            Exercises are empty?
+                                                        </p>
+                                                        <p className="body-copy grey-one--text">
+                                                            Add an item using the button below
+                                                        </p>
+                                                    </div>
+                                                    <div className=""
+                                                        style={{
+                                                            "margin-left": "90px",
+                                                            "margin-top": "30px",
+                                                            "margin-bottom": "20px",
+                                                            "width": "200px",
+                                                            "height": "50px",
+                                                        }}>
+                                                        <button data-v-70fe1976="" to="[object Object]"
+                                                            className="k-button medium colorOne">
+                                                            <div className="k-button__content"
+                                                                style={{ "opacity": 1 }}>
+                                                                ADD EXERCISES
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
 
                                             <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                 <button

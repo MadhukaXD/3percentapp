@@ -57,6 +57,22 @@ function FoodList() {
 
     const [show, setShow] = useState(true);
 
+    const [ShowDeleteHover, setShowDeleteHover] = useState(false);
+
+    const onClink = (e) => {
+        e.preventDefault();
+        setShowDeleteHover(!ShowDeleteHover);
+    };
+
+    // const [DeleteFood, setDeleteFood] = useState([]);
+
+    // function Delete() {
+    //     axios
+    //         .delete('https://the3percent-food.herokuapp.com/api/food/', { id: Food_id })
+    //         .then(res => setDeleteFood(res.data))
+    //         .catch(error => console.log(error));
+    // }
+
     return (
         <div id="app" className="grey-background" >
             <div data-app="true" className="k-app light" >
@@ -309,6 +325,64 @@ function FoodList() {
                                         </div>
                                     </div>
                                 </div>
+
+
+                                {ShowDeleteHover ? <div>
+                                    <div >
+                                        <div className=""
+                                            style={{
+                                                "background-color": "#FF6600",
+                                                "width": "400px",
+                                                "height": "130px",
+                                                "margin-left": "510px",
+                                                "margin-top": "130px",
+                                                "position": "absolute",
+                                                "border-radius": "8px",
+                                                "z-index": "5",
+                                            }}>
+                                            <div className="col"
+                                                style={{
+                                                    "padding-top": "20px",
+                                                    "padding-bottom": "10px",
+                                                    "padding-left": "auto",
+                                                    "padding-right": "auto",
+                                                }}
+                                            >
+                                                <div className="pica grow"
+                                                    style={{
+                                                        "padding-left": "30px",
+                                                        "padding-right": "auto",
+                                                        "padding-bottom": "25px",
+                                                    }}
+                                                >
+                                                    Are you sure you want to Delete this Food?
+                                                </div>
+                                                <div className="row"
+                                                    style={{
+                                                        "margin-left": "30px",
+                                                        "margin-right": "20px",
+                                                    }}
+                                                >
+                                                    <button type="button" class="btn btn-danger"
+                                                        style={{
+                                                            "width": "150px",
+                                                            "height": "auto",
+                                                            "margin-right": "20px",
+
+                                                        }}>Delete</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        style={{
+                                                            "width": "150px",
+                                                            "height": "auto",
+                                                            "margin-left": "20px",
+                                                        }}>Cancel</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> : null}
+
                                 <div className="container grid-gap-earth">
                                     <div data-v-5a98f47a="" className="layout row wrap">
                                         {isLoad == '0' ? (
@@ -362,7 +436,11 @@ function FoodList() {
                                                         <div className="k-row__slot--middle">
                                                             <div className="brevier grey-one--text">
                                                                 <div data-v-19d24620="" className="layout row wrap">
-                                                                    <div data-v-19d24620="" className="flex xs12 sm8 md6 lg4">
+                                                                    <div data-v-19d24620="" className="flex xs12 sm8 md6 lg4"
+                                                                        style={{
+                                                                            "margin-left": "100px",
+                                                                        }}
+                                                                    >
                                                                         Nutrition Plan Name
                                                                     </div>
                                                                     <div data-v-19d24620="" className="flex sm2 hidden-xs-only">
@@ -371,9 +449,11 @@ function FoodList() {
                                                                     <div data-v-19d24620="" className="flex sm2 hidden-xs-only">
                                                                         Groups
                                                                     </div>
-                                                                    <div data-v-19d24620=""
-                                                                        className="flex xs2 hidden-md-and-down">
-                                                                        Created By
+                                                                    <div data-v-19d24620="" className="flex xs2 hidden-md-and-down"
+                                                                        style={{
+                                                                            "margin-left": "45px",
+                                                                        }}>
+                                                                        Source
                                                                     </div>
                                                                     <div data-v-19d24620=""
                                                                         className="flex md2 hidden-sm-and-down">
@@ -457,51 +537,52 @@ function FoodList() {
                                                                             <div data-v-62035167="" data-v-12e8f0c3=""
                                                                                 className="k-counter brevier show">
                                                                                 <div data-v-62035167=""
-                                                                                    className="k-counter__value colorOne">0</div>
+                                                                                    className="k-counter__value colorOne"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <div data-v-12e8f0c3="" 
-                                                                            className="flex xs2 hidden-md-and-down d-flex align-center">
-                                                                            <div data-v-23bc496c="" data-v-12e8f0c3="" size="40px"
-                                                                                className="mr-mars k-avatar colorOne"
+                                                                        <div className="k-row__slot--left">
+                                                                            <div data-v-23bc496c size="40px"
+                                                                                className="k-avatar colorOneLight"
                                                                                 style={{
-                                                                                    "height": "40px !important",
-                                                                                    "width": "40px !important"
+                                                                                    "height": "60px",
+                                                                                    "width": "60px",
                                                                                 }}>
-                                                                                <span data-v-23bc496c="" className="k-avatar__initials"
-                                                                                    style={{
-                                                                                        "font-size": "20px",
-                                                                                        "width": "40px"
-                                                                                    }}>kd</span>
+                                                                                <img
+                                                                                    src="/images/logonew.png" />
                                                                             </div>
-                                                                            Admin
                                                                         </div>
                                                                         <div data-v-12e8f0c3=""
-                                                                            className="flex hidden-sm-and-down md2 d-flex align-center">
+                                                                            className="flex hidden-sm-and-down md2 d-flex align-center"
+                                                                            style={{
+                                                                                "margin-left": "70px"
+                                                                            }}
+                                                                        >
                                                                             {Food.Date}
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </NavLink>
-                                                            <button
-                                                                data-v-1b4e9c52="" to="[object Object]"
-                                                                className="action-toolbar__icon k-button  flat icon medium ">
-                                                                <div className="k-button__content"
-                                                                    style={{ "opacity": "1" }}>
-                                                                    <svg
-                                                                        data-v-7f8bad2e="" aria-hidden="true"
-                                                                        focusable="false" data-prefix="fas"
-                                                                        data-icon="trash-alt" role="img"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        viewBox="0 0 448 512"
-                                                                        className="svg-inline--fa fa-trash-alt fa-w-14 k-icon earth colortwotranslucent">
-                                                                        <path data-v-7f8bad2e="" fill="currentColor"
-                                                                            d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
-                                                                            className="">
-                                                                        </path>
-                                                                    </svg>
-                                                                </div>
-                                                            </button>
+                                                            <form className="deletebutton" id="deletebutton" onClick={onClink}>
+                                                                <button
+                                                                    data-v-1b4e9c52="" to="[object Object]"
+                                                                    className="action-toolbar__icon k-button  flat icon medium ">
+                                                                    <div className="k-button__content"
+                                                                        style={{ "opacity": "1" }}>
+                                                                        <svg
+                                                                            data-v-7f8bad2e="" aria-hidden="true"
+                                                                            focusable="false" data-prefix="fas"
+                                                                            data-icon="trash-alt" role="img"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 448 512"
+                                                                            className="svg-inline--fa fa-trash-alt fa-w-14 k-icon earth colortwotranslucent">
+                                                                            <path data-v-7f8bad2e="" fill="currentColor"
+                                                                                d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
+                                                                                className="">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     ))}
                                                     </div> : null}
@@ -579,27 +660,12 @@ function FoodList() {
                                                                             className="k-counter brevier show">
                                                                             <div data-v-62035167=""
                                                                                     className="k-counter__value colorOne"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div data-v-12e8f0c3=""
-                                                                            className="flex xs2 hidden-md-and-down d-flex align-center col-md-4">
-                                                                        <div data-v-23bc496c="" data-v-12e8f0c3="" size="40px"
-                                                                            className="mr-mars k-avatar colorOne"
-                                                                            style={{
-                                                                                "height": "40px !important",
-                                                                                "width": "40px !important"
-                                                                            }}>
-                                                                            <span data-v-23bc496c="" className="k-avatar__initials"
-                                                                                style={{
-                                                                                    "font-size": "20px",
-                                                                                    "width": "40px"
-                                                                                }}>kd</span>
+                                                                            </div>
                                                                         </div>
 
-                                                                    </div>
+                                                                        {/*  */}
                                                                     <div data-v-12e8f0c3=""
                                                                             className="flex hidden-sm-and-down md2 d-flex align-center col-md-4">
-
                                                                     </div>
                                                                 </div>
                                                             </div>

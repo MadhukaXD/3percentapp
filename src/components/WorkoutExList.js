@@ -1,76 +1,53 @@
-import React, { useState, useEffect, useRef } from 'react'
-import styled from "styled-components"
+import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import Header from './Header';
 import { NavLink, Link, useLocation } from "react-router-dom";
-import YoutubeEmbed from './YoutubeEmbed';
-import getYouTubeID from 'get-youtube-id';
 
-function ExerciseList() {
+function WorkoutExList() {
 
-    const [ExerciseList, setExerciseList] = useState([]);
+    let [WorkoutExList, setWorkoutExList] = useState([]);
     let [isLoad, setIsLoad] = useState("0");
 
     useEffect(() => {
         axios
-            .get('https://the3percent-exercises.herokuapp.com/api/exercise')
+            .get('http://localhost:5004/api/workout')
             .then(function (res) {
-                setExerciseList(res.data);
-                setIsLoad('1');
+                setWorkoutExList(res.data);
+
             })
             .catch(error => console.log(error));
-
-    });
-
-
-    let [query, setquery] = useState("");
-    let [exercises, setexercises] = useState([]);
+    }, []);
+    // console.log(WorkoutExList);
 
 
+    const [ExList, setExList] = useState([]);
+    const [WorkoutList, setWorkoutList] = useState([]);
 
-    async function getExercise() {
-        const options = {
-            method: 'GET',
-            url: 'https://exercisedb.p.rapidapi.com/exercises/name/' + query,
-            headers: {
-                'x-rapidapi-host': 'exercisedb.p.rapidapi.com',
-                'x-rapidapi-key': '7f614a6c33msha01e400e1ace471p1e3678jsn350e491184a1'
-            }
-        };
+    const queryParams = new URLSearchParams(window.location.search);
+    const WorkoutList_id = queryParams.get('WorkoutList_id');
 
-        axios
-            .request(options)
-            .then(function (response) {
-                setexercises(response.data);
-                console.log(response.data);
+    const apiurl = "http://localhost:5004/api/workout/" + WorkoutList_id;
+
+    React.useEffect(() => {
+        fetch(apiurl)
+            .then(results => results.json())
+            .then(data => {
+                // console.log(data.Recipe);
+                setWorkoutList(data);
+                setExList(data.Exercise);
                 setIsLoad('1');
-            }).catch(function (error) {
-                console.error(error);
+
             });
-    };
+    }, []);
+    console.log(WorkoutList);
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        getExercise();
-        setShow(!show);
-        setquery("");
-    };
-
-    const [show, setShow] = useState(true);
-    const [showfilter, setShowfilter] = useState(false);
     const [ShowDeleteHover, setShowDeleteHover] = useState(false);
 
     const onClink = (e) => {
         e.preventDefault();
-        setShowfilter(!showfilter);
-    };
-
-    const onClickDeletButton = (e) => {
-        e.preventDefault();
         setShowDeleteHover(!ShowDeleteHover);
     };
 
-    let id = getYouTubeID(ExerciseList.VideoURL);
 
     return (
         <div id="app" className="grey-background" >
@@ -105,7 +82,7 @@ function ExerciseList() {
                                         <div className="flex pt-earth xs12">
                                             <div data-v-194e1f66="" className="d-flex canon" >
                                                 <div data-v-194e1f66="" className="colorTwo--text tw-text-2xl" >
-                                                    Exercise List </div>
+                                                    Workout Exercise List </div>
                                             </div>
                                         </div>
                                         <div className="flex pt-earth xs12 pt-none">
@@ -115,41 +92,32 @@ function ExerciseList() {
                                                         <div data-v-1b4e9c52="" className="flex xs12 md9">
                                                             <div data-v-1b4e9c52="" className="action-toolbar__input k-input mb-none"
                                                                 style={{ "--componentThemeColor": "var(--colorOne)" }}>
-
-                                                                <form className="searchBar" id="foodsearchbar" onSubmit={onSubmit}>
-                                                                    <div className="k-input-container d-flex align-center k-input__field">
-                                                                        <div className="pica"
-                                                                            style={{
-                                                                                "flex-grow": "1",
-                                                                                "position": "relative"
-                                                                            }}>
-                                                                            <input
-                                                                                type="text" data-vv-name="object-898551"
-                                                                                appendcb="function(){}" aria-checked=""
-                                                                                autocomplete="on" id="object-898551"
-                                                                                name="object-898551" placeholder="Search"
-                                                                                prependcb="function(){}" role="text" rows="5"
-                                                                                data-mask="null"
-                                                                                value={query}
-                                                                                onChange={(e) => setquery(e.target.value)} />
-                                                                        </div>
-                                                                        <div
-                                                                            className="k-input__field-icon pica left colorOne--text">
-                                                                            <svg data-v-7f8bad2e="" data-v-1b4e9c52=""
-                                                                                aria-hidden="true" focusable="false"
-                                                                                data-prefix="far" data-icon="search" role="img"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                viewBox="0 0 512 512"
-                                                                                className="svg-inline--fa fa-search fa-w-16 k-icon mars colorOne">
-                                                                                <path data-v-7f8bad2e="" fill="currentColor"
-                                                                                    d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"
-                                                                                    className="">
-                                                                                </path>
-                                                                            </svg>
-                                                                        </div>
+                                                                <div
+                                                                    className="k-input-container d-flex align-center k-input__field">
+                                                                    <div
+                                                                        className="k-input__field-icon pica left colorOne--text">
                                                                     </div>
-                                                                </form>
-                                                                <div data-v-6b0e4150="">
+                                                                    <div className="pica"
+                                                                        style={{
+                                                                            "flex-grow": "1",
+                                                                            "position": "relative"
+                                                                        }}>
+                                                                        <input
+                                                                            type="text"
+                                                                            data-vv-name="object-898551"
+                                                                            appendcb="function(){}"
+                                                                            aria-checked=""
+                                                                            autocomplete="on"
+                                                                            id="object-898551"
+                                                                            name="object-898551"
+                                                                            placeholder="Workout Title"
+                                                                            prependcb="function(){}"
+                                                                            role="text" rows="5"
+                                                                            data-mask="null"
+                                                                            readOnly={true}
+                                                                            value={WorkoutList.WorkoutTitle}
+                                                                        />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -283,9 +251,7 @@ function ExerciseList() {
                                                             </div>
 
 
-
-                                                            <form className="searchBar" id="foodsearchbar" onClick={onClink}>
-                                                                <div data-v-5b87c31b="" data-v-1b4e9c52="" className="k-badge">
+                                                            <div data-v-5b87c31b="" data-v-1b4e9c52="" className="k-badge">
                                                                 <div data-v-5b87c31b="" className="k-badge__overlay"
                                                                     style={{
                                                                         "top": "5px",
@@ -316,9 +282,7 @@ function ExerciseList() {
                                                                         </svg>
                                                                     </div>
                                                                 </button>
-                                                                </div>
-                                                            </form>
-
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -327,9 +291,7 @@ function ExerciseList() {
                                     </div>
                                 </div>
 
-                                {/* Filter panael */}
-                                {showfilter ? <div>
-
+                                {ShowDeleteHover ? <div>
                                     <div className="flex xs1">
                                         <div className="dashboard-action-button k-card raised"
                                             style={{
@@ -348,182 +310,10 @@ function ExerciseList() {
                                                         Abs
                                                     </div>
                                                 </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Back (lower)
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Back (middle)
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Bicep
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Calves
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Chest (inner)
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Chest (mid)
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Chest (upper)
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Forearms
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Glutes
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Hamstrings
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Lats
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Neck
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Obliques
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Quads
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Shoulder (front)
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Shoulder (rear)
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Shoulder (side)
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Traps
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                                <div className="k-card__content">
-                                                    <div className="pica grow">
-                                                        Triceps
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div> : null}
-
-                                {ShowDeleteHover ? <div>
-                                    <div >
-                                        <div className=""
-                                            style={{
-                                                "background-color": "#FF6600",
-                                                "width": "400px",
-                                                "height": "130px",
-                                                "margin-left": "510px",
-                                                "margin-top": "130px",
-                                                "position": "absolute",
-                                                "border-radius": "8px",
-                                                "z-index": "5",
-                                            }}>
-                                            <div className="col"
-                                                style={{
-                                                    "padding-top": "20px",
-                                                    "padding-bottom": "10px",
-                                                    "padding-left": "auto",
-                                                    "padding-right": "auto",
-                                                }}
-                                            >
-                                                <div className="pica grow"
-                                                    style={{
-                                                        "padding-left": "18px",
-                                                        "padding-right": "auto",
-                                                        "padding-bottom": "25px",
-                                                        "padding-top": "10px",
-                                                    }}
-                                                >
-                                                    Are you sure you want to Delete this Exercise?
-                                                </div>
-                                                <div className="row"
-                                                    style={{
-                                                        "margin-left": "30px",
-                                                        "margin-right": "20px",
-                                                    }}
-                                                >
-                                                    <button type="button" class="btn btn-danger"
-                                                        style={{
-                                                            "width": "150px",
-                                                            "height": "auto",
-                                                            "margin-right": "20px",
-
-                                                        }}>Delete</button>
-                                                    <button type="button" class="btn btn-primary"
-                                                        style={{
-                                                            "width": "150px",
-                                                            "height": "auto",
-                                                            "margin-left": "20px",
-                                                        }}>Cancel</button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> : null}
-
 
                                 <div className="container grid-gap-earth">
                                     <div data-v-5a98f47a="" className="layout row wrap">
@@ -532,6 +322,7 @@ function ExerciseList() {
                                         ) : (
                                             <div></div>
                                         )}
+
                                         <div data-v-5a98f47a="" className="flex xs12">
                                             <div data-v-19d24620="" data-v-5a98f47a="" macro-type="grams">
                                                 <div data-v-19d24620="">
@@ -541,8 +332,66 @@ function ExerciseList() {
                                                     <div data-v-19d24620="" className="action-bar-portal v-portal"
                                                         style={{ "display": "none" }}>
                                                     </div>
+                                                    {/* Description */}
+                                                    <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised"
+                                                        style={{
+                                                            "margin-top": "20px",
+                                                            "margin-bottom": "20px",
+                                                        }}
+                                                    >
+                                                        <div className="k-card__content">
+                                                            <div data-v-52fb9f55="" className="layout row wrap no-padding">
+                                                                <div data-v-52fb9f55="" className="flex py-none xs12">
+                                                                    <div data-v-52fb9f55="" className="k-select"
+                                                                        field="[object Object]">
+                                                                        <div className="k-select__input-group">
+                                                                            <div className="k-input k-input--has-changed"
+                                                                                style={{ "--componentThemeColor": "var(--colorOne)" }}>
+                                                                                <label for="object-110314"
+                                                                                    className="minion k-input__label colorOne--text">
+                                                                                    Workout Description
+                                                                                </label>
+                                                                                <div
+                                                                                    className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                                    <div className="pica"
+                                                                                        style={{
+                                                                                            "flex-grow": "2",
+                                                                                            "position": "relative"
+                                                                                        }}>
+                                                                                        <textarea type="text"
+                                                                                            data-vv-name="object-110314"
+                                                                                            data-vv-as="macro type"
+                                                                                            appendcb="function(){}"
+                                                                                            aria-label="Macro Type"
+                                                                                            autocomplete="on" id="object-110314"
+                                                                                            label="Macro Type"
+                                                                                            name="object-110314"
+                                                                                            prependcb="function(){}"
+                                                                                            role="text"
+                                                                                            rows="5" data-mask="null"
+                                                                                            aria-checked="Grams"
+                                                                                            value={WorkoutList.WorkoutDescription}
+                                                                                        >
+
+                                                                                        </textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div data-v-6b0e4150="" ></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="k-select__list-container"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div data-v-19d24620="" id="k-row-6dba366e-f496-4c5d-ac70-1e83a1f76ec0"
-                                                        className="list-table-header k-row pl-mars pt-sun">
+                                                        className="list-table-header k-row pl-mars pt-sun"
+                                                        style={{
+                                                            "margin-top": "-28px"
+                                                        }}
+                                                    >
                                                         <div className="k-row__slot--left">
                                                             <div style={{ "width": "24px" }}>
                                                                 <div>
@@ -591,8 +440,8 @@ function ExerciseList() {
                                                                     </div>
                                                                     <div data-v-19d24620=""
                                                                         className="flex xs2 hidden-md-and-down"
-                                                                        style={{ "paddingLeft": "55px" }}>
-                                                                        Source
+                                                                        style={{ "paddingLeft": "40px" }}>
+                                                                        Added by
                                                                     </div>
                                                                     <div data-v-19d24620=""
                                                                         className="flex md2 hidden-sm-and-down"
@@ -606,8 +455,7 @@ function ExerciseList() {
                                                             <div style={{ "width": "60px" }}></div>
                                                         </div>
                                                     </div>
-                                                    {show ? <div>
-                                                    {ExerciseList.map((ExerciseList, key) => (
+                                                    {ExList.map((ExList, key) => (
                                                         <div data-v-12e8f0c3="" data-v-19d24620=""
                                                             id="k-row-e02c9d68-bf46-4c60-aacb-9f41ee3fec08"
                                                             className="k-row clickable standalone image-middle">
@@ -640,13 +488,14 @@ function ExerciseList() {
                                                                             </label>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
                                                             </div>
                                                             <div className="k-row__slot--middle">
                                                                 <NavLink
                                                                     strict
                                                                     exact
-                                                                    to={"editexercise?ExerciseList_id=" + ExerciseList._id}
+                                                                    to={"editworkoutexercise?ExList_id=" + ExList._id + "&WorkoutList_id=" + WorkoutList_id}
                                                                 >
                                                                     <div data-v-12e8f0c3="" className="layout row wrap">
                                                                         <div data-v-12e8f0c3=""
@@ -654,20 +503,19 @@ function ExerciseList() {
                                                                             <div data-v-c9edefc2="" data-v-12e8f0c3=""
                                                                                 className="k-image colorTwo">
                                                                                 <div data-v-c9edefc2="" className="k-image__sizer"
-                                                                                    style={{ "padding-bottom": "100%" }} >
-                                                                                    {/* <YoutubeEmbed embedId={ExerciseList.VideoURL} /> */}
-                                                                                    {/* <YoutubeEmbed embedId={id} /> */}
-                                                                                    {/* <img src={ExerciseList.Image} /> */}
+                                                                                    style={{ "padding-bottom": "100%" }}>
                                                                                 </div>
-                                                                                <div data-v-c9edefc2="" className="k-image__image">
+                                                                                <div data-v-c9edefc2="" className="k-image__image"
+                                                                                    style={{ "background-image": "url(&quot;/3/img/14.1ac5241b.png&quot;)" }}>
                                                                                 </div>
                                                                                 <div data-v-c9edefc2="" className="k-image__content"
                                                                                     style={{ "display": "none" }}>
                                                                                 </div>
                                                                             </div>
-                                                                            {ExerciseList.ExerciseTitle}
-                                                                        </div>
+                                                                            {/* {WorkoutExList.Exercise["ExerciseTitle"]} */}
+                                                                            {ExList.ExerciseTitle}
 
+                                                                        </div>
                                                                         <div data-v-12e8f0c3=""
                                                                             className="flex sm2 hidden-xs-only d-flex align-center">
                                                                             <div data-v-f1ed5950="" data-v-12e8f0c3=""
@@ -680,8 +528,9 @@ function ExerciseList() {
                                                                             <div data-v-62035167="" data-v-12e8f0c3=""
                                                                                 className="k-counter brevier show">
                                                                                 <div data-v-62035167=""
-                                                                                className="k-counter__value colorOne">
-                                                                                {ExerciseList.Type}</div>
+                                                                                    className="k-counter__value colorOne">
+                                                                                    {ExList.Type}
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <div className="k-row__slot--left">
@@ -690,7 +539,7 @@ function ExerciseList() {
                                                                                 style={{
                                                                                     "height": "60px",
                                                                                     "width": "60px",
-                                                                                    "margin-left": "15px",
+                                                                                    "margin-left": "-0px",
                                                                                 }}>
                                                                                 <img
                                                                                     src="/images/logonew.png" />
@@ -701,13 +550,13 @@ function ExerciseList() {
                                                                             style={{
                                                                                 "margin-left": "100px",
                                                                             }}>
-                                                                        {ExerciseList.Date}
+                                                                            {/* Date */}
+                                                                            {ExList.Date}
                                                                         </div>
-
                                                                     </div>
                                                                 </NavLink>
                                                             </div>
-                                                            <form className="deletebutton" id="deletebutton" onClick={onClickDeletButton}>
+                                                            <form className="deletebutton" id="deletebutton" onClick={onClink}>
                                                                 <button
                                                                     data-v-1b4e9c52="" to="[object Object]"
                                                                     className="action-toolbar__icon k-button  flat icon medium ">
@@ -730,128 +579,6 @@ function ExerciseList() {
                                                             </form>
                                                         </div>
                                                     ))}
-                                                    </div> : null}
-
-                                                    {exercises.map((exercises, key) => (
-                                                        <div data-v-12e8f0c3="" data-v-19d24620=""
-                                                            id="k-row-e02c9d68-bf46-4c60-aacb-9f41ee3fec08"
-                                                            className="k-row clickable standalone image-middle">
-                                                            <div className="k-row__slot--left">
-                                                                <div data-v-12e8f0c3="" className="d-flex align-center pl-moon">
-                                                                    <div data-v-12e8f0c3="">
-                                                                        <div id="checkbox-undefined" className="k-checkbox">
-                                                                            <input
-                                                                                id="object-456304" type="checkbox"
-                                                                                data-vv-name="object-456304" data-vv-as=""
-                                                                                role="checkbox" className="k-checkbox__input"
-                                                                                value="false" />
-                                                                            <div className="k-checkbox__wrapper"><svg
-                                                                                data-v-7f8bad2e="" aria-hidden="true"
-                                                                                focusable="false" data-prefix="far"
-                                                                                data-icon="check" role="img"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                viewBox="0 0 512 512"
-                                                                                className="k-checkbox__check svg-inline--fa fa-check fa-w-16 k-icon mars white--text">
-                                                                                <path data-v-7f8bad2e="" fill="currentColor"
-                                                                                    d="M435.848 83.466L172.804 346.51l-96.652-96.652c-4.686-4.686-12.284-4.686-16.971 0l-28.284 28.284c-4.686 4.686-4.686 12.284 0 16.971l133.421 133.421c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-28.284-28.284c-4.686-4.686-12.284-4.686-16.97 0z"
-                                                                                    className="">
-                                                                                </path>
-                                                                            </svg>
-                                                                            </div>
-                                                                            <label for="object-456304"
-                                                                                className="k-checkbox__label">
-                                                                                <span>
-                                                                                </span>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="k-row__slot--middle">
-                                                                <NavLink
-                                                                    strict
-                                                                    exact
-                                                                    to={"editexercise2?id=" + exercises.id}>
-                                                                <div data-v-12e8f0c3="" className="layout row wrap">
-                                                                    <div data-v-12e8f0c3=""
-                                                                        className="flex xs12 sm8 md6 lg4 xs4 d-flex align-center pica">
-                                                                        <div data-v-c9edefc2="" data-v-12e8f0c3=""
-                                                                            className="k-image colorTwo">
-                                                                            <div data-v-c9edefc2="" className="k-image__sizer"
-                                                                                style={{ "padding-bottom": "100%" }}>
-                                                                                <img src={exercises.gifUrl} />
-                                                                            </div>
-                                                                            <div data-v-c9edefc2="" className="k-image__image"
-                                                                                style={{ "background-image": "url(&quot;/3/img/14.1ac5241b.png&quot;)" }}>
-                                                                            </div>
-                                                                            <div data-v-c9edefc2="" className="k-image__content"
-                                                                                style={{ "display": "none" }}>
-                                                                            </div>
-                                                                        </div>
-                                                                        {exercises.name}
-                                                                    </div>
-
-                                                                    <div data-v-12e8f0c3=""
-                                                                        className="flex sm2 hidden-xs-only d-flex align-center">
-                                                                        <div data-v-f1ed5950="" data-v-12e8f0c3=""
-                                                                            className="k-avatar__row"
-                                                                            style={{ "height": "32px" }}>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div data-v-12e8f0c3=""
-                                                                        className="flex sm2 hidden-xs-only d-flex align-center">
-                                                                        <div data-v-62035167="" data-v-12e8f0c3=""
-                                                                            className="k-counter brevier show">
-                                                                            <div data-v-62035167=""
-                                                                                className="k-counter__value colorOne">
-                                                                                {exercises.bodyPart}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div data-v-12e8f0c3=""
-                                                                        className="flex xs2 hidden-md-and-down d-flex align-center">
-                                                                        <div data-v-23bc496c="" data-v-12e8f0c3="" size="40px"
-                                                                            className="mr-mars k-avatar colorOne"
-                                                                            style={{
-                                                                                "height": "40px !important",
-                                                                                "width": "40px !important"
-                                                                            }}>
-                                                                        </div>
-                                                                            Database
-                                                                    </div>
-                                                                    <div data-v-12e8f0c3=""
-                                                                        className="flex hidden-sm-and-down md2 d-flex align-center">
-
-                                                                    </div>
-                                                                </div>
-                                                                </NavLink >
-                                                            </div>
-                                                            <button
-                                                                data-v-1b4e9c52="" to="[object Object]"
-                                                                className="action-toolbar__icon k-button  flat icon medium ">
-                                                                <div className="k-button__content"
-                                                                    style={{ "opacity": "1" }}>
-                                                                    <svg
-                                                                        data-v-7f8bad2e="" aria-hidden="true"
-                                                                        focusable="false" data-prefix="fas"
-                                                                        data-icon="trash-alt" role="img"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        viewBox="0 0 448 512"
-                                                                        className="svg-inline--fa fa-trash-alt fa-w-14 k-icon earth colortwotranslucent">
-                                                                        <path data-v-7f8bad2e="" fill="currentColor"
-                                                                            d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
-                                                                            className="">
-                                                                        </path>
-                                                                    </svg>
-                                                                </div>
-                                                            </button>
-                                                        </div>
-                                                    ))}
-
-
-                                                    {/* filter panel */}
-
-
-
                                                     <div data-v-644ea9c9="" data-v-19d24620=""
                                                         className="infinite-loading-container">
                                                         <div data-v-644ea9c9="" className="infinite-status-prompt"
@@ -937,4 +664,4 @@ function ExerciseList() {
     )
 }
 
-export default ExerciseList
+export default WorkoutExList

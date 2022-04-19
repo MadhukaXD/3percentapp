@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import styled from "styled-components";
 import axios from "axios";
 import Header from './Header';
+import { NavLink, Link, useLocation } from "react-router-dom";
 
 function ClientList() {
 
@@ -379,59 +379,66 @@ function ClientList() {
                                                             </div>
                                                         </div>
                                                         <div className="k-row__slot--middle">
-                                                            <div data-v-12e8f0c3="" className="layout row wrap">
-                                                                <div data-v-12e8f0c3=""
-                                                                    className="flex xs12 sm8 md6 lg4 xs4 d-flex align-center pica">
-                                                                    <div data-v-c9edefc2="" data-v-12e8f0c3=""
-                                                                        className="k-image colorTwo">
-                                                                        <div data-v-c9edefc2="" className="k-image__sizer"
-                                                                            style={{ "padding-bottom": "100%" }}>
+                                                                <NavLink
+                                                                    strict
+                                                                    exact
+                                                                    to={"clientprofile"}
+                                                                >
+                                                                    <div data-v-12e8f0c3="" className="layout row wrap">
+                                                                        <div data-v-12e8f0c3=""
+                                                                            className="flex xs12 sm8 md6 lg4 xs4 d-flex align-center pica">
+                                                                            <div data-v-c9edefc2="" data-v-12e8f0c3=""
+                                                                                className="k-image colorTwo">
+                                                                                <div data-v-c9edefc2="" className="k-image__sizer"
+                                                                                    style={{ "padding-bottom": "100%" }}>
+                                                                                    <img src={ClientList.avatar} />
+                                                                                </div>
+                                                                                <div data-v-c9edefc2="" className="k-image__image"
+                                                                                    style={{ "background-image": "url(&quot;/3/img/14.1ac5241b.png&quot;)" }}>
+                                                                                </div>
+                                                                                <div data-v-c9edefc2="" className="k-image__content"
+                                                                                    style={{ "display": "none" }}>
+                                                                                </div>
+                                                                            </div>
+                                                                            {ClientList.FirstName} {ClientList.LastName}
                                                                         </div>
-                                                                        <div data-v-c9edefc2="" className="k-image__image"
-                                                                            style={{ "background-image": "url(&quot;/3/img/14.1ac5241b.png&quot;)" }}>
+                                                                        <div data-v-12e8f0c3=""
+                                                                            className="flex sm2 hidden-xs-only d-flex align-center">
+                                                                            <div data-v-f1ed5950="" data-v-12e8f0c3=""
+                                                                                className="k-avatar__row"
+                                                                                style={{ "height": "32px" }}>
+                                                                            </div>
                                                                         </div>
-                                                                        <div data-v-c9edefc2="" className="k-image__content"
-                                                                            style={{ "display": "none" }}>
+                                                                        <div data-v-12e8f0c3=""
+                                                                            className="flex sm2 hidden-xs-only d-flex align-center">
+                                                                            <div data-v-62035167="" data-v-12e8f0c3=""
+                                                                                className="k-counter brevier show">
+                                                                                <div data-v-62035167=""
+                                                                                    className="k-counter__value colorOne">0</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div data-v-12e8f0c3=""
+                                                                            className="flex xs2 hidden-md-and-down d-flex align-center">
+                                                                            <div data-v-23bc496c="" data-v-12e8f0c3="" size="40px"
+                                                                                className="mr-mars k-avatar colorOne"
+                                                                                style={{
+                                                                                    "height": "40px !important",
+                                                                                    "width": "40px !important"
+                                                                                }}>
+                                                                                <span data-v-23bc496c="" className="k-avatar__initials"
+                                                                                    style={{
+                                                                                        "font-size": "20px",
+                                                                                        "width": "40px"
+                                                                                    }}>kd</span>
+                                                                            </div>
+                                                                            {ClientList.Gender}
+                                                                        </div>
+                                                                        <div data-v-12e8f0c3=""
+                                                                            className="flex hidden-sm-and-down md2 d-flex align-center">
+                                                                            {ClientList.Location}
                                                                         </div>
                                                                     </div>
-                                                                        {ClientList.FirstName} {ClientList.LastName}
-                                                                </div>
-                                                                <div data-v-12e8f0c3=""
-                                                                    className="flex sm2 hidden-xs-only d-flex align-center">
-                                                                    <div data-v-f1ed5950="" data-v-12e8f0c3=""
-                                                                        className="k-avatar__row"
-                                                                        style={{ "height": "32px" }}>
-                                                                    </div>
-                                                                </div>
-                                                                <div data-v-12e8f0c3=""
-                                                                    className="flex sm2 hidden-xs-only d-flex align-center">
-                                                                    <div data-v-62035167="" data-v-12e8f0c3=""
-                                                                        className="k-counter brevier show">
-                                                                        <div data-v-62035167=""
-                                                                            className="k-counter__value colorOne">0</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div data-v-12e8f0c3=""
-                                                                    className="flex xs2 hidden-md-and-down d-flex align-center">
-                                                                    <div data-v-23bc496c="" data-v-12e8f0c3="" size="40px"
-                                                                        className="mr-mars k-avatar colorOne"
-                                                                        style={{
-                                                                            "height": "40px !important",
-                                                                            "width": "40px !important"
-                                                                        }}>
-                                                                        <span data-v-23bc496c="" className="k-avatar__initials"
-                                                                            style={{
-                                                                                "font-size": "20px",
-                                                                                "width": "40px"
-                                                                            }}>kd</span>
-                                                                    </div>
-                                                                        {ClientList.Gender}
-                                                                </div>
-                                                                <div data-v-12e8f0c3=""
-                                                                    className="flex hidden-sm-and-down md2 d-flex align-center">
-                                                                        {ClientList.Location}
-                                                                </div>
-                                                            </div>
+                                                                </NavLink>
                                                             </div>
                                                             {/* <button
                                                                 data-v-1b4e9c52="" to="[object Object]"

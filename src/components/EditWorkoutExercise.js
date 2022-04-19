@@ -1,146 +1,60 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from "axios"
 import Header from './Header';
-import { NavLink, Link, useLocation } from "react-router-dom";
-import { ReactNotifications, Store } from 'react-notifications-component';
+import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { Form } from "react-bootstrap";
 import YoutubeEmbed from './YoutubeEmbed';
 import getYouTubeID from 'get-youtube-id';
 
-function AddExercises() {
+function EditWorkoutExercise() {
 
-    let [ExerciseTitle, setExerciseTitle] = useState("");
-    let [ExerciseDescription, setExerciseDescription] = useState("");
-    let [ExerciseCategory, setExerciseCategory] = useState("");
-    let [Type, setType] = useState("");
-    let [MainMuscleWorked, setMainMuscleWorked] = useState("");
-    let [OtherMuscleWorked, setOtherMuscleWorked] = useState("");
-    let [Equipment, setEquipment] = useState("");
-    let [MechanicsType, setMechanicsType] = useState("");
-    let [Level, setLevel] = useState("");
-    let [Sport, setSport] = useState("");
-    let [Force, setForce] = useState("");
-    let [VideoTitle, setVideoTitle] = useState("");
-    let [VideoURL, setVideoURL] = useState("");
-    let [Image, setImage] = useState("");
+    let [isLoad, setIsLoad] = useState("0");
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        fetch("https://the3percent-exercises.herokuapp.com/api/exercise", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ExerciseTitle, ExerciseDescription, ExerciseCategory, Type, MainMuscleWorked, OtherMuscleWorked, Equipment, MechanicsType, Level, Sport, Force, VideoTitle, VideoURL }),
-        })
-            .then(function (response) {
-                console.log(response.status);
-                if (response.status === 200) {
-                    Store.addNotification({
-                        title: "Success!",
-                        message: "New Exercise added successfully",
-                        type: "success",
-                        insert: "top",
-                        container: "top-right",
-                        animationIn: ["animate__animated", "animate__fadeIn"],
-                        animationOut: ["animate__animated", "animate__fadeOut"],
-                        dismiss: {
-                            duration: 5000,
-                            onScreen: true
-                        }
-                    });
-                }
-                else {
-                    Store.addNotification({
-                        title: "Failure!",
-                        message: "Please fill required fields",
-                        type: "danger",
-                        insert: "top",
-                        container: "top-right",
-                        animationIn: ["animate__animated", "animate__fadeIn"],
-                        animationOut: ["animate__animated", "animate__fadeOut"],
-                        dismiss: {
-                            duration: 5000,
-                            onScreen: true
-                        }
-                    });
-                }
-                window.location = "/exerciselist";
-            })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error)
+    const [ExList, setExList] = useState([]);
+    const [WorkoutList, setWorkoutList] = useState([]);
+
+    const queryParams = new URLSearchParams(window.location.search);
+    const WorkoutList_id = queryParams.get('WorkoutList_id');
+
+    const apiurl = "http://localhost:5004/api/workout/" + WorkoutList_id;
+
+    React.useEffect(() => {
+        fetch(apiurl)
+            .then(results => results.json())
+            .then(data => {
+                // console.log(data.Recipe);
+                //setWorkoutList(data);
+                setExList(data.Exercise);
+                setIsLoad('1');
             });
-    };
-
-    let id = getYouTubeID(VideoURL);
+    }, []);
 
 
-    // let myarray =
-    //     [
+    const ExList_id = queryParams.get('ExList_id');
+
+    for (let i = 0; i < ExList.length; i++) {
+        if (ExList[i]['_id'] == ExList_id) {
+            setExList(ExList[i]);
+            //break;
+            break;
+        }
+    }
+    let id = getYouTubeID(ExList['VideoURL']);
+
+    // console.log(ExList['ExerciseTitle']);
 
 
 
-    //     ];
 
-    // for (let i = 0; i < myarray.length; i++) {
-    //     console.log(myarray[i]);
-    //     ExerciseTitle = myarray[i].name;
-    //     MainMuscleWorked = myarray[i].target;
-    //     Equipment = myarray[i].equipment;
-    //     Image = myarray[i].gifUrl;
 
-    //     fetch("https://the3percent-exercises.herokuapp.com/api/exercise", {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify({ ExerciseTitle, MainMuscleWorked, Equipment, Image }),
-    //     })
-    //         .then(function (response) {
-    //             console.log(response.status);
-    //             if (response.status === 200) {
-    //                 Store.addNotification({
-    //                     title: "Success!",
-    //                     message: "New Exercise added successfully",
-    //                     type: "success",
-    //                     insert: "top",
-    //                     container: "top-right",
-    //                     animationIn: ["animate__animated", "animate__fadeIn"],
-    //                     animationOut: ["animate__animated", "animate__fadeOut"],
-    //                     dismiss: {
-    //                         duration: 5000,
-    //                         onScreen: true
-    //                     }
-    //                 });
-    //                 //window.location = "/exerciselist";
-    //             }
-    //             else {
-    //                 Store.addNotification({
-    //                     title: "Failure!",
-    //                     message: "Please fill required fields",
-    //                     type: "danger",
-    //                     insert: "top",
-    //                     container: "top-right",
-    //                     animationIn: ["animate__animated", "animate__fadeIn"],
-    //                     animationOut: ["animate__animated", "animate__fadeOut"],
-    //                     dismiss: {
-    //                         duration: 5000,
-    //                         onScreen: true
-    //                     }
-    //                 });
-    //             }
-    //         })
-    //         .then((response) => {
-    //             console.log(response);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         });
-    // }
-
-    // console.log(id);
     return (
-
         <div id="app name" className="grey-background">
+            {isLoad == '0' ? (
+                <div class='loader'><div class=''></div></div>
+            ) : (
+                <div></div>
+            )}
             <div data-app="true" className="k-app light">
                 <div className="k-layout-main__wrapper">
                     <Header />
@@ -151,8 +65,7 @@ function AddExercises() {
                                 "height": "230px",
                                 "top": "-5rem"
                             }}>
-                            <div data-v-2913046a="" className="background-ribbon"
-                                style={{ "height": "230px" }}>
+                            <div data-v-2913046a="" className="background-ribbon" style={{ "height": "230px" }}>
                                 <div data-v-2913046a="" className="header-image-background background-ribbon__old"
                                     style={{
                                         "background-color": "rgb(20, 10, 37)",
@@ -166,6 +79,7 @@ function AddExercises() {
                                 </div>
                             </div>
                         </div>
+
                         <div data-v-0cf3cda2="" className="page-wrapper">
                             <div data-v-158550f2="" data-v-0cf3cda2="" flyout-items="[object Object]">
                                 <div className="container px-none pt-none">
@@ -199,8 +113,11 @@ function AddExercises() {
                                                                                     placeholder="Exercise Title"
                                                                                     rows="5" data-mask="null"
                                                                                     aria-checked="Grams"
-                                                                                    value={ExerciseTitle}
-                                                                                    onChange={(e) => setExerciseTitle(e.target.value)} />
+                                                                                    readOnly={true}
+                                                                                    key={ExList['ExerciseTitle']}
+                                                                                    defaultValue={ExList['ExerciseTitle']}
+                                                                                // onChange={(e) => setExerciseTitle(e.target.value)}
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                         <div data-v-6b0e4150="" ></div>
@@ -218,6 +135,7 @@ function AddExercises() {
                                                 style={{ "display": "none" }}></div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div className="container grid-gap-earth">
                                     <div data-v-158550f2="" className="layout row wrap">
@@ -255,8 +173,10 @@ function AddExercises() {
                                                                                         role="text"
                                                                                         rows="5" data-mask="null"
                                                                                         aria-checked="Grams"
-                                                                                        value={ExerciseDescription}
-                                                                                        onChange={(e) => setExerciseDescription(e.target.value)}>
+                                                                                        key={ExList['ExerciseDescription']}
+                                                                                        defaultValue={ExList['ExerciseDescription']}
+                                                                                    // onChange={(e) => setExerciseDescription(e.target.value)}
+                                                                                    >
                                                                                     </textarea>
                                                                                 </div>
                                                                             </div>
@@ -271,26 +191,26 @@ function AddExercises() {
                                                 </div>
                                             </div>
 
-                                            <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
-                                                <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                            <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
+                                                <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                     <div data-v-52fb9f55=""
                                                         id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                        className="k-row thin">
-                                                        <div className="k-row__slot--middle"><span data-v-194e1f66=""
-                                                            className="k-title">
-                                                            <div data-v-194e1f66="" className="d-flex pica">
+                                                        class="k-row thin">
+                                                        <div class="k-row__slot--middle"><span data-v-194e1f66=""
+                                                            class="k-title">
+                                                            <div data-v-194e1f66="" class="d-flex pica">
                                                                 <span
                                                                     data-v-194e1f66="" data-v-52fb9f55=""
-                                                                    className="k-title">
-                                                                    <div data-v-194e1f66="" className="d-flex pica">
+                                                                    class="k-title">
+                                                                    <div data-v-194e1f66="" class="d-flex pica">
                                                                         Breakdown
                                                                     </div>
                                                                 </span>
                                                             </div>
                                                             <div data-v-194e1f66=""
-                                                                className="k-title__subtitle-wrapper long-primer">
+                                                                class="k-title__subtitle-wrapper long-primer">
                                                                 <span
-                                                                    data-v-194e1f66="" className="">
+                                                                    data-v-194e1f66="" class="">
                                                                 </span>
                                                             </div>
                                                         </span>
@@ -298,26 +218,29 @@ function AddExercises() {
                                                     </div>
                                                 </div>
                                                 <hr /><br />
-                                                <div className="k-card__content">
-                                                    <div data-v-52fb9f55="" className="layout row wrap no-padding">
+                                                <div class="k-card__content">
+                                                    <div data-v-52fb9f55="" class="layout row wrap no-padding">
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0" >
                                                                 <label for="object-640858"
-                                                                    className="minion k-input__label colorOne--text">
+                                                                    class="minion k-input__label colorOne--text">
                                                                     Exercise Category* (Barbell /Bodyweight /Cables etc)
                                                                 </label>
-                                                                <div >
-                                                                    <div className="pica"
+                                                                <div>
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }} >
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            value={ExerciseCategory}
-                                                                            onChange={(e) => setExerciseCategory(e.target.value)}>
-                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                        // onChange={(e) => setExerciseCategory(e.target.value)}
+                                                                        >
+                                                                            <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExList['ExerciseCategory']}
+                                                                                defaultValue={ExList['ExerciseCategory']}
+                                                                            >
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Barbell">Barbell</option>
                                                                                 <option value="Bodyweight">Bodyweight</option>
@@ -330,23 +253,26 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0">
                                                                 <label for="object-584956"
-                                                                    className="minion k-input__label colorOne--text">
+                                                                    class="minion k-input__label colorOne--text">
                                                                     Type* (Strength / Powerlifting / Stretching etc)
                                                                 </label>
-                                                                <div >
-                                                                    <div className="pica"
+                                                                <div>
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            value={Type}
-                                                                            onChange={(e) => setType(e.target.value)}>
-                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                        // onChange={(e) => setType(e.target.value)}
+                                                                        >
+                                                                            <select class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExList['Type']}
+                                                                                defaultValue={ExList['Type']}
+                                                                            >
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Strength">Strength</option>
                                                                                 <option value="Powerlifting">Powerlifting</option>
@@ -359,137 +285,92 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0" >
-                                                                <label for="object-582949"
-                                                                    className="minion k-input__label colorOne--text">
-                                                                    Main Muscle Worked* (Biceps / Shoulders / Chest etc)
+                                                                <label for="object-497406" class="minion k-input__label colorOne--text">
+                                                                    Main Muscle Worked*
                                                                 </label>
-                                                                <div>
-                                                                    <div className="pica"
-                                                                        style={{
-                                                                            "flex-grow": "2",
-                                                                            "position": "relative"
-                                                                        }}>
-                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            value={MainMuscleWorked}
-                                                                            onChange={(e) => setMainMuscleWorked(e.target.value)}>
-                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
-                                                                                <option selected>Choose...</option>
-                                                                                <option value="Shoulder (front)">Shoulder (front)</option>
-                                                                                <option value="Shoulder (rear)">Shoulder (rear)</option>
-                                                                                <option value="Shoulder (side)">Shoulder (side)</option>
-                                                                                <option value="Chest (inner)">Chest (inner)</option>
-                                                                                <option value="Chest (mid)">Chest (mid)</option>
-                                                                                <option value="Chest (upper)">Chest (upper)</option>
-                                                                                <option value="Bicep">Biceps</option>
-                                                                                <option value="Tricep">Triceps</option>
-                                                                                <option value="Back">Back</option>
-                                                                                <option value="Quads">Quads</option>
-                                                                                <option value="Calves">Calves</option>
-                                                                                <option value="Forearms">Forearms</option>
-                                                                                <option value="Abs">Abs</option>
-                                                                                <option value="Back (lower)">Back (lower)</option>
-                                                                                <option value="Back (middle)">Back (middle)</option>
-                                                                                <option value="Obliques">Obliques</option>
-                                                                                <option value="Traps">Traps</option>
-                                                                            </select>
-                                                                        </Form.Group>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        {/* <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
-                                                                min="0" >
-                                                                <label for="object-497406" className="minion k-input__label colorOne--text">
-                                                                    Main Muscle Worked* (Biceps / Shoulders / Chest etc)
-                                                                </label>
-                                                                <div className="k-input-container d-flex align-center k-input__field k-input__field--active">
-                                                                    <div className="pica"
+                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={MainMuscleWorked}
-                                                                            onChange={(e) => setMainMuscleWorked(e.target.value)} />
+                                                                            key={ExList['MainMuscleWorked']}
+                                                                            defaultValue={ExList['MainMuscleWorked']}
+                                                                        // onChange={(e) => setMainMuscleWorked(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div> */}
+                                                        </div>
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0" >
-                                                                <label for="object-497406" className="minion k-input__label colorOne--text">
+                                                                <label for="object-497406" class="minion k-input__label colorOne--text">
                                                                     Other Muscles Worked
                                                                 </label>
-                                                                <div className="k-input-container d-flex align-center k-input__field k-input__field--active">
-                                                                    <div className="pica"
+                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <input type="text"
-                                                                            value={OtherMuscleWorked}
-                                                                            onChange={(e) => setOtherMuscleWorked(e.target.value)} />
+                                                                            key={ExList['OtherMuscleWorked']}
+                                                                            defaultValue={ExList['OtherMuscleWorked']}
+                                                                        // onChange={(e) => setOtherMuscleWorked(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0" >
-                                                                <label for="object-537921"
-                                                                    className="minion k-input__label colorOne--text">
+                                                                <label for="object-497406" class="minion k-input__label colorOne--text">
                                                                     Equipment
-                                                                    (Dumbbell / Barbell / Body Only)
                                                                 </label>
-                                                                <div>
-                                                                    <div className="pica"
+                                                                <div class="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
-                                                                        }} >
-                                                                        <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            value={Equipment}
-                                                                            onChange={(e) => setEquipment(e.target.value)}>
-                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
-                                                                                <option selected>Choose...</option>
-                                                                                <option value="Dumbbell">Dumbbell</option>
-                                                                                <option value="Barbell">Barbell</option>
-                                                                                <option value="Bars">Bars</option>
-                                                                                <option value="Benches">Benches</option>
-                                                                                <option value="Cables">Cables</option>
-                                                                                <option value="Tredmill">Tredmill</option>
-                                                                            </select>
-                                                                        </Form.Group>
+                                                                        }}>
+                                                                        <input type="text"
+                                                                            key={ExList['Equipment']}
+                                                                            defaultValue={ExList['Equipment']}
+                                                                        // onChange={(e) => setEquipment(e.target.value)}
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0"  >
                                                                 <label for="object-86824"
-                                                                    className="minion k-input__label colorOne--text">
+                                                                    class="minion k-input__label colorOne--text">
                                                                     Mechanics Type ( Isolation / Compound )
                                                                 </label>
                                                                 <div>
-                                                                    <div className="pica"
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            value={MechanicsType}
-                                                                            onChange={(e) => setMechanicsType(e.target.value)}>
-                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                        // onChange={(e) => setMechanicsType(e.target.value)}
+                                                                        >
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExList['MechanicsType']}
+                                                                                defaultValue={ExList['MechanicsType']}
+                                                                            >
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Isolation">Isolation</option>
                                                                                 <option value="Compound">Compound</option>
@@ -500,23 +381,26 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0"  >
                                                                 <label for="object-86824"
-                                                                    className="minion k-input__label colorOne--text">
+                                                                    class="minion k-input__label colorOne--text">
                                                                     Level (Beginner / Intermediate / Expert)
                                                                 </label>
-                                                                <div >
-                                                                    <div className="pica"
+                                                                <div>
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            value={Level}
-                                                                            onChange={(e) => setLevel(e.target.value)}>
-                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                        // onChange={(e) => setLevel(e.target.value)}
+                                                                        >
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExList['Level']}
+                                                                                defaultValue={ExList['Level']}
+                                                                            >
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Beginner">Beginner</option>
                                                                                 <option value="Intermediate">Intermediate</option>
@@ -528,23 +412,26 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0"  >
                                                                 <label for="object-86824"
-                                                                    className="minion k-input__label colorOne--text">
+                                                                    class="minion k-input__label colorOne--text">
                                                                     Sport (Yes / No)
                                                                 </label>
                                                                 <div>
-                                                                    <div className="pica"
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            value={Sport}
-                                                                            onChange={(e) => setSport(e.target.value)}>
-                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                        // onChange={(e) => setSport(e.target.value)}
+                                                                        >
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExList['Sport']}
+                                                                                defaultValue={ExList['Sport']}
+                                                                            >
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Yes">Yes</option>
                                                                                 <option value="No">No</option>
@@ -555,23 +442,26 @@ function AddExercises() {
                                                             </div>
                                                         </div>
 
-                                                        <div data-v-52fb9f55="" className="flex py-none xs4 md4">
-                                                            <div data-v-52fb9f55="" className="k-input k-input--has-changed"
+                                                        <div data-v-52fb9f55="" class="flex py-none xs4 md4">
+                                                            <div data-v-52fb9f55="" class="k-input k-input--has-changed"
                                                                 min="0"  >
                                                                 <label for="object-86824"
-                                                                    className="minion k-input__label colorOne--text">
+                                                                    class="minion k-input__label colorOne--text">
                                                                     Force ( Pull / Push / Static)
                                                                 </label>
                                                                 <div>
-                                                                    <div className="pica"
+                                                                    <div class="pica"
                                                                         style={{
                                                                             "flex-grow": "2",
                                                                             "position": "relative"
                                                                         }}>
                                                                         <Form.Group className="mb-3" controlId="formBasicEmail"
-                                                                            value={Force}
-                                                                            onChange={(e) => setForce(e.target.value)}>
-                                                                            <select name="gender" className="k-input-container d-flex align-center k-input__field k-input__field--active">
+                                                                        // onChange={(e) => setForce(e.target.value)}
+                                                                        >
+                                                                            <select name="gender" class="k-input-container d-flex align-center k-input__field k-input__field--active"
+                                                                                key={ExList['Force']}
+                                                                                defaultValue={ExList['Force']}
+                                                                            >
                                                                                 <option selected>Choose...</option>
                                                                                 <option value="Pull">Pull</option>
                                                                                 <option value="Push">Push</option>
@@ -587,27 +477,27 @@ function AddExercises() {
                                                 </div>
                                             </div>
 
-                                            <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
-                                                <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                            <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
+                                                <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                     <div data-v-52fb9f55=""
                                                         id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                        className="k-row thin">
-                                                        <div className="k-row__slot--middle"><span data-v-194e1f66=""
-                                                            className="k-title">
-                                                            <div data-v-194e1f66="" className="d-flex pica">
+                                                        class="k-row thin">
+                                                        <div class="k-row__slot--middle"><span data-v-194e1f66=""
+                                                            class="k-title">
+                                                            <div data-v-194e1f66="" class="d-flex pica">
                                                                 <span
                                                                     data-v-194e1f66="" data-v-52fb9f55=""
-                                                                    className="k-title">
-                                                                    <div data-v-194e1f66="" className="d-flex pica">
+                                                                    class="k-title">
+                                                                    <div data-v-194e1f66="" class="d-flex pica">
                                                                         Exercise Video - will be displayed first
                                                                     </div>
                                                                 </span>
 
                                                             </div>
                                                             <div data-v-194e1f66=""
-                                                                className="k-title__subtitle-wrapper long-primer">
+                                                                class="k-title__subtitle-wrapper long-primer">
                                                                 <span
-                                                                    data-v-194e1f66="" className="">
+                                                                    data-v-194e1f66="" class="">
                                                                 </span>
                                                             </div>
                                                         </span>
@@ -616,8 +506,8 @@ function AddExercises() {
                                                 </div>
                                                 <hr /><br />
 
-                                                <div className="k-card__content">
-                                                    <div data-v-52fb9f55="" className="layout row wrap no-padding">
+                                                <div class="k-card__content">
+                                                    <div data-v-52fb9f55="" class="layout row wrap no-padding">
                                                     </div>
                                                 </div>
                                                 <div data-v-52fb9f55="" className="flex py-none xs12">
@@ -649,8 +539,9 @@ function AddExercises() {
                                                                             prependcb="function(){}" role="text"
                                                                             rows="5" data-mask="null"
                                                                             aria-checked="Grams"
-                                                                            value={VideoTitle}
-                                                                            onChange={(e) => setVideoTitle(e.target.value)}
+                                                                            key={ExList['VideoTitle']}
+                                                                            defaultValue={ExList['VideoTitle']}
+                                                                        // onChange={(e) => setVideoTitle(e.target.value)}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -671,6 +562,7 @@ function AddExercises() {
                                                                     className="minion k-input__label colorOne--text">
                                                                     Video URL*
                                                                 </label>
+
                                                                 <div
                                                                     className="k-input-container d-flex align-center k-input__field k-input__field--active">
                                                                     <div className="pica"
@@ -689,41 +581,41 @@ function AddExercises() {
                                                                             prependcb="function(){}" role="text"
                                                                             rows="5" data-mask="null"
                                                                             aria-checked="Grams"
-                                                                            value={VideoURL}
-                                                                            onChange={(e) => setVideoURL(e.target.value)}
+                                                                            key={ExList['VideoURL']}
+                                                                            defaultValue={ExList['VideoURL']}
+                                                                        // onChange={(e) => setVideoURL(e.target.value)}
                                                                         />
                                                                     </div>
                                                                 </div>
                                                                 <div data-v-6b0e4150="" ></div>
+                                                                <YoutubeEmbed embedId={id} />
                                                             </div>
                                                         </div>
+                                                        <div className="k-select__list-container"></div>
                                                     </div>
                                                 </div>
-
-                                                <YoutubeEmbed embedId={id} />
-
                                             </div>
 
-                                            <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
-                                                <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                            <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
+                                                <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                     <div data-v-52fb9f55=""
                                                         id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                        className="k-row thin">
-                                                        <div className="k-row__slot--middle"><span data-v-194e1f66=""
-                                                            className="k-title">
-                                                            <div data-v-194e1f66="" className="d-flex pica">
+                                                        class="k-row thin">
+                                                        <div class="k-row__slot--middle"><span data-v-194e1f66=""
+                                                            class="k-title">
+                                                            <div data-v-194e1f66="" class="d-flex pica">
                                                                 <span
                                                                     data-v-194e1f66="" data-v-52fb9f55=""
-                                                                    className="k-title">
-                                                                    <div data-v-194e1f66="" className="d-flex pica">
+                                                                    class="k-title">
+                                                                    <div data-v-194e1f66="" class="d-flex pica">
                                                                         Exercise Image(s) - drag to sort
                                                                     </div>
                                                                 </span>
                                                             </div>
                                                             <div data-v-194e1f66=""
-                                                                className="k-title__subtitle-wrapper long-primer">
+                                                                class="k-title__subtitle-wrapper long-primer">
                                                                 <span
-                                                                    data-v-194e1f66="" className="">
+                                                                    data-v-194e1f66="" class="">
                                                                 </span>
                                                             </div>
                                                         </span>
@@ -731,53 +623,56 @@ function AddExercises() {
                                                     </div>
                                                 </div>
                                                 <hr /><br />
-                                                <div data-v-52fb9f55="" data-v-70fe1976="" className="mb-earth k-card raised">
-                                                    <div className="k-card__toolbar double-pica k-card__toolbar double-pica">
+                                                <div data-v-52fb9f55="" data-v-70fe1976="" class="mb-earth k-card raised">
+                                                    <div class="k-card__toolbar double-pica k-card__toolbar double-pica">
                                                         <div data-v-52fb9f55=""
                                                             id="k-row-e7998299-5d85-4c87-946a-1a8a341bc050"
-                                                            className="k-row thin">
-                                                            <div className="k-row__slot--middle"><span data-v-194e1f66=""
-                                                                className="k-title">
-                                                                <div data-v-194e1f66="" className="d-flex pica">
+                                                            class="k-row thin">
+                                                            <div class="k-row__slot--middle"><span data-v-194e1f66=""
+                                                                class="k-title">
+                                                                <div data-v-194e1f66="" class="d-flex pica">
                                                                     <span
                                                                         data-v-194e1f66="" data-v-52fb9f55=""
-                                                                        className="k-title">
-                                                                        <div data-v-194e1f66="" className="d-flex pica">
+                                                                        class="k-title">
+                                                                        <div data-v-194e1f66="" class="d-flex pica">
                                                                         </div>
                                                                     </span>
                                                                 </div>
                                                                 <div data-v-194e1f66=""
-                                                                    className="k-title__subtitle-wrapper long-primer">
+                                                                    class="k-title__subtitle-wrapper long-primer">
                                                                     <span
-                                                                        data-v-194e1f66="" className="">
+                                                                        data-v-194e1f66="" class="">
                                                                     </span>
                                                                 </div>
                                                             </span>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div className="k-card__content">
-                                                        <div data-v-52fb9f55="" className="layout row wrap no-padding">
+                                                    <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
+                                                        <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
+                                                            {/* <img src={ExerciseList.Image} /> */}
+                                                        </div>
+                                                    </div>
+                                                    <div class="k-card__content">
+                                                        <div data-v-52fb9f55="" class="layout row wrap no-padding">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="k-card__content">
-                                                    <div data-v-52fb9f55="" className="layout row wrap no-padding">
+                                                <div class="k-card__content">
+                                                    <div data-v-52fb9f55="" class="layout row wrap no-padding">
                                                     </div>
                                                 </div>
                                             </div>
 
 
-
                                             <div data-v-70fe1976="" className="d-flex justify-center pa-saturn">
                                                 <button
-                                                    onClick={onSubmit}
+                                                    // onClick={onSubmit}
                                                     data-v-70fe1976="" to="[object Object]"
                                                     className="k-button medium colorOne">
                                                     <div className="k-button__content"
                                                         style={{ "opacity": 1 }}>
-                                                        Save exercise
+                                                        Update exercise
                                                     </div>
                                                 </button>
                                             </div>
@@ -811,9 +706,7 @@ function AddExercises() {
                 </div>
             </div>
         </div >
-
     )
 }
 
-
-export default AddExercises
+export default EditWorkoutExercise;

@@ -27,6 +27,9 @@ import ClientConfirmation from './components/ClientConfirmation';
 import EditFoods2 from './components/EditFoods2';
 import ImageUploader from './components/ImageUploader';
 import EditExercise2 from './components/EditExercise2';
+import ClientMessage from './components/ClientMessage';
+import WorkoutExList from './components/WorkoutExList';
+import EditWorkoutExercise from './components/EditWorkoutExercise';
 
 class Routes extends Component {
 
@@ -88,6 +91,9 @@ class Routes extends Component {
                             <Route path="/workoutslist">
                                 <WorkoutsList />
                             </Route>
+                            <Route path="/workoutexlist">
+                                <WorkoutExList />
+                            </Route>
                             <Route path="/programmelist">
                                 <ProgrammeList />
                             </Route>
@@ -109,6 +115,9 @@ class Routes extends Component {
                             <Route path="/clienttraining">
                                 <ClientTraining />
                             </Route>
+                            <Route path="/clientmessage">
+                                <ClientMessage />
+                            </Route>
                             <Route path="/clientphotos">
                                 <ClientPhotos />
                             </Route>
@@ -123,6 +132,9 @@ class Routes extends Component {
                             </Route>
                             <Route path="/editexercise2">
                                 <EditExercise2 />
+                            </Route>
+                            <Route path="/editworkoutexercise">
+                                <EditWorkoutExercise />
                             </Route>
                             <Route path="/dash">
                                 <Dash />
