@@ -30,6 +30,8 @@ import EditExercise2 from './components/EditExercise2';
 import ClientMessage from './components/ClientMessage';
 import WorkoutExList from './components/WorkoutExList';
 import EditWorkoutExercise from './components/EditWorkoutExercise';
+import ProgrammeWorkoutList from './components/ProgrammeWorkoutList';
+import ProgrammeWorkouExList from './components/ProgrammeWorkouExList';
 
 class Routes extends Component {
 
@@ -135,6 +137,12 @@ class Routes extends Component {
                             </Route>
                             <Route path="/editworkoutexercise">
                                 <EditWorkoutExercise />
+                            </Route>
+                            <Route path="/programmeworkoutList">
+                                <ProgrammeWorkoutList />
+                            </Route>
+                            <Route path="/programmeworkoutExList">
+                                <ProgrammeWorkouExList />
                             </Route>
                             <Route path="/dash">
                                 <Dash />

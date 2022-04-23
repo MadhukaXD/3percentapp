@@ -19,8 +19,8 @@ function ExerciseList() {
             })
             .catch(error => console.log(error));
 
-    });
-
+    }, []);
+    console.log(ExerciseList);
 
     let [query, setquery] = useState("");
     let [exercises, setexercises] = useState([]);
@@ -69,7 +69,7 @@ function ExerciseList() {
         setShowDeleteHover(!ShowDeleteHover);
     };
 
-    let id = getYouTubeID(ExerciseList.VideoURL);
+    // let id = getYouTubeID(ExerciseList.VideoURL);
 
     return (
         <div id="app" className="grey-background" >

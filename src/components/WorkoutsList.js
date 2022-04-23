@@ -16,7 +16,7 @@ function WorkoutsList() {
                 setIsLoad('1');
             })
             .catch(error => console.log(error));
-    });
+    }, []);
 
     const [ShowDeleteHover, setShowDeleteHover] = useState(false);
 
@@ -384,7 +384,7 @@ function WorkoutsList() {
                                                                 <div data-v-19d24620="" className="layout row wrap">
                                                                     <div data-v-19d24620="" className="flex xs12 sm8 md6 lg4"
                                                                         style={{ "paddingLeft": "92px" }}>
-                                                                        Execrcise title
+                                                                        Workout title
                                                                     </div>
                                                                     <div data-v-19d24620="" className="flex sm2 hidden-xs-only">
 

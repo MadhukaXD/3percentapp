@@ -240,6 +240,47 @@ function Dash() {
                                                                     </NavLink>
                                                                 </Col>
 
+                                                                <Col md={6} className="pb-3">
+                                                                    <NavLink
+                                                                        strict
+                                                                        exact
+                                                                        to={`${process.env.PUBLIC_URL}/programmelist`}
+                                                                        key={`${process.env.PUBLIC_URL}/programmelist`}>
+                                                                        <div className="flex xs1">
+                                                                            <div className="dashboard-action-button k-card raised">
+                                                                                <div className="k-card__content">
+                                                                                    <div className="pica grow">
+                                                                                        View<br />
+                                                                                        Programes
+                                                                                    </div>
+                                                                                    <div
+                                                                                        className="colorOne icon round-icon d-inline-flex align-center justify-center">
+                                                                                        <svg data-v-7f8bad2e aria-hidden="true"
+                                                                                            focusable="false" data-prefix="fad"
+                                                                                            data-icon="calendar-alt" role="img"
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            viewBox="0 0 448 512"
+                                                                                            className="svg-inline--fa fa-calendar-alt fa-w-14 k-icon mars noColor--text">
+                                                                                            <g data-v-7f8bad2e className="fa-group">
+                                                                                                <path data-v-7f8bad2e
+                                                                                                    fill="currentColor"
+                                                                                                    d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm128 244a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12H76a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm128 128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-128a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm-80-180h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16zm-192 0h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16z"
+                                                                                                    className="fa-secondary">
+                                                                                                </path>
+                                                                                                <path data-v-7f8bad2e
+                                                                                                    fill="currentColor"
+                                                                                                    d="M448 112v80H0v-80a48 48 0 0 1 48-48h48v48a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V64h128v48a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V64h48a48 48 0 0 1 48 48z"
+                                                                                                    className="fa-primary">
+                                                                                                </path>
+                                                                                            </g>
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </NavLink>
+                                                                </Col>
+
 
                                                                 <Col md={6} className="pb-3">
                                                                     <div className="flex xs1">

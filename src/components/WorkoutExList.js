@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import Header from './Header';
 import { NavLink, Link, useLocation } from "react-router-dom";
+import YoutubeEmbed from './YoutubeEmbed';
+import getYouTubeID from 'get-youtube-id';
 
 function WorkoutExList() {
 
@@ -48,6 +50,7 @@ function WorkoutExList() {
         setShowDeleteHover(!ShowDeleteHover);
     };
 
+    // let id = getYouTubeID(ExList.VideoURL);
 
     return (
         <div id="app" className="grey-background" >
@@ -495,7 +498,7 @@ function WorkoutExList() {
                                                                 <NavLink
                                                                     strict
                                                                     exact
-                                                                    to={"editworkoutexercise?ExList_id=" + ExList._id + "&WorkoutList_id=" + WorkoutList_id}
+                                                                    to={"editworkoutexercise?WorkoutList_id=" + WorkoutList_id + "&ExList_id=" + ExList._id}
                                                                 >
                                                                     <div data-v-12e8f0c3="" className="layout row wrap">
                                                                         <div data-v-12e8f0c3=""
@@ -514,7 +517,6 @@ function WorkoutExList() {
                                                                             </div>
                                                                             {/* {WorkoutExList.Exercise["ExerciseTitle"]} */}
                                                                             {ExList.ExerciseTitle}
-
                                                                         </div>
                                                                         <div data-v-12e8f0c3=""
                                                                             className="flex sm2 hidden-xs-only d-flex align-center">
