@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Form } from "react-bootstrap";
-import { Range } from 'react-range';
 
 function Questions() {
 
