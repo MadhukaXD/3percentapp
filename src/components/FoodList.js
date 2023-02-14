@@ -11,7 +11,7 @@ function FoodList() {
 
     useEffect(() => {
         axios
-            .get('https://the3percent-food.herokuapp.com/api/food/')
+            .get('https://the3percent-foods.herokuapp.com/api/food/')
             .then(function (res) {
                 setFood(res.data);
                 setIsLoad('1');

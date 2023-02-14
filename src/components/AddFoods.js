@@ -35,7 +35,7 @@ function AddFoods() {
     const onSubmit = (e) => {
         console.log(Image);
         e.preventDefault();
-        fetch("https://the3percent-food.herokuapp.com/api/food", {
+        fetch("https://the3percent-foods.herokuapp.com/api/food", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ FoodName, Recipe, ServingSize, UnitMeasurement, Protein, Carbs, Fat, Fibre, Sodium, Sugar, Calories, TotalCarbohydrates, SaturatedFat, Cholesterol, VitaminA, VitaminC, Calcium, Iron, Image }),

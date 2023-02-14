@@ -609,7 +609,7 @@ function ExerciseList() {
                                                     {ExerciseList.map((ExerciseList, key) => (
                                                         <div data-v-12e8f0c3="" data-v-19d24620=""
                                                             id="k-row-e02c9d68-bf46-4c60-aacb-9f41ee3fec08"
-                                                            className="k-row clickable standalone image-middle">
+                                                            className="k-row clickable standalone image-middle" key={key}>
                                                             <div className="k-row__slot--left">
                                                                 <div data-v-12e8f0c3="" className="d-flex align-center pl-moon">
                                                                     <div data-v-12e8f0c3="">
@@ -734,7 +734,7 @@ function ExerciseList() {
                                                     {exercises.map((exercises, key) => (
                                                         <div data-v-12e8f0c3="" data-v-19d24620=""
                                                             id="k-row-e02c9d68-bf46-4c60-aacb-9f41ee3fec08"
-                                                            className="k-row clickable standalone image-middle">
+                                                            className="k-row clickable standalone image-middle" key={key}>
                                                             <div className="k-row__slot--left">
                                                                 <div data-v-12e8f0c3="" className="d-flex align-center pl-moon">
                                                                     <div data-v-12e8f0c3="">
